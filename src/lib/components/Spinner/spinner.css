@@ -1,0 +1,121 @@
+.spinner {
+  width: 100px;
+  height: 100px;
+  background: #eee;
+  border-radius: 50%;
+  position: relative;
+  margin: 50px;
+  display: inline-block; }
+  .spinner:after, .spinner:before {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%; }
+
+.spinner-1:after {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  border: 4px solid transparent;
+  border-top-color: #2182BD;
+  border-bottom-color: #2182BD;
+  animation: spinny 2s linear infinite; }
+
+@keyframes spinny {
+  0% {
+    transform: rotate(0deg) scale(1); }
+  50% {
+    transform: rotate(180deg) scale(1.2); }
+  100% {
+    transform: rotate(360deg) scale(1); } }
+
+.spinner-2 {
+  animation: spin 2s linear infinite; }
+  .spinner-2:before, .spinner-2:after {
+    height: 20px;
+    width: 20px;
+    background: #2182BD;
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    margin-left: -10px;
+    animation: bouncy 1s ease-in infinite; }
+  .spinner-2:after {
+    top: auto;
+    bottom: -10px;
+    animation: bouncy 0.5s ease-in infinite; }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
+@keyframes bouncy {
+  0%, 100% {
+    transform: translateY(0pc); }
+  50% {
+    transform: translateY(30px); } }
+
+.spinner-3 {
+  background: none;
+  border: 4px solid #eee; }
+  .spinner-3::after {
+    width: 4px;
+    height: 66px;
+    background: #2182BD;
+    border-radius: 4px;
+    position: absolute;
+    top: 50%;
+    left: 50px;
+    margin-left: -2px;
+    transform-origin: top center;
+    animation: spin 2s linear infinite; }
+
+.spinner-4:before, .spinner-4:after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -50px;
+  background: #2182BD;
+  animation: pulse 3s linear infinite;
+  opacity: 0; }
+
+.spinner-4:after {
+  animation: pulse 2s linear 2.3s infinite; }
+
+@keyframes pulse {
+  0% {
+    transform: scale(0);
+    opacity: 1; }
+  100% {
+    transform: scale(1.3);
+    opacity: 0; } }
+
+.spinner-5 {
+  height: 0px;
+  width: 0px; }
+  .spinner-5 span {
+    display: block;
+    height: 20px;
+    width: 20px;
+    background: #ddd;
+    border-radius: 50%;
+    position: absolute;
+    top: 0px; }
+    .spinner-5 span:nth-child(1) {
+      left: -40px;
+      animation: bounce 1s ease-in-out infinite; }
+    .spinner-5 span:nth-child(2) {
+      animation: bounce 1s ease-in-out 0.33s infinite; }
+    .spinner-5 span:nth-child(3) {
+      left: 40px;
+      animation: bounce 1s ease-in-out 0.66s infinite; }
+
+@keyframes bounce {
+  0%, 75%, 100% {
+    transform: translateY(0px); }
+  25% {
+    transform: translateY(-30px); } }
