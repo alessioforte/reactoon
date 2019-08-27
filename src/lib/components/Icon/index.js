@@ -2,9 +2,8 @@ import React from 'react'
 import { Svg } from './styled'
 import icons from './icons'
 
-export default ({ name, color, size }) => {
-    const d = icons[name].d
-    const width = icons[name].width
+const Icon = ({ name, color, size }) => {
+    const { d, width } = icons[name]
     return (
         <Svg
             color={color}
@@ -17,3 +16,17 @@ export default ({ name, color, size }) => {
         </Svg>
     )
 }
+
+Icon.propTypes = {
+    name: PropTypes.string,
+    color: PropTypes.string,
+    size: PropTypes.number
+};
+
+Icon.defaultProps = {
+    name: 'default',
+    color: '#FFFFFF',
+    size: 30
+};
+
+export default Icon
