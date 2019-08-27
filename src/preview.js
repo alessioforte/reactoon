@@ -107,6 +107,8 @@ export default class Preview extends Component {
     render() {
         return (
             <Root>
+                <Button>test</Button>
+                <br />
                 <Checkbox />
                 <br />
                 <Toggle />
