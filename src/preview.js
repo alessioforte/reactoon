@@ -112,7 +112,6 @@ export default class Preview extends Component {
                     type='submit'
                     name='btn'
                     value='primary'
-                    disabled
                 >
                     PRIMARY
                 </Button>
@@ -120,6 +119,7 @@ export default class Preview extends Component {
                 <Button status='success'>SUCCESS</Button>
                 <Button status='ghost'>GHOST</Button>
                 <Button href='/' status='warning'>WARNING LINK</Button>
+                <Button status='primary' disabled>DISABLED</Button>
                 <br />
                 <Checkbox />
                 <br />

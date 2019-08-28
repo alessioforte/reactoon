@@ -5,7 +5,6 @@ import Theme, { getContrastYIQ } from "../../theme";
 
 const Button = ({ status, onClick, href, children, theme, ...rest }) => {
 
-  if (rest.disabled) status = 'disabled'
   let button = (
     <StyledButton {...rest} className={status} onClick={onClick}>
       {Children.toArray(children)}
@@ -107,10 +106,11 @@ const Wrapper = styled.div`
     color: ${props =>
     props.theme.colors[getContrastYIQ(props.theme.colors.warning)]};
   }
-  .disabled {
+  button:disabled {
     background: ${props => props.theme.colors.disabled};
     border: 2px solid ${props => props.theme.colors.disabled};
     color: ${props =>
     props.theme.colors[getContrastYIQ(props.theme.colors.disabled)]};
+    opacity: 0.5;
   }
 `;
