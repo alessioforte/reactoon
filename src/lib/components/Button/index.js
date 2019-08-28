@@ -3,21 +3,18 @@ import PropTypes from "prop-types";
 import styled, { css, withTheme, ThemeProvider } from "styled-components";
 import Theme, { getContrastYIQ } from "../../theme";
 
-/**
- * add Button type ( default, primary, ghost, success, error, warning, light, dark )
- * and html type ( disables ) props
- *
- */
 const Button = ({ status, onClick, href, children, theme, ...rest }) => {
+
+  if (rest.disabled) status = 'disabled'
   let button = (
-    <StyledButton className={status} onClick={onClick} {...rest}>
+    <StyledButton {...rest} className={status} onClick={onClick}>
       {Children.toArray(children)}
     </StyledButton>
   );
 
   if (href) {
     button = (
-      <A className={status} href={href} onClick={onClick} {...rest}>
+      <A {...rest} className={status} href={href} onClick={onClick}>
         {Children.toArray(children)}
       </A>
     );
@@ -51,6 +48,7 @@ const buttonStyles = css`
   display: inline-block;
   box-sizing: border-box;
   padding: 0.25em 2em;
+  min-width: 200px;
   text-decoration: none;
   border-radius: 4px;
   -webkit-font-smoothing: antialiased;
@@ -77,26 +75,42 @@ const StyledButton = styled.button`
 const Wrapper = styled.div`
   width: 100%;
   text-align: center;
-  margin: 4em 0;
+  margin: 1em 0;
   .default,
   .primary {
     background: ${props => props.theme.colors.primary};
     border: 2px solid ${props => props.theme.colors.primary};
+    color: ${props =>
+    props.theme.colors[getContrastYIQ(props.theme.colors.primary)]};
   }
   .success {
     background: ${props => props.theme.colors.success};
     border: 2px solid ${props => props.theme.colors.success};
+    color: ${props =>
+    props.theme.colors[getContrastYIQ(props.theme.colors.success)]};
   }
   .error {
     background: ${props => props.theme.colors.error};
     border: 2px solid ${props => props.theme.colors.error};
+    color: ${props =>
+    props.theme.colors[getContrastYIQ(props.theme.colors.error)]};
   }
   .ghost {
-    background: ${props => props.theme.colors.error};
-    border: 2px solid ${props => props.theme.colors.error};
+    background: ${props => props.theme.colors.light};
+    border: 2px solid ${props => props.theme.colors.idle};
+    color: ${props =>
+    props.theme.colors[getContrastYIQ(props.theme.colors.light)]};
   }
   .warning {
     background: ${props => props.theme.colors.warning};
     border: 2px solid ${props => props.theme.colors.warning};
+    color: ${props =>
+    props.theme.colors[getContrastYIQ(props.theme.colors.warning)]};
+  }
+  .disabled {
+    background: ${props => props.theme.colors.disabled};
+    border: 2px solid ${props => props.theme.colors.disabled};
+    color: ${props =>
+    props.theme.colors[getContrastYIQ(props.theme.colors.disabled)]};
   }
 `;

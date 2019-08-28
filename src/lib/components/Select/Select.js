@@ -221,20 +221,20 @@ const List = styled.div`
         cursor: default;
     }
 `
-const Selected = styled.div`
-    color: ${props => props.isText ? props.theme.colors.idle : props.theme.colors[getContrastYIQ(props.theme.colors.background)]};
-    li {
-        display: flex;
-        align-items: center;
-        justify-content:space-between;
-        min-height: 28px;
-        padding: 0 10px;
-        list-style-type: none;
-    }
-    li:hover {
-        cursor: default;
-    }
-`
+// const Selected = styled.div`
+//     color: ${props => props.isText ? props.theme.colors.idle : props.theme.colors[getContrastYIQ(props.theme.colors.background)]};
+//     li {
+//         display: flex;
+//         align-items: center;
+//         justify-content:space-between;
+//         min-height: 28px;
+//         padding: 0 10px;
+//         list-style-type: none;
+//     }
+//     li:hover {
+//         cursor: default;
+//     }
+// `
 const Null = styled.li`
     color: ${props => props.theme.colors.idle};
 `

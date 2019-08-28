@@ -107,7 +107,15 @@ export default class Preview extends Component {
     render() {
         return (
             <Root>
-                <Button status='primary'>PRIMARY</Button>
+                <Button
+                    status='primary'
+                    type='submit'
+                    name='btn'
+                    value='primary'
+                    disabled
+                >
+                    PRIMARY
+                </Button>
                 <Button status='error'>ERROR</Button>
                 <Button status='success'>SUCCESS</Button>
                 <Button status='ghost'>GHOST</Button>

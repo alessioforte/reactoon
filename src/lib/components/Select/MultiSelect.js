@@ -89,7 +89,7 @@ class Multiselect extends Component {
         selected.push(item)
         values.push(item.value)
 
-        let index = this.state.options.indexOf(item)
+        // let index = this.state.options.indexOf(item)
         let options = this.state.options
         // options.splice(index, 1)
 
@@ -104,7 +104,7 @@ class Multiselect extends Component {
 
     unselect(e, item) {
         e.stopPropagation()
-        let sIndex = this.state.selected.indexOf(item)
+        // let sIndex = this.state.selected.indexOf(item)
         let selected = this.state.selected
         // selected.splice(sIndex, 1)
 
@@ -288,9 +288,9 @@ const Selected = styled.div`
 const Placeholder = styled.div`
     color: ${props => props.theme.colors.idle};
 `
-const IconBox = styled.div`
-    min-width: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-`
+// const IconBox = styled.div`
+//     min-width: 20px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: flex-end;
+// `
