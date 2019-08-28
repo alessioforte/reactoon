@@ -107,7 +107,11 @@ export default class Preview extends Component {
     render() {
         return (
             <Root>
-                <Button>test</Button>
+                <Button status='primary'>PRIMARY</Button>
+                <Button status='error'>ERROR</Button>
+                <Button status='success'>SUCCESS</Button>
+                <Button status='ghost'>GHOST</Button>
+                <Button href='/' status='warning'>WARNING LINK</Button>
                 <br />
                 <Checkbox />
                 <br />
