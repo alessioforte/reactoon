@@ -88,7 +88,7 @@ class Dropdown extends Component {
             <ThemeProvider theme={theme}>
                 <Block ref={this.dropdown}>
                     <Button onClick={this.show}>
-                        {placeholder === '' ? <Icon name='caret' color={theme.colors[getContrastYIQ(theme.colors.primary)]} size={5} /> : placeholder}
+                        {placeholder === '' ? <Icon name='caret' color={theme.colors[getContrastYIQ(theme.colors.primary)]} size='5px' /> : placeholder}
                     </Button>
                     {visible && (
                         <Drop position={position} ref={this.content}>

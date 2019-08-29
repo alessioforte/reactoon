@@ -3,18 +3,40 @@ import PropTypes from "prop-types";
 import styled, { css, withTheme, ThemeProvider } from "styled-components";
 import Theme, { getContrastYIQ } from "../../theme";
 
-const Button = ({ status, onClick, href, children, theme, ...rest }) => {
+const Button = ({ status, onClick, href, children, theme, text, ...rest }) => {
+
+  const STATUS = {
+    primary: {
+      background: theme.colors.primary,
+      color: theme.colors.white,
+      border: theme.colors.primary,
+    },
+    ghost: {
+      background: theme.colors.white,
+      color: theme.colors.dark,
+      border: theme.colors.grey,
+    },
+  };
+
+  if (!STATUS[status]) {
+    // eslint-disable-next-line no-console
+    console.error(`
+    <Button status='${status}' ... />
+    '${status}' is not a valid status button try:
+     ${Object.keys(STATUS).join(', ')}
+    `);
+  }
+  const buttonStatus = STATUS[status] || STATUS.primary;
 
   let button = (
-    <StyledButton {...rest} className={status} onClick={onClick}>
-      {Children.toArray(children)}
+    <StyledButton {...rest} status={buttonStatus}>
+      {children ? Children.toArray(children) : text}
     </StyledButton>
   );
-
   if (href) {
     button = (
-      <A {...rest} className={status} href={href} onClick={onClick}>
-        {Children.toArray(children)}
+      <A {...rest} href={href} status={buttonStatus}>
+        {children ? Children.toArray(children) : text}
       </A>
     );
   }
@@ -34,8 +56,8 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
-  status: "default",
-  text: "",
+  status: 'primary',
+  text: '',
   onClick: () => {},
   theme: Theme.styles
 };
@@ -55,9 +77,6 @@ const buttonStyles = css`
   user-select: none;
   cursor: pointer;
   outline: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: bold;
-  font-size: 16px;
   border: 2px solid ${props => props.theme.colors.primary};
   color: ${props =>
     props.theme.colors[getContrastYIQ(props.theme.colors.primary)]};
@@ -70,6 +89,13 @@ const A = styled.a`
 `;
 const StyledButton = styled.button`
   ${buttonStyles};
+  &:disabled {
+    background: ${props => props.theme.colors.disabled};
+    border: 2px solid ${props => props.theme.colors.disabled};
+    color: ${props =>
+    props.theme.colors[getContrastYIQ(props.theme.colors.disabled)]};
+    opacity: 0.5;
+  }
 `;
 const Wrapper = styled.div`
   width: 100%;

@@ -122,11 +122,11 @@ class DatePicker extends Component {
                         <div>
                             {selected && (
                                 <IconDelete onClick={e => this.clear(e)}>
-                                    <Icon name='delete' size={8} color={theme.colors.background} />
+                                    <Icon name='delete' size='8px' color={theme.colors.background} />
                                 </IconDelete>
                             )}
                             <div>
-                                <Icon name='caret' size={5} color={theme.colors.ground} />
+                                <Icon name='caret' size='5px' color={theme.colors.ground} />
                             </div>
                         </div>
                     </Button>
@@ -135,11 +135,11 @@ class DatePicker extends Component {
                             <Month>
                                 <Header>
                                     <CaretBox right={false} onClick={() => this.getMonth('last')}>
-                                        <Icon name='caret' size={5} color={theme[getContrastYIQ(theme.colors.background)]} />
+                                        <Icon name='caret' size='5px' color={theme[getContrastYIQ(theme.colors.background)]} />
                                     </CaretBox>
                                     {month} {date.year}
                                     <CaretBox right={true} onClick={() => this.getMonth('next')}>
-                                        <Icon name='caret' size={5} color={theme[getContrastYIQ(theme.colors.background)]} />
+                                        <Icon name='caret' size='5px' color={theme[getContrastYIQ(theme.colors.background)]} />
                                     </CaretBox>
                                 </Header>
                                 <Context.Provider value={{ today: this.today, month: date.month, selected }}>

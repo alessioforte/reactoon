@@ -131,7 +131,7 @@ class Multiselect extends Component {
                 <div key={`${item}-${i}`}>
                     { item.text }
                     <div onClick={(e) => this.unselect(e, item)}>
-                        <Icon name='delete' size={8} color={theme.colors[getContrastYIQ(theme.colors.primary)]} margin='0 0 0 8px'/>
+                        <Icon name='delete' size='8px' color={theme.colors[getContrastYIQ(theme.colors.primary)]} margin='0 0 0 8px'/>
                     </div>
                 </div>
             )

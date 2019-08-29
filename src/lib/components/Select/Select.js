@@ -111,7 +111,7 @@ class Select extends Component {
                         isError={isError}
                     >
                         { text ? text : placeholder }
-                        <IconBox><Icon name='caret' size={5} color={theme.colors.ground} /></IconBox>
+                        <IconBox><Icon name='caret' size='5px' color={theme.colors.ground} /></IconBox>
                     </Button>
                     {
                         visible && (

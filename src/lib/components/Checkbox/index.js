@@ -32,7 +32,7 @@ class Checkbox extends Component {
                     <Check check={value}>
                         <Icon
                             name='checkmark'
-                            size={8}
+                            size='8px'
                             color={theme.colors[getContrastYIQ(theme.colors.primary)]}
                         />
                     </Check>
