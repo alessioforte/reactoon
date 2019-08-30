@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled, { css, withTheme, ThemeProvider } from "styled-components";
 import Theme, { getContrastYIQ } from "../../theme";
 
-const Button = ({ status, onClick, href, children, theme, text, ...rest }) => {
+const Button = ({ status, href, children, theme, text, ...rest }) => {
 
   if (!STATUS[status]) {
     // eslint-disable-next-line no-console
@@ -34,14 +34,12 @@ const Button = ({ status, onClick, href, children, theme, text, ...rest }) => {
 Button.propTypes = {
   status: PropTypes.string,
   href: PropTypes.string,
-  onClick: PropTypes.func,
   children: PropTypes.node.isRequired
 };
 
 Button.defaultProps = {
   status: 'primary',
   text: '',
-  onClick: () => {},
   theme: Theme.styles
 };
 
