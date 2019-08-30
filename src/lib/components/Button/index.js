@@ -5,19 +5,6 @@ import Theme, { getContrastYIQ } from "../../theme";
 
 const Button = ({ status, onClick, href, children, theme, text, ...rest }) => {
 
-  const STATUS = {
-    primary: {
-      background: theme.colors.primary,
-      color: theme.colors.white,
-      border: theme.colors.primary,
-    },
-    ghost: {
-      background: theme.colors.white,
-      color: theme.colors.dark,
-      border: theme.colors.grey,
-    },
-  };
-
   if (!STATUS[status]) {
     // eslint-disable-next-line no-console
     console.error(`
@@ -26,7 +13,7 @@ const Button = ({ status, onClick, href, children, theme, text, ...rest }) => {
      ${Object.keys(STATUS).join(', ')}
     `);
   }
-  const buttonStatus = STATUS[status] || STATUS.primary;
+  const buttonStatus = status || 'primary';
 
   let button = (
     <StyledButton {...rest} status={buttonStatus}>
@@ -41,11 +28,7 @@ const Button = ({ status, onClick, href, children, theme, text, ...rest }) => {
     );
   }
 
-  return (
-    <ThemeProvider theme={theme}>
-      <Wrapper>{button}</Wrapper>
-    </ThemeProvider>
-  );
+  return <ThemeProvider theme={theme}>{button}</ThemeProvider>
 };
 
 Button.propTypes = {
@@ -64,9 +47,44 @@ Button.defaultProps = {
 
 export default withTheme(Button);
 
+const STATUS = {
+  primary: css`
+    background: ${props => props.theme.colors.primary};
+    border: 2px solid ${props => props.theme.colors.primary};
+    color: ${props =>
+      props.theme.colors[getContrastYIQ(props.theme.colors.primary)]};      
+  `,
+  success: css`
+    background: ${props => props.theme.colors.success};
+    border: 2px solid ${props => props.theme.colors.success};
+    color: ${props =>
+      props.theme.colors[getContrastYIQ(props.theme.colors.success)]};
+  `,
+  error: css`
+    background: ${props => props.theme.colors.error};
+    border: 2px solid ${props => props.theme.colors.error};
+    color: ${props =>
+      props.theme.colors[getContrastYIQ(props.theme.colors.error)]};
+  `,
+  ghost: css`
+    background: ${props => props.theme.colors.light};
+    border: 2px solid ${props => props.theme.colors.idle};
+    color: ${props =>
+      props.theme.colors[getContrastYIQ(props.theme.colors.light)]};
+  `,
+  warning: css`
+    background: ${props => props.theme.colors.warning};
+    border: 2px solid ${props => props.theme.colors.warning};
+    color: ${props =>
+      props.theme.colors[getContrastYIQ(props.theme.colors.warning)]};
+  `
+}
+
 const buttonStyles = css`
   height: ${props => (props.height ? props.height + "px" : "30px")};
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   box-sizing: border-box;
   padding: 0.25em 2em;
   min-width: 200px;
@@ -77,18 +95,15 @@ const buttonStyles = css`
   user-select: none;
   cursor: pointer;
   outline: 0;
+  font-size: 12px;
+  text-align: center;
   border: 2px solid ${props => props.theme.colors.primary};
   color: ${props =>
     props.theme.colors[getContrastYIQ(props.theme.colors.primary)]};
-  &:active {
-    opacity: 0.9;
-  }
-`;
-const A = styled.a`
-  ${buttonStyles};
 `;
 const StyledButton = styled.button`
   ${buttonStyles};
+  ${props => STATUS[props.status]}
   &:disabled {
     background: ${props => props.theme.colors.disabled};
     border: 2px solid ${props => props.theme.colors.disabled};
@@ -97,46 +112,4 @@ const StyledButton = styled.button`
     opacity: 0.5;
   }
 `;
-const Wrapper = styled.div`
-  width: 100%;
-  text-align: center;
-  margin: 1em 0;
-  .default,
-  .primary {
-    background: ${props => props.theme.colors.primary};
-    border: 2px solid ${props => props.theme.colors.primary};
-    color: ${props =>
-    props.theme.colors[getContrastYIQ(props.theme.colors.primary)]};
-  }
-  .success {
-    background: ${props => props.theme.colors.success};
-    border: 2px solid ${props => props.theme.colors.success};
-    color: ${props =>
-    props.theme.colors[getContrastYIQ(props.theme.colors.success)]};
-  }
-  .error {
-    background: ${props => props.theme.colors.error};
-    border: 2px solid ${props => props.theme.colors.error};
-    color: ${props =>
-    props.theme.colors[getContrastYIQ(props.theme.colors.error)]};
-  }
-  .ghost {
-    background: ${props => props.theme.colors.light};
-    border: 2px solid ${props => props.theme.colors.idle};
-    color: ${props =>
-    props.theme.colors[getContrastYIQ(props.theme.colors.light)]};
-  }
-  .warning {
-    background: ${props => props.theme.colors.warning};
-    border: 2px solid ${props => props.theme.colors.warning};
-    color: ${props =>
-    props.theme.colors[getContrastYIQ(props.theme.colors.warning)]};
-  }
-  button:disabled {
-    background: ${props => props.theme.colors.disabled};
-    border: 2px solid ${props => props.theme.colors.disabled};
-    color: ${props =>
-    props.theme.colors[getContrastYIQ(props.theme.colors.disabled)]};
-    opacity: 0.5;
-  }
-`;
+const A = styled(StyledButton.withComponent('a'))``;

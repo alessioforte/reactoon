@@ -116,10 +116,10 @@ export default class Preview extends Component {
                     PRIMARY
                 </Button>
                 <Button status='error'>ERROR</Button>
+                <Button status='primary' disabled>DISABLED</Button>
                 <Button status='success'>SUCCESS</Button>
                 <Button status='ghost'>GHOST</Button>
                 <Button href='/' status='warning'>WARNING LINK</Button>
-                <Button status='primary' disabled>DISABLED</Button>
                 <br />
                 <Checkbox />
                 <br />
