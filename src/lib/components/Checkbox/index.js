@@ -1,25 +1,25 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import styled, { withTheme, ThemeProvider } from "styled-components";
-import Theme, { getContrastYIQ } from "../../theme";
-import Icon from "../Icon";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import styled, { withTheme, ThemeProvider } from 'styled-components';
+import { getContrastYIQ, styles } from '../../theme';
+import Icon from '../Icon';
 
 const Checkbox = ({ checked, label, onChange, theme }) => {
-  const [value, setValue] = useState(checked || false)
+  const [value, setValue] = useState(checked || false);
 
   const handleOnChande = () => {
-    setValue(!value)
-    let data = { checked: !value, label }
-    onChange(data)
-  }
+    setValue(!value);
+    const data = { checked: !value, label };
+    onChange(data);
+  };
 
   return (
     <ThemeProvider theme={theme}>
       <Box onClick={handleOnChande}>
         <Check check={value}>
           <Icon
-            name="checkmark"
-            size="9px"
+            name='checkmark'
+            size='9px'
             color={theme.colors[getContrastYIQ(theme.colors.primary)]}
           />
         </Check>
@@ -32,14 +32,15 @@ const Checkbox = ({ checked, label, onChange, theme }) => {
 Checkbox.propTypes = {
   label: PropTypes.string,
   checked: PropTypes.bool,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  theme: PropTypes.object
 };
 
 Checkbox.defaultProps = {
   checked: false,
   label: null,
   onChange: () => {},
-  theme: Theme.styles
+  theme: styles
 };
 
 export default withTheme(Checkbox);

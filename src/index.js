@@ -1,8 +1,7 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import Preview from './preview';
-import { ThemeProvider } from 'styled-components';
 import theme from './theme';
 
 const GlobalStyle = createGlobalStyle`
@@ -41,11 +40,11 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 render(
-    <Fragment>
-        <GlobalStyle />
-        <ThemeProvider theme={theme}>
-            <Preview />
-        </ThemeProvider>
-    </Fragment>,
-    document.getElementById('root')
+  <>
+    <GlobalStyle />
+    <ThemeProvider theme={theme}>
+      <Preview />
+    </ThemeProvider>
+  </>,
+  document.getElementById('root')
 );

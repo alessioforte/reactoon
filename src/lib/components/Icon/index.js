@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Svg, Wrapper } from "./styled";
-import icons from "./icons";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Svg, Wrapper } from './styled';
+import icons from './icons';
 
 const Icon = ({ name, color, size }) => {
   if (!icons[name]) {
@@ -17,8 +17,8 @@ const Icon = ({ name, color, size }) => {
       <Svg
         color={color}
         height={size}
-        x="0px"
-        y="0px"
+        x='0px'
+        y='0px'
         viewBox={`0 0 ${width} 512`}
       >
         <path d={d} />
@@ -34,8 +34,8 @@ Icon.propTypes = {
 };
 
 Icon.defaultProps = {
-  color: "#DADEE1",
-  size: "30px"
+  color: '#DADEE1',
+  size: '30px'
 };
 
 export default Icon;

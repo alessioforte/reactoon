@@ -1,0 +1,75 @@
+{
+  "extends": ["prettier", "prettier/react"],
+  "plugins": ["react", "import", "prettier", "react-hooks", "jsx-a11y"],
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true,
+    "es6": true
+  },
+  "rules": {
+    "arrow-parens": ["error", "as-needed"],
+    "comma-dangle": ["error", "only-multiline"],
+    "consistent-return": "off",
+    "global-require": "off",
+    "max-len": ["warn", 120],
+    "no-alert": "off",
+    "no-confusing-arrow": "off",
+    "no-console": "off",
+    "no-param-reassign": "off",
+    "no-underscore-dangle": "off",
+    "prefer-promise-reject-errors": "warn",
+    "prefer-template": "warn",
+    "react/destructuring-assignment": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react/forbid-prop-types": 0,
+    "react/jsx-closing-tag-location": "off",
+    "react/jsx-first-prop-new-line": [2, "multiline"],
+    "react/jsx-filename-extension": "off",
+    "react/jsx-no-target-blank": "warn",
+    "react/jsx-max-props-per-line": [1, {"maximum": 1}],
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/prop-types": "off",
+    "react/no-multi-comp": ["error", {"ignoreStateless": true}],
+    "react/no-unescaped-entities": "off",
+    "react/prefer-stateless-function": "warn",
+    "react/require-default-props": 0,
+    "jsx-a11y/label-has-associated-control": "off",
+    "jsx-a11y/control-has-associated-label": "off",
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["to"],
+        "aspects": ["noHref", "invalidHref", "preferButton"]
+      }
+    ],
+    "import/default": "off",
+    "import/extensions": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/no-named-as-default": "error",
+    "import/no-unresolved": "off",
+    "import/no-dynamic-require": "off"
+  },
+  "settings": {
+    "import/resolve": {
+      "moduleDirectory": ["node_modules", "src", "api"]
+    }
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "globals": {
+    "__DEVELOPMENT__": true,
+    "__CLIENT__": true,
+    "__SERVER__": true,
+    "__DISABLE_SSR__": true,
+    "__DEVTOOLS__": true,
+    "webpackIsomorphicTools": true
+  }
+}
