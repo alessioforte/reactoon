@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Svg } from "./styled";
+import { Svg, Wrapper } from "./styled";
 import icons from "./icons";
 
 const Icon = ({ name, color, size }) => {
@@ -13,7 +13,7 @@ const Icon = ({ name, color, size }) => {
   }
   const { d, width } = icons[name] || icons.default;
   return (
-    <div>
+    <Wrapper>
       <Svg
         color={color}
         height={size}
@@ -23,7 +23,7 @@ const Icon = ({ name, color, size }) => {
       >
         <path d={d} />
       </Svg>
-    </div>
+    </Wrapper>
   );
 };
 

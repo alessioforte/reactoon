@@ -39,9 +39,21 @@ const BORDERS = {
     radius: 0
 }
 
+const SIZE = {
+  is: 'xs',
+  xs: {
+    height: ''
+  },
+  sm: {},
+  md: {},
+  lg: {},
+  xl: {}
+}
+
 export const styles = {
     colors: COLORS,
-    border: BORDERS
+    borders: BORDERS,
+    size: SIZE
 }
 
 export function create(theme) {

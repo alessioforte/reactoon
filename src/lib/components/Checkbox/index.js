@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled, { withTheme, ThemeProvider } from "styled-components";
 import Theme, { getContrastYIQ } from "../../theme";
@@ -19,7 +19,7 @@ const Checkbox = ({ checked, label, onChange, theme }) => {
         <Check check={value}>
           <Icon
             name="checkmark"
-            size="8px"
+            size="9px"
             color={theme.colors[getContrastYIQ(theme.colors.primary)]}
           />
         </Check>
