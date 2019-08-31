@@ -1,12 +1,7 @@
 import { Theme } from './lib';
 
-/**
- * Light Theme
- */
-export default {
+const theme = Theme.create({
     colors: {
-        ...Theme.styles.colors,
-
         primary: '#1FA588',
         secondary: '#86C5E0',
         action: '#F7AC91',
@@ -39,8 +34,8 @@ export default {
         shadow: '0px 1px 5px 1px rgba(0, 0, 0, 0.2)'
     },
     borders: {
-        ...Theme.styles.borders,
-
         radius: 5
     }
-};
+});
+
+export default theme

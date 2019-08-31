@@ -2,7 +2,7 @@
  * Default Theme
  */
 
-const colors = {
+const COLORS = {
     primary: '#ffff00',
     secondary: '#DAA520',
     action: '',
@@ -35,13 +35,24 @@ const colors = {
     shadow: '0px 1px 5px 1px rgba(0, 0, 0, 0.2)'
 }
 
-const borders = {
+const BORDERS = {
     radius: 0
 }
 
 export const styles = {
+    colors: COLORS,
+    border: BORDERS
+}
+
+export function create(theme) {
+  let colors = COLORS
+  let borders = BORDERS
+  if (theme.colors) colors = { ...colors, ...theme.colors }
+  if (theme.borders) borders = { ...borders, ...theme.borders }
+  return {
     colors,
     borders
+  }
 }
 
 export function getContrastYIQ(hexcolor) {
@@ -64,5 +75,6 @@ export function getContrastYIQ(hexcolor) {
 
 export default {
     styles,
-    getContrastYIQ
+    getContrastYIQ,
+    create
 }
