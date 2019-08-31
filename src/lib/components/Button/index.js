@@ -34,7 +34,7 @@ const Button = ({ status, href, children, theme, text, ...rest }) => {
 Button.propTypes = {
   status: PropTypes.string,
   href: PropTypes.string,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   text: PropTypes.string,
   theme: PropTypes.object
 };
