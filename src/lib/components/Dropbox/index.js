@@ -25,7 +25,7 @@ class Dropbox extends Component {
   }
 
   setDropdownPosition() {
-    let rect = this.input.current.getBoundingClientRect();
+    const rect = this.input.current.getBoundingClientRect();
     let position = {
       top: 35,
       left: '0',
@@ -85,14 +85,12 @@ class Dropbox extends Component {
 
     return (
       <ThemeProvider theme={theme}>
-        <Box>
-          <Input ref={this.input} onClick={this.show}>
-            {renderInput()}
-          </Input>
+        <Box ref={this.input}>
+          {renderInput({ show: this.show })}
           {
             visible && (
-              <Drop position={position} ref={this.drop} onClick={this.close}>
-                {renderOptions()}
+              <Drop position={position} ref={this.drop}>
+                {renderOptions({ close: this.close })}
               </Drop>
             )
 
@@ -117,7 +115,6 @@ export default withTheme(Dropbox)
 
 // prettier-ignore
 const Box = styled.div`
-  display: inline-block;
   position: relative;
 `
 const Drop = styled.div.attrs(({ position }) => ({ style: position }))`
@@ -129,11 +126,9 @@ const Drop = styled.div.attrs(({ position }) => ({ style: position }))`
   padding: 5px 0;
   font-size: 12px;
   min-width: 200px;
+  width: 100%;
   z-index: 9;
   &::-webkit-scrollbar {
       display: none;
   }
 `;
-const Input = styled.div`
-
-`

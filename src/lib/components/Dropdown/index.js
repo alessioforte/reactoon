@@ -6,18 +6,18 @@ import Button from '../Button'
 import Dropbox from '../Dropbox'
 
 const Dropdown = ({ placeholder, children }) => {
-  const renderInput = () => (
-    <Button>
+  const renderInput = ({ show }) => (
+    <Button onClick={show}>
       { placeholder ? placeholder :  <Icon name='caret' size='5px' />}
     </Button>
   )
-  const renderOptions = () => (
-    <List>
+  const renderOptions = ({ close }) => (
+    <Options>
       {children &&
         children.map((item, i) => (
-          <Option key={`select-${i}`}>{item}</Option>
+          <Option onClick={close} key={`select-${i}`}>{item}</Option>
         ))}
-    </List>
+    </Options>
   )
   return (
     <Dropbox
@@ -29,9 +29,6 @@ const Dropdown = ({ placeholder, children }) => {
 
 export default Dropdown
 
-const List = styled.div`
-
-`;
 const Option = styled.div`
   margin: 0;
   min-height: 30px;
@@ -44,4 +41,7 @@ const Option = styled.div`
     color: ${props => props.theme.colors[getContrastYIQ(props.theme.colors.hover)]};
     cursor: pointer;
   }
+`
+const Options = styled.div`
+
 `
