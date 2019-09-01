@@ -5,15 +5,15 @@ import { styles } from '../../theme';
 import { StyledButton, A, availableStatus } from './styled';
 
 const Button = ({ status, href, children, theme, text, ...rest }) => {
+  let buttonStatus = status
   if (!availableStatus.includes(status)) {
     // eslint-disable-next-line no-console
-    console.error(`
-    <Button status='${status}' ... />
-    '${status}' is not a valid status button try:
-     ${availableStatus.join(', ')}
+    buttonStatus = 'primary'
+    console.log(`
+<Button status='${status}' ... />
+'${status}' is not a valid status button try: ${availableStatus.join(', ')}
     `);
   }
-  const buttonStatus = status || 'primary';
 
   let button = (
     <StyledButton {...rest} status={buttonStatus}>

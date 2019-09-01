@@ -113,7 +113,7 @@ export default class Preview extends Component {
         <Button status='primary' disabled>
           DISABLED
         </Button>
-        <Button status='success'>SUCCESS</Button>
+        <Button status='successg'>SUCCESS</Button>
         <Button status='ghost'>GHOST</Button>
         <Button href='/' status='warning'>
           WARNING LINK
