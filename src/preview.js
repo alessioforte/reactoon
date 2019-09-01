@@ -18,6 +18,7 @@ import {
   // Spinner,
   // Notification,
   Button,
+  Icon,
   Input,
   // Tooltip,
   // SideBar,
@@ -115,8 +116,9 @@ export default class Preview extends Component {
         </Button>
         <Button status='successg'>SUCCESS</Button>
         <Button status='ghost'>GHOST</Button>
-        <Button href='/' status='warning'>
-          WARNING LINK
+        <Button href='/' status='warning' text='LINK' />
+        <Button status='warning'>
+          <Icon name='caret' size='5px' />
         </Button>
         <br />
         <Checkbox />
@@ -165,6 +167,19 @@ export default class Preview extends Component {
         />
         <br />
         <DatePicker />
+        <br />
+        <Dropdown>
+          <div onClick={() => console.log('create')}>create</div>
+          <div onClick={() => console.log('edit')}>edit</div>
+          <div onClick={() => alert('delete')}>delete</div>
+        </Dropdown>
+        <BottomRight>
+          <Dropdown>
+            <div onClick={() => console.log('create')}>create</div>
+            <div onClick={() => console.log('edit')}>edit</div>
+            <div onClick={() => alert('delete')}>delete</div>
+          </Dropdown>
+        </BottomRight>
       </Root>
     );
   }
@@ -224,3 +239,9 @@ const Root = styled.div`
 //     display: flex;
 //     align-items: center;
 // `
+
+const BottomRight = styled.div`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+`;

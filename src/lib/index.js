@@ -14,6 +14,7 @@ import Radio from './components/Radio';
 // import Loading from './components/loading/loading'
 // import Spinner from './components/spinner/spinner'
 // import Notification from './components/notification'
+import Icon from './components/Icon';
 import Input from './components/Input';
 // import Tooltip from './components/tooltip/tooltip'
 // import SideBar from './components/sidebar/sidebar'
@@ -40,6 +41,7 @@ export {
   // Loading,
   // Spinner,
   // Notification,
+  Icon,
   Input,
   // Tooltip,
   // SideBar,

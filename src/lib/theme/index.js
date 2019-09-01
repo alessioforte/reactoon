@@ -101,16 +101,16 @@ export function getColorLuminance(hex, luminance) {
 
 function validateHex(color) {
   if (typeof color !== 'string') {
-    console.error(`${color} is not a string`);
+    console.error(`Validate hex color: ${color} is not a string`);
     return false;
   }
   if (color[0] !== '#') {
-    console.error(`${color} - hex color not valid`);
+    console.error(`Validate hex color: ${color} is not a valid hex color`);
     return false;
   }
   color = color.replace('#', '');
   if (color.length < 3) {
-    console.error(`#${color} - hex color not valid`);
+    console.error( `Validate hex color: #${color} is not a valid hex color`);
     return false;
   }
   if (color.length === 3) {
