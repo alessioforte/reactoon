@@ -13,14 +13,14 @@ describe('<Button />', () => {
     const text = 'Submit';
     const children = 'Clear';
     const {
-      container: { firstChild: buttonWithTextProps },
+      container: { firstChild: buttonWithTextProps }
     } = render(<Button text={text} />);
     const {
-      container: { firstChild: buttonWithChildren },
+      container: { firstChild: buttonWithChildren }
     } = render(
       <Button text={text}>
         <span>{children}</span>
-      </Button>,
+      </Button>
     );
 
     expect(buttonWithTextProps).toHaveTextContent(text);
@@ -29,10 +29,10 @@ describe('<Button />', () => {
 
   it('Should render primary button if status is not valid', () => {
     const { container: button1 } = render(
-      <Button status="status-not-valid" text="Not Valid" />,
+      <Button status='status-not-valid' text='Not Valid' />
     );
     const { container: button2 } = render(
-      <Button status="not-valid-status">Not Valid</Button>,
+      <Button status='not-valid-status'>Not Valid</Button>
     );
 
     expect(button1).toStrictEqual(button2);
@@ -40,7 +40,7 @@ describe('<Button />', () => {
 
   it('should render button with disabled attribute', () => {
     const { container } = render(
-      <Button status="primary" text='disabled' disabled />
+      <Button status='primary' text='disabled' disabled />
     );
     const button = container.querySelector('button');
     expect(button).toHaveAttribute('disabled');

@@ -205,7 +205,7 @@ const Block = styled.div`
   padding: 5px 0;
 `;
 const Button = styled.div`
-  border-radius: ${props => props.theme.borders.radius + 'px'};
+  border-radius: ${props => props.theme.border.radius + 'px'};
   border: 1px solid
     ${props =>
       props.isError ? props.theme.colors.error : props.theme.colors.background};
@@ -228,7 +228,7 @@ const Button = styled.div`
 `;
 const Drop = styled.div.attrs(({ position }) => ({ style: position }))`
   margin: 5px 0;
-  border-radius: ${props => props.theme.borders.radius + 'px'};
+  border-radius: ${props => props.theme.border.radius + 'px'};
   padding-bottom: 5px;
   position: absolute;
   box-sizing: border-box;

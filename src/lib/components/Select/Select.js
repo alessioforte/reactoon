@@ -172,7 +172,7 @@ const Block = styled.div`
   position: relative;
 `;
 const Button = styled.div`
-  border-radius: ${props => props.theme.borders.radius + 'px'};
+  border-radius: ${props => props.theme.border.radius + 'px'};
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -194,7 +194,7 @@ const Button = styled.div`
   }
 `;
 const Drop = styled.div.attrs(({ position }) => ({ style: position }))`
-  border-radius: ${props => props.theme.borders.radius + 'px'};
+  border-radius: ${props => props.theme.border.radius + 'px'};
   position: absolute;
   box-sizing: border-box;
   display: flex;
@@ -216,7 +216,7 @@ const List = styled.div`
   overflow: scroll;
   max-height: 338px;
   li {
-    border-radius: ${props => props.theme.borders.radius + 'px'};
+    border-radius: ${props => props.theme.border.radius + 'px'};
     display: flex;
     align-items: center;
     min-height: 28px;

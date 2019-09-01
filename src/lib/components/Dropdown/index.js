@@ -128,7 +128,7 @@ const Block = styled.div`
   position: relative;
 `;
 const Button = styled.button`
-  border-radius: ${props => props.theme.borders.radius + 'px'};
+  border-radius: ${props => props.theme.border.radius + 'px'};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -147,7 +147,7 @@ const Button = styled.button`
   }
 `;
 const Drop = styled.div.attrs(({ position }) => ({ style: position }))`
-    border-radius: ${props => props.theme.borders.radius + 'px'};
+    border-radius: ${props => props.theme.border.radius + 'px'};
     position: absolute;
     background: ${props => props.theme.colors.background};
     color: ${props =>

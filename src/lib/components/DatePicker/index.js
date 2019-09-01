@@ -216,7 +216,7 @@ const Block = styled.div`
   max-width: 230px;
 `;
 const Button = styled.div`
-  border-radius: ${props => props.theme.borders.radius + 'px'};
+  border-radius: ${props => props.theme.border.radius + 'px'};
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -244,7 +244,7 @@ const Button = styled.div`
   }
 `;
 const Drop = styled.div`
-  border-radius: ${props => props.theme.borders.radius + 'px'};
+  border-radius: ${props => props.theme.border.radius + 'px'};
   position: absolute;
   top: 35px;
   box-sizing: border-box;

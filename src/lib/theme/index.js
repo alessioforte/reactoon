@@ -5,7 +5,6 @@
 const COLORS = {
   primary: '#ffff00',
   secondary: '#DAA520',
-  action: '',
   success: '#00FA9A',
   warning: '#FFA500',
   danger: '#B22222',
@@ -13,18 +12,20 @@ const COLORS = {
   info: '#00BFFF',
   light: '#fff',
   dark: '#1a1a1a',
-  text: '#fff',
-  textLight: '#ffffff',
-  textDark: '#000000',
-  textIdle: '',
-  textActive: '',
-  textError: '',
+  // text: '#fff',
+  // textLight: '#ffffff',
+  // textDark: '#000000',
+  // textIdle: '',
+  // textActive: '',
+  // textError: '',
+
   groundzero: '#EFEFEF',
   background: '#eee',
   flatground: '#D3D3D3',
   ground: '#B5B5B5',
-  hillground: '#848484',
-  highground: '#3A3A3A',
+  upperground: '#848484',
+  higherground: '#3A3A3A',
+
   active: '#FFD700',
   selected: '#999',
   hover: '#2182BD',
@@ -35,14 +36,16 @@ const COLORS = {
   shadow: '0px 1px 5px 1px rgba(0, 0, 0, 0.2)'
 };
 
-const BORDERS = {
-  radius: 0
+const BORDER = {
+  radius: 0,
+  width: '1px'
 };
 
 const SIZE = {
   is: 'xs',
   xs: {
-    height: ''
+    height: '',
+    fontSize: ''
   },
   sm: {},
   md: {},
@@ -52,38 +55,76 @@ const SIZE = {
 
 export const styles = {
   colors: COLORS,
-  borders: BORDERS,
+  border: BORDER,
   size: SIZE
 };
 
 export function create(theme) {
   let colors = COLORS;
-  let borders = BORDERS;
+  let border = BORDER;
   if (theme.colors) colors = { ...colors, ...theme.colors };
-  if (theme.borders) borders = { ...borders, ...theme.borders };
+  if (theme.border) border = { ...border, ...theme.border };
   return {
     colors,
-    borders
+    border
   };
 }
 
-export function getContrastYIQ(hexcolor) {
-  if (typeof hexcolor !== 'string')
-    throw new Error(`${hexcolor} is not a string`);
-  if (hexcolor[0] !== '#') throw new Error(`${hexcolor} - HEX color not valid`);
-
-  hexcolor = hexcolor.replace('#', '');
-
-  if (hexcolor.length < 3) throw new Error(`${hexcolor} - HEX color not valid`);
-  if (hexcolor.length === 3) hexcolor = hexcolor + hexcolor;
-
-  var r = parseInt(hexcolor.substr(0, 2), 16);
-  var g = parseInt(hexcolor.substr(2, 2), 16);
-  var b = parseInt(hexcolor.substr(4, 2), 16);
-
+export function getContrastYIQ(hex) {
+  const color = validateHex(hex);
+  if (!color) {
+    console.warn(`Something goes wrong getContrastYIQ not applied`);
+    return 'dark';
+  }
+  const [r, g, b] = colorHexToRgb(color);
   var yiq = (r * 299 + g * 587 + b * 114) / 1000;
-
   return yiq >= 128 ? 'dark' : 'light';
+}
+
+export function getColorLuminance(hex, luminance) {
+  const color = validateHex(hex);
+  if (!color) {
+    console.warn(`Something goes wrong getColorLuminance not applied`);
+    return hex;
+  }
+  const rgb = colorHexToRgb(color);
+  hex = '#';
+  luminance = luminance || 0;
+  rgb.forEach(c => {
+    let x = Math.round(Math.min(Math.max(0, c + c * luminance), 255)).toString(
+      16
+    );
+    hex += ('00' + x).substr(x.length);
+  });
+  return hex;
+}
+
+function validateHex(color) {
+  if (typeof color !== 'string') {
+    console.error(`${color} is not a string`);
+    return false;
+  }
+  if (color[0] !== '#') {
+    console.error(`${color} - hex color not valid`);
+    return false;
+  }
+  color = color.replace('#', '');
+  if (color.length < 3) {
+    console.error(`#${color} - hex color not valid`);
+    return false;
+  }
+  if (color.length === 3) {
+    color = color[0] + color[0] + color[1] + color[1] + color[2] + color[2];
+  }
+  return `#${color}`;
+}
+
+function colorHexToRgb(hex) {
+  var r, g, b;
+  r = parseInt(hex[1] + hex[2], 16);
+  g = parseInt(hex[3] + hex[4], 16);
+  b = parseInt(hex[5] + hex[6], 16);
+  return [r, g, b];
 }
 
 export default {

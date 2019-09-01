@@ -59,7 +59,7 @@ export default withTheme(Input);
 
 /* eslint-disable */
 const Box = styled.div`
-  border-radius: ${props => props.theme.borders.radius + 'px'};
+  border-radius: ${props => props.theme.border.radius + 'px'};
   box-sizing: border-box;
   position: relative;
   min-height: 30px;
