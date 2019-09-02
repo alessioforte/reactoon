@@ -16,7 +16,7 @@ import Radio from './components/Radio';
 // import Notification from './components/notification'
 import Icon from './components/Icon';
 import Input from './components/Input';
-// import Tooltip from './components/tooltip/tooltip'
+import Tooltip from './components/Tooltip'
 // import SideBar from './components/sidebar/sidebar'
 // import Modal from './components/modal/modal'
 // import Calendar from './components/calendar/calendar'
@@ -43,7 +43,7 @@ export {
   // Notification,
   Icon,
   Input,
-  // Tooltip,
+  Tooltip,
   // SideBar,
   // Modal,
   // Calendar,

@@ -36,12 +36,12 @@ class Radio extends Component {
       <ThemeProvider theme={theme}>
         <Block inline={this.inline}>
           {this.options.map((option, i) => (
-            <div key={`${option.text}-${i}`}>
+            <div key={`${option.label}-${i}`}>
               <Option onClick={e => this.onChange(e, option.value)}>
                 <Selector active={this.state.value === option.value}>
                   <div />
                 </Selector>
-                <Label>{option.text}</Label>
+                <Label>{option.label}</Label>
               </Option>
             </div>
           ))}

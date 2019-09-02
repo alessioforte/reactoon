@@ -20,7 +20,7 @@ import {
   Button,
   Icon,
   Input,
-  // Tooltip,
+  Tooltip,
   // SideBar,
   // Modal,
   // Calendar,
@@ -32,32 +32,32 @@ import {
 import 'moment/locale/it';
 
 const langs = [
-  { text: 'italiano', value: 'it' },
-  { text: 'inglese', value: 'en' },
-  { text: 'spagnolo', value: 'es' },
-  { text: 'francese', value: 'fr' },
-  { text: 'tedesco', value: 'ge' },
-  { text: 'russo', value: 'ru' }
+  { label: 'italiano', value: 'it' },
+  { label: 'inglese', value: 'en' },
+  { label: 'spagnolo', value: 'es' },
+  { label: 'francese', value: 'fr' },
+  { label: 'tedesco', value: 'ge' },
+  { label: 'russo', value: 'ru' }
 ];
 
 const bands = [
-  { text: 'Kasabian', value: 'Kasabian' },
-  { text: 'Oasis', value: 'Oasis' },
-  { text: 'Franz Ferdinand', value: 'Franz Ferdinand' },
-  { text: 'Strokes', value: 'Strokes' },
-  { text: 'Beatles', value: 'Beatles' },
-  { text: 'Rolling Stones', value: 'Rolling Stones' },
-  { text: 'Queen', value: 'Queen' },
-  { text: 'Deep Purple', value: 'Deep Purple' },
-  { text: 'Led Zeppelin', value: 'Led Zeppelin' },
-  { text: 'Rainbow', value: 'Rainbow' },
-  { text: 'Pink Floyd', value: 'Pink Floyd' },
-  { text: 'Coldplay', value: 'Coldplay' },
-  { text: 'Muse', value: 'Muse' },
-  { text: 'The Doors', value: 'The Doors' },
-  { text: 'Killers', value: 'Killers' },
-  { text: 'The Smiths', value: 'The Smiths' },
-  { text: 'Whitesnakes', value: 'Whitesnakes' }
+  { label: 'Kasabian', value: 'Kasabian' },
+  { label: 'Oasis', value: 'Oasis' },
+  { label: 'Franz Ferdinand', value: 'Franz Ferdinand' },
+  { label: 'Strokes', value: 'Strokes' },
+  { label: 'Beatles', value: 'Beatles' },
+  { label: 'Rolling Stones', value: 'Rolling Stones' },
+  { label: 'Queen', value: 'Queen' },
+  { label: 'Deep Purple', value: 'Deep Purple' },
+  { label: 'Led Zeppelin', value: 'Led Zeppelin' },
+  { label: 'Rainbow', value: 'Rainbow' },
+  { label: 'Pink Floyd', value: 'Pink Floyd' },
+  { label: 'Coldplay', value: 'Coldplay' },
+  { label: 'Muse', value: 'Muse' },
+  { label: 'The Doors', value: 'The Doors' },
+  { label: 'Killers', value: 'Killers' },
+  { label: 'The Smiths', value: 'The Smiths' },
+  { label: 'Whitesnakes', value: 'Whitesnakes' }
 ];
 
 // const radioOptions = [
@@ -71,8 +71,8 @@ const getSuggestions = value => {
   return new Promise((resolve, reject) => {
     let suggestions = [];
     suggestions = bands.filter(item => {
-      let text = item.text.toLowerCase();
-      return text.includes(value.toLowerCase());
+      let label = item.label.toLowerCase();
+      return label.includes(value.toLowerCase());
     });
     resolve(suggestions);
   });
@@ -107,20 +107,9 @@ export default class Preview extends Component {
   render() {
     return (
       <Root>
-        <Button status='primary' type='submit' name='btn' value='primary'>
-          PRIMARY
-        </Button>
-        <Button status='error'>ERROR</Button>
-        <Button status='primary' disabled>
-          DISABLED
-        </Button>
-        <Button status='successg'>SUCCESS</Button>
-        <Button status='ghost'>GHOST</Button>
-        <Button href='/' status='warning' text='LINK' />
-        <Button status='warning'>
-          <Icon name='caret' size='5px' />
-        </Button>
-        <br />
+        <Tooltip text='This is a tooltip 4'>
+          <Button status='primary'>4</Button>
+        </Tooltip>
         <Checkbox />
         <br />
         <Toggle />
@@ -136,6 +125,26 @@ export default class Preview extends Component {
           placeholder='select your favorite rock bands'
           onChange={values => console.log('Multiselect values:', values)}
         />
+        <br />
+        <Button status='primary' type='submit' name='btn' value='primary'>
+          PRIMARY
+        </Button>
+        <Button status='error'>ERROR</Button>
+        <Button status='primary' disabled>
+          DISABLED
+        </Button>
+        <Button status='successg'>SUCCESS</Button>
+        <Button status='ghost'>GHOST</Button>
+        <Button href='/' status='warning' text='LINK' />
+        <Tooltip text='This is a tooltip 1'>
+          <Button status='primary'>1</Button>
+        </Tooltip>
+        <Tooltip text='This is a tooltip 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'>
+          <Button status='primary'>2</Button>
+        </Tooltip>
+        <Tooltip text='This is a tooltip 3 Lorem ipsum dolor'>
+          <Button status='primary'>3</Button>
+        </Tooltip>
         <br />
         <Input placeholder='email' />
         <Input
@@ -173,12 +182,18 @@ export default class Preview extends Component {
           <div onClick={() => console.log('edit')}>edit</div>
           <div onClick={() => alert('delete')}>delete</div>
         </Dropdown>
+        <Tooltip text='This is a tooltip 6'>
+          <Button status='primary'>6</Button>
+        </Tooltip>
         <BottomRight>
           <Dropdown>
             <div onClick={() => console.log('create')}>create</div>
             <div onClick={() => console.log('edit')}>edit</div>
             <div onClick={() => alert('delete')}>delete</div>
           </Dropdown>
+          <Tooltip text='This is a tooltip 5'>
+            <Button status='primary'>5</Button>
+          </Tooltip>
         </BottomRight>
       </Root>
     );

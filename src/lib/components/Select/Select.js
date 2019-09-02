@@ -1,26 +1,26 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styled, { ThemeProvider, withTheme } from 'styled-components';
+import styled, { withTheme } from 'styled-components';
 import Theme, { getContrastYIQ } from '../../theme';
 import Dropbox from '../Dropbox'
 import Icon from '../Icon';
 
 const Select = ({ placeholder, options, isError, onChange, theme }) => {
   const [state, setState] = useState({
-    text: placeholder || 'select...',
+    label: placeholder || 'select...',
     value: null
   })
 
   const select = (item, callback) => {
-    const { text, value } = item
-    setState({ text, value })
+    const { label, value } = item
+    setState({ label, value })
     onChange(item.value);
     callback()
   }
 
   const renderInput = ({ show }) => (
     <Button onClick={show} isError={isError} value={state.value}>
-      {state.text}
+      {state.label}
       <IconBox>
         <Icon name='caret' size='5px' color={theme.colors.ground} />
       </IconBox>
@@ -33,9 +33,9 @@ const Select = ({ placeholder, options, isError, onChange, theme }) => {
           <Option
             key={`${option.value}`}
             onClick={e => select(option, close)}
-            selected={state.text === option.text}
+            selected={state.label === option.label}
           >
-            {option.text}
+            {option.label}
           </Option>
         ))
       }

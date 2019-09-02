@@ -128,7 +128,7 @@ class Multiselect extends Component {
 
     return selected.map((item, i) => (
       <div key={`${item}-${i}`}>
-        {item.text}
+        {item.label}
         <div onClick={e => this.unselect(e, item)}>
           <Icon
             name='delete'
@@ -172,7 +172,7 @@ class Multiselect extends Component {
                         this.select(item);
                       }}
                     >
-                      {item.text}
+                      {item.label}
                     </li>
                   ))}
               </List>

@@ -36,13 +36,13 @@ const Searchbar = ({
       case 'ArrowDown':
         if (showTips) {
           i = (tipIndex + 1) % length;
-          input.current.value = suggestions[i].text;
+          input.current.value = suggestions[i].label;
         }
         break;
       case 'ArrowUp':
         if (showTips) {
           i = (tipIndex + length - 1) % length;
-          input.current.value = suggestions[i].text;
+          input.current.value = suggestions[i].label;
         }
         break;
       case 'Escape':
