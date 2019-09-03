@@ -28,13 +28,11 @@ const Tooltip = ({ content, children }) => {
       }
 
       if (right < width / 2) {
-        position.left = null;
-        position.right = `${right}px`;
+        position.left = `${innerWidth - (innerWidth - rect.x) - width + rect.width}px`;
       }
 
       if (rect.y < height) {
-        position.top = `${rect.y + rect.height + 5}px`;
-        position.bottom = null;
+        position.bottom = `${innerHeight - rect.top - scrollY - height - rect.height - 5}px`;;
       }
 
       Object.assign(tip.current.style, position);
@@ -105,6 +103,7 @@ export const Target = styled.div`
 `;
 export const Tip = styled.div`
   position: absolute;
+  left: -800px;
   padding: 9px;
   animation: 1.2s ${delay} ease;
   font-size: 12px;

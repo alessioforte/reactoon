@@ -195,10 +195,34 @@ export default class Preview extends Component {
             <div onClick={() => console.log('edit')}>edit</div>
             <div onClick={() => alert('delete')}>delete</div>
           </Dropdown>
-          <Tooltip content='This is a tooltip 5'>
+          <Tooltip content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'>
             <Button status='primary'>5</Button>
           </Tooltip>
         </BottomRight>
+        <Select
+          options={langs}
+          placeholder='select a language'
+          onChange={value => console.log('select value:', value)}
+        />
+        <br />
+        <Select
+          options={langs}
+          placeholder='select a language'
+          onChange={value => console.log('select value:', value)}
+        />
+        <br />
+        <Select
+          options={langs}
+          placeholder='select a language'
+          onChange={value => console.log('select value:', value)}
+        />
+        <br />
+        <Select
+          options={langs}
+          placeholder='select a language'
+          onChange={value => console.log('select value:', value)}
+        />
+        <br />
       </Root>
     );
   }
@@ -260,6 +284,6 @@ const Root = styled.div`
 // `
 const BottomRight = styled.div`
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: 10px;
+  right: 50px;
 `;
