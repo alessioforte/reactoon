@@ -107,7 +107,7 @@ export default class Preview extends Component {
   render() {
     return (
       <Root>
-        <Tooltip text='This is a tooltip 4'>
+        <Tooltip content='This is a tooltip 4'>
           <Button status='primary'>4</Button>
         </Tooltip>
         <Checkbox />
@@ -120,7 +120,7 @@ export default class Preview extends Component {
           <div onClick={() => alert('delete')}>delete</div>
         </Dropdown>
         <br />
-        <Tooltip text='This is a tooltip 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'>
+        <Tooltip content='This is a tooltip 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'>
           <Button status='primary'>2</Button>
         </Tooltip>
         <br />
@@ -140,13 +140,13 @@ export default class Preview extends Component {
         <Button status='successg'>SUCCESS</Button>
         <Button status='ghost'>GHOST</Button>
         <Button href='/' status='warning' text='LINK' />
-        <Tooltip text='This is a tooltip 1'>
+        <Tooltip content='tip'>
           <Button status='primary'>1</Button>
         </Tooltip>
-        <Tooltip text='This is a tooltip 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'>
+        <Tooltip content='This is a tooltip 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'>
           <Button status='primary'>2</Button>
         </Tooltip>
-        <Tooltip text='This is a tooltip 3 Lorem ipsum dolor'>
+        <Tooltip content='This is a tooltip 3 Lorem ipsum dolor'>
           <Button status='primary'>3</Button>
         </Tooltip>
         <br />
@@ -186,7 +186,7 @@ export default class Preview extends Component {
           <div onClick={() => console.log('edit')}>edit</div>
           <div onClick={() => alert('delete')}>delete</div>
         </Dropdown>
-        <Tooltip text='This is a tooltip 6'>
+        <Tooltip content='This is a tooltip 6'>
           <Button status='primary'>6</Button>
         </Tooltip>
         <BottomRight>
@@ -195,7 +195,7 @@ export default class Preview extends Component {
             <div onClick={() => console.log('edit')}>edit</div>
             <div onClick={() => alert('delete')}>delete</div>
           </Dropdown>
-          <Tooltip text='This is a tooltip 5'>
+          <Tooltip content='This is a tooltip 5'>
             <Button status='primary'>5</Button>
           </Tooltip>
         </BottomRight>
@@ -258,7 +258,6 @@ const Root = styled.div`
 //     display: flex;
 //     align-items: center;
 // `
-
 const BottomRight = styled.div`
   position: absolute;
   bottom: 0;

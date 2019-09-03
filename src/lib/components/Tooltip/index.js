@@ -6,7 +6,7 @@ import { styles, getContrastYIQ } from '../../theme';
 
 const ROOT_NODE = document.createElement('div');
 
-const Tooltip = ({ text, children }) => {
+const Tooltip = ({ content, children }) => {
   const target = React.createRef();
   const tip = React.createRef();
 
@@ -17,7 +17,7 @@ const Tooltip = ({ text, children }) => {
       const rect = target.current.getBoundingClientRect();
       const { innerHeight, innerWidth, scrollY } = window;
       const { width, height } = tip.current.getBoundingClientRect();
-
+      const right = innerWidth - (rect.x + rect.width);
       const position = {
         bottom: `${innerHeight - rect.top - scrollY + 5}px`,
         left: `${rect.left + rect.width / 2 - width / 2}px`
@@ -27,8 +27,7 @@ const Tooltip = ({ text, children }) => {
         position.left = `${rect.left}px`;
       }
 
-      if (innerWidth - (rect.x + rect.width) < width / 2) {
-        const right = innerWidth - (rect.x + rect.width);
+      if (right < width / 2) {
         position.left = null;
         position.right = `${right}px`;
       }
@@ -51,7 +50,7 @@ const Tooltip = ({ text, children }) => {
   };
 
   const renderTooltip = () => {
-    return createPortal(<Tip ref={tip}>{text}</Tip>, ROOT_NODE);
+    return createPortal(<Tip ref={tip}>{content}</Tip>, ROOT_NODE);
   };
 
   return (
@@ -70,9 +69,14 @@ const Tooltip = ({ text, children }) => {
   );
 };
 
+function setRoot(APP_NODE, id) {
+  ROOT_NODE.setAttribute('id', id);
+  APP_NODE.insertAdjacentElement('afterend', ROOT_NODE);
+}
+
 Tooltip.propTypes = {
-  children: PropTypes.node,
-  text: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
+  children: PropTypes.node.isRequired,
+  content: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   theme: PropTypes.object
 };
 
@@ -80,16 +84,11 @@ Tooltip.defaultProps = {
   theme: styles
 };
 
-function setRoot(APP_NODE, id) {
-  ROOT_NODE.setAttribute('id', id);
-  APP_NODE.insertAdjacentElement('afterend', ROOT_NODE);
-}
-
 Tooltip.setRoot = setRoot;
 
 export default Tooltip;
 
-const delay = keyframes`
+export const delay = keyframes`
     0% {
         opacity: 0;
     }
@@ -100,19 +99,18 @@ const delay = keyframes`
         opacity: 1;
     }
 `;
-const Target = styled.div`
+export const Target = styled.div`
   display: inline-block;
 `;
-const Tip = styled.div`
+export const Tip = styled.div`
   position: absolute;
   padding: 9px;
-  animation: 0.9s ${delay} ease;
+  animation: 1.2s ${delay} ease;
   font-size: 12px;
   max-height: 150px;
   max-width: 300px;
   box-sizing: border-box;
   text-align: center;
-  display: inline-block;
   background: ${props => props.theme.colors.background};
   color: ${props =>
     props.theme.colors[getContrastYIQ(props.theme.colors.background)]};
