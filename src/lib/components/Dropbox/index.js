@@ -87,14 +87,11 @@ class Dropbox extends Component {
       <ThemeProvider theme={theme}>
         <Box ref={this.input}>
           {renderInput({ show: this.show })}
-          {
-            visible && (
-              <Drop position={position} ref={this.drop}>
-                {renderOptions({ close: this.close })}
-              </Drop>
-            )
-
-          }
+          {visible && (
+            <Drop position={position} ref={this.drop}>
+              {renderOptions({ close: this.close })}
+            </Drop>
+          )}
         </Box>
       </ThemeProvider>
     );
@@ -104,14 +101,14 @@ class Dropbox extends Component {
 Dropbox.propTypes = {
   renderInput: PropTypes.func,
   renderOptions: PropTypes.func,
-  theme: PropTypes.object,
+  theme: PropTypes.object
 };
 
 Dropbox.defaultProps = {
   theme: Theme.styles
 };
 
-export default withTheme(Dropbox)
+export default withTheme(Dropbox);
 
 // prettier-ignore
 const Box = styled.div`
@@ -121,7 +118,8 @@ const Drop = styled.div.attrs(({ position }) => ({ style: position }))`
   border-radius: ${props => props.theme.border.radius + 'px'};
   position: absolute;
   background: ${props => props.theme.colors.background};
-  color: ${props => props.theme.colors[getContrastYIQ(props.theme.colors.primary)]};
+  color: ${props =>
+    props.theme.colors[getContrastYIQ(props.theme.colors.primary)]};
   box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.2);
   padding: 5px 0;
   font-size: 12px;
@@ -129,6 +127,6 @@ const Drop = styled.div.attrs(({ position }) => ({ style: position }))`
   width: 100%;
   z-index: 9;
   &::-webkit-scrollbar {
-      display: none;
+    display: none;
   }
 `;

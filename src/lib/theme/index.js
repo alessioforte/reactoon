@@ -110,7 +110,7 @@ function validateHex(color) {
   }
   color = color.replace('#', '');
   if (color.length < 3) {
-    console.error( `Validate hex color: #${color} is not a valid hex color`);
+    console.error(`Validate hex color: #${color} is not a valid hex color`);
     return false;
   }
   if (color.length === 3) {

@@ -1,58 +1,58 @@
 import React, { Children, useState, useEffect } from 'react';
-import { createPortal } from 'react-dom'
+import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
-import { styles, getContrastYIQ } from '../../theme'
+import { styles, getContrastYIQ } from '../../theme';
 
 const ROOT_NODE = document.createElement('div');
 
 const Tooltip = ({ text, children }) => {
-  const target = React.createRef()
-  const tip = React.createRef()
+  const target = React.createRef();
+  const tip = React.createRef();
 
-  const [state, setState] = useState({ visible: false })
+  const [state, setState] = useState({ visible: false });
 
   useEffect(() => {
     if (tip.current) {
-      const rect = target.current.getBoundingClientRect()
-      const { innerHeight, innerWidth, scrollY } = window
-      const { width, height } = tip.current.getBoundingClientRect()
+      const rect = target.current.getBoundingClientRect();
+      const { innerHeight, innerWidth, scrollY } = window;
+      const { width, height } = tip.current.getBoundingClientRect();
 
       const position = {
         bottom: `${innerHeight - rect.top - scrollY + 5}px`,
         left: `${rect.left + rect.width / 2 - width / 2}px`
-      }
+      };
 
       if (rect.x < width / 2) {
-        position.left = `${rect.left}px`
+        position.left = `${rect.left}px`;
       }
 
       if (innerWidth - (rect.x + rect.width) < width / 2) {
-        const right = innerWidth - (rect.x + rect.width)
-        position.left = null
-        position.right = `${right}px`
+        const right = innerWidth - (rect.x + rect.width);
+        position.left = null;
+        position.right = `${right}px`;
       }
 
       if (rect.y < height) {
-        position.top = `${rect.y + rect.height + 5}px`
-        position.bottom = null
+        position.top = `${rect.y + rect.height + 5}px`;
+        position.bottom = null;
       }
 
-      Object.assign(tip.current.style, position)
+      Object.assign(tip.current.style, position);
     }
-  })
+  });
 
   const show = () => {
-    setState({ visible: true })
-  }
+    setState({ visible: true });
+  };
 
   const hide = () => {
-    setState({ visible: false })
-  }
+    setState({ visible: false });
+  };
 
   const renderTooltip = () => {
-    return createPortal(<Tip ref={tip}>{text}</Tip>, ROOT_NODE)
-  }
+    return createPortal(<Tip ref={tip}>{text}</Tip>, ROOT_NODE);
+  };
 
   return (
     <>
@@ -65,27 +65,27 @@ const Tooltip = ({ text, children }) => {
       >
         {Children.toArray(children)}
       </Target>
-    { state.visible && renderTooltip()}
+      {state.visible && renderTooltip()}
     </>
-  )
-}
+  );
+};
 
 Tooltip.propTypes = {
   children: PropTypes.node,
   text: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   theme: PropTypes.object
-}
+};
 
 Tooltip.defaultProps = {
   theme: styles
-}
+};
 
 function setRoot(APP_NODE, id) {
-  ROOT_NODE.setAttribute('id', id)
-  APP_NODE.insertAdjacentElement('afterend', ROOT_NODE)
+  ROOT_NODE.setAttribute('id', id);
+  APP_NODE.insertAdjacentElement('afterend', ROOT_NODE);
 }
 
-Tooltip.setRoot = setRoot
+Tooltip.setRoot = setRoot;
 
 export default Tooltip;
 
@@ -102,7 +102,7 @@ const delay = keyframes`
 `;
 const Target = styled.div`
   display: inline-block;
-`
+`;
 const Tip = styled.div`
   position: absolute;
   padding: 9px;
@@ -114,7 +114,8 @@ const Tip = styled.div`
   text-align: center;
   display: inline-block;
   background: ${props => props.theme.colors.background};
-  color: ${props => props.theme.colors[getContrastYIQ(props.theme.colors.background)]};
+  color: ${props =>
+    props.theme.colors[getContrastYIQ(props.theme.colors.background)]};
   box-shadow: ${props => props.theme.colors.shadow};
   border-radius: ${props => props.theme.border.radius + 'px'};
-`
+`;

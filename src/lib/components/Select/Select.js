@@ -2,21 +2,21 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { withTheme } from 'styled-components';
 import Theme, { getContrastYIQ } from '../../theme';
-import Dropbox from '../Dropbox'
+import Dropbox from '../Dropbox';
 import Icon from '../Icon';
 
 const Select = ({ placeholder, options, isError, onChange, theme }) => {
   const [state, setState] = useState({
     label: placeholder || 'select...',
     value: null
-  })
+  });
 
   const select = (item, callback) => {
-    const { label, value } = item
-    setState({ label, value })
+    const { label, value } = item;
+    setState({ label, value });
     onChange(item.value);
-    callback()
-  }
+    callback();
+  };
 
   const renderInput = ({ show }) => (
     <Button onClick={show} isError={isError} value={state.value}>
@@ -25,11 +25,11 @@ const Select = ({ placeholder, options, isError, onChange, theme }) => {
         <Icon name='caret' size='5px' color={theme.colors.ground} />
       </IconBox>
     </Button>
-  )
+  );
   const renderOptions = ({ close }) => (
     <Options>
-      {
-        options && options.map(option => (
+      {options &&
+        options.map(option => (
           <Option
             key={`${option.value}`}
             onClick={e => select(option, close)}
@@ -37,17 +37,11 @@ const Select = ({ placeholder, options, isError, onChange, theme }) => {
           >
             {option.label}
           </Option>
-        ))
-      }
+        ))}
     </Options>
-  )
-  return (
-    <Dropbox
-      renderInput={renderInput}
-      renderOptions={renderOptions}
-    />
-  )
-}
+  );
+  return <Dropbox renderInput={renderInput} renderOptions={renderOptions} />;
+};
 
 Select.propTypes = {
   options: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -93,10 +87,12 @@ const Options = styled.div`
   /* overflow: scroll; */
 `;
 const Option = styled.li`
-  background: ${props => props.selected ? props.theme.colors.ground  : 'transparent'};
-  color: ${props => props.selected ?
-    props.theme.colors[getContrastYIQ(props.theme.colors.ground)] :
-    props.theme.colors[getContrastYIQ(props.theme.colors.background)]};
+  background: ${props =>
+    props.selected ? props.theme.colors.ground : 'transparent'};
+  color: ${props =>
+    props.selected
+      ? props.theme.colors[getContrastYIQ(props.theme.colors.ground)]
+      : props.theme.colors[getContrastYIQ(props.theme.colors.background)]};
   display: flex;
   align-items: center;
   min-height: 28px;
@@ -105,10 +101,11 @@ const Option = styled.li`
   margin: 0;
   &:hover {
     background: ${props => props.theme.colors.hover};
-    color: ${props => props.theme.colors[getContrastYIQ(props.theme.colors.hover)]};
+    color: ${props =>
+      props.theme.colors[getContrastYIQ(props.theme.colors.hover)]};
     cursor: default;
   }
-`
+`;
 const IconBox = styled.div`
   min-width: 20px;
   display: flex;
