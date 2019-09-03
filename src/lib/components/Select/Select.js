@@ -19,12 +19,12 @@ const Select = ({ placeholder, options, isError, onChange, theme }) => {
   };
 
   const renderInput = ({ show }) => (
-    <Button onClick={show} isError={isError} value={state.value}>
+    <Input onClick={show} isError={isError} value={state.value} tabIndex='0'>
       {state.label}
-      <IconBox>
+      <div className='icon'>
         <Icon name='caret' size='5px' color={theme.colors.ground} />
-      </IconBox>
-    </Button>
+      </div>
+    </Input>
   );
   const renderOptions = ({ close }) => (
     <Options>
@@ -57,7 +57,7 @@ Select.defaultProps = {
 export default withTheme(Select);
 
 // prettier-ignore
-const Button = styled.div`
+const Input = styled.div`
   border-radius: ${props => props.theme.border.radius + 'px'};
   box-sizing: border-box;
   display: flex;
@@ -78,6 +78,15 @@ const Button = styled.div`
   padding: 0 10px;
   &:hover {
     border-color: ${props => props.theme.colors.ground};
+  }
+  &:focus {
+    outline-color: ${props => props.theme.colors.focus};
+  }
+  .icon {
+    min-width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
   }
 `;
 const Options = styled.div`
@@ -106,9 +115,4 @@ const Option = styled.li`
     cursor: default;
   }
 `;
-const IconBox = styled.div`
-  min-width: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-`;
+

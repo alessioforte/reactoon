@@ -8,14 +8,12 @@ const buttonStyles = css`
   justify-content: center;
   box-sizing: border-box;
   padding: 0 1em;
-  /* min-width: 120px; */
   text-decoration: none;
   border-radius: 4px;
   -webkit-font-smoothing: antialiased;
   -webkit-touch-callout: none;
   user-select: none;
   cursor: pointer;
-  outline: 0;
   font-size: 12px;
   text-align: center;
   border: 0;
@@ -91,6 +89,9 @@ export const StyledButton = styled.button`
     background: ${props => props.theme.colors.disabled};
     color: ${props => props.theme.colors[getContrastYIQ(props.theme.colors.disabled)]};
     opacity: 0.5;
+  }
+  &:focus {
+    outline: ${props => props.theme.colors.focus} auto 5px;
   }
 `;
 

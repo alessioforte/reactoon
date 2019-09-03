@@ -31,7 +31,7 @@ const COLORS = {
   hover: '#2182BD',
   idle: '#888',
   disabled: '#778899',
-  focus: 'none',
+  focus: '#61dafb',
   holiday: '#FF4365',
   shadow: '0px 1px 5px 1px rgba(0, 0, 0, 0.2)'
 };

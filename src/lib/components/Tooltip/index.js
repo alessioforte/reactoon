@@ -61,6 +61,7 @@ const Tooltip = ({ content, children }) => {
         onFocus={show}
         onBlur={hide}
         ref={target}
+        aria-haspopup='true'
       >
         {Children.toArray(children)}
       </Target>

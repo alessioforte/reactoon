@@ -29,7 +29,7 @@ const theme = Theme.create({
     higherground: '#303030',
     idle: '#eee',
     disabled: '#778899',
-    focus: '#fafafa',
+    focus: '#61dafb',
     holiday: '#FF4365',
     shadow: '0px 1px 5px 1px rgba(0, 0, 0, 0.2)'
   },
