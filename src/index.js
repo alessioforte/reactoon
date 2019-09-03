@@ -3,6 +3,10 @@ import { render } from 'react-dom';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import Preview from './preview';
 import theme from './theme';
+import { Tooltip } from './lib';
+
+const MOUNT_NODE = document.getElementById('root');
+Tooltip.setRoot(MOUNT_NODE, 'root-tooltip');
 
 const GlobalStyle = createGlobalStyle`
     * {
@@ -46,5 +50,5 @@ render(
       <Preview />
     </ThemeProvider>
   </>,
-  document.getElementById('root')
+  MOUNT_NODE
 );
