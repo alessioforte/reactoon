@@ -10,7 +10,7 @@ const Tooltip = ({ content, children }) => {
   const target = React.createRef();
   const tip = React.createRef();
 
-  const [state, setState] = useState({ visible: false });
+  const [visible, setState] = useState(false);
 
   useEffect(() => {
     if (tip.current) {
@@ -32,7 +32,7 @@ const Tooltip = ({ content, children }) => {
       }
 
       if (rect.y < height) {
-        position.bottom = `${innerHeight - rect.top - scrollY - height - rect.height - 5}px`;;
+        position.bottom = `${innerHeight - rect.top - scrollY - height - rect.height - 5}px`;
       }
 
       Object.assign(tip.current.style, position);
@@ -40,11 +40,11 @@ const Tooltip = ({ content, children }) => {
   });
 
   const show = () => {
-    setState({ visible: true });
+    setState(true);
   };
 
   const hide = () => {
-    setState({ visible: false });
+    setState(false);
   };
 
   const renderTooltip = () => {
@@ -63,7 +63,7 @@ const Tooltip = ({ content, children }) => {
       >
         {Children.toArray(children)}
       </Target>
-      {state.visible && renderTooltip()}
+      {visible && renderTooltip()}
     </>
   );
 };
