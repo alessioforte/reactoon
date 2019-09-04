@@ -6,12 +6,12 @@ import Button from '../Button';
 import Dropbox from '../Dropbox';
 
 const Dropdown = ({ placeholder, children }) => {
-  const renderInput = ({ show }) => (
+  const renderTarget = ({ show }) => (
     <Button onClick={show}>
       {placeholder ? placeholder : <Icon name='caret' size='5px' />}
     </Button>
   );
-  const renderOptions = ({ close }) => (
+  const renderDropdown = ({ close }) => (
     <Options>
       {children &&
         children.map((item, i) => (
@@ -21,7 +21,7 @@ const Dropdown = ({ placeholder, children }) => {
         ))}
     </Options>
   );
-  return <Dropbox renderInput={renderInput} renderOptions={renderOptions} />;
+  return <Dropbox renderTarget={renderTarget} renderDropdown={renderDropdown} />;
 };
 
 export default Dropdown;

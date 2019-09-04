@@ -18,7 +18,7 @@ const Select = ({ placeholder, options, isError, onChange, theme }) => {
     callback();
   };
 
-  const renderInput = ({ show }) => (
+  const renderTarget = ({ show }) => (
     <Input onClick={show} isError={isError} value={state.value} tabIndex='0'>
       {state.label}
       <div className='icon'>
@@ -26,7 +26,7 @@ const Select = ({ placeholder, options, isError, onChange, theme }) => {
       </div>
     </Input>
   );
-  const renderOptions = ({ close }) => (
+  const renderDropdown = ({ close }) => (
     <Options>
       {options &&
         options.map(option => (
@@ -40,7 +40,7 @@ const Select = ({ placeholder, options, isError, onChange, theme }) => {
         ))}
     </Options>
   );
-  return <Dropbox renderInput={renderInput} renderOptions={renderOptions} />;
+  return <Dropbox renderTarget={renderTarget} renderDropdown={renderDropdown} />;
 };
 
 Select.propTypes = {

@@ -12,8 +12,8 @@ class Dropbox extends Component {
       position: {}
     };
 
-    this.input = React.createRef();
-    this.drop = React.createRef();
+    this.target = React.createRef();
+    this.dropdown = React.createRef();
     this.hide = this.hide.bind(this);
     this.blur = this.blur.bind(this);
     this.show = this.show.bind(this);
@@ -25,7 +25,7 @@ class Dropbox extends Component {
   }
 
   setDropdownPosition() {
-    const rect = this.input.current.getBoundingClientRect();
+    const rect = this.target.current.getBoundingClientRect();
     let position = {
       top: 35,
       left: '0',
@@ -63,7 +63,7 @@ class Dropbox extends Component {
   }
 
   hide(e) {
-    var rect = this.drop.current.getBoundingClientRect();
+    var rect = this.dropdown.current.getBoundingClientRect();
     var x = e.clientX;
     var y = e.clientY;
     if (y < rect.top || y > rect.bottom || x < rect.left || x > rect.right) {
@@ -80,16 +80,16 @@ class Dropbox extends Component {
   }
 
   render() {
-    const { theme, renderInput, renderOptions } = this.props;
+    const { theme, renderTarget, renderDropdown } = this.props;
     const { visible, position } = this.state;
 
     return (
       <ThemeProvider theme={theme}>
-        <Box ref={this.input}>
-          {renderInput({ show: this.show })}
+        <Box ref={this.target}>
+          {renderTarget({ show: this.show })}
           {visible && (
-            <Drop position={position} ref={this.drop}>
-              {renderOptions({ close: this.close })}
+            <Drop position={position} ref={this.dropdown}>
+              {renderDropdown({ close: this.close })}
             </Drop>
           )}
         </Box>
@@ -99,8 +99,8 @@ class Dropbox extends Component {
 }
 
 Dropbox.propTypes = {
-  renderInput: PropTypes.func,
-  renderOptions: PropTypes.func,
+  renderTarget: PropTypes.func,
+  renderDropdown: PropTypes.func,
   theme: PropTypes.object
 };
 
