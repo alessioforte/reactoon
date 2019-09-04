@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Input /> should render and match the snapshot 1`] = `
+<div
+  class="sc-bdVaJa equLuU"
+>
+  <input
+    data-value="false"
+    type="input"
+    value=""
+  />
+  <label
+    class="sc-bwzfXH jqmPGq"
+  >
+    name
+  </label>
+  <div
+    class="sc-htpNat dvsOBt"
+  />
+</div>
+`;

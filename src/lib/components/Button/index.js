@@ -32,7 +32,7 @@ Prop status '${status}' not valid try instead: ${availableStatus.join(', ')}
 };
 
 Button.propTypes = {
-  status: PropTypes.string,
+  status: PropTypes.oneOf(availableStatus),
   href: PropTypes.string,
   children: PropTypes.node,
   text: PropTypes.string,
