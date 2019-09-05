@@ -26,7 +26,8 @@ import {
   // Calendar,
   // DatePicker,
   Searchbar,
-  DatePicker
+  DatePicker,
+  withTooltip
 } from './lib';
 
 import 'moment/locale/it';
@@ -77,6 +78,8 @@ const getSuggestions = value => {
     resolve(suggestions);
   });
 };
+
+const ButtonTip = withTooltip(Button)
 export default class Preview extends Component {
   constructor() {
     super();
@@ -137,7 +140,7 @@ export default class Preview extends Component {
         <Button status='primary' disabled>
           DISABLED
         </Button>
-        <Button status='successg'>SUCCESS</Button>
+        <ButtonTip status='successg' tooltip='fuckit'>SUCCESS</ButtonTip>
         <Button status='ghost'>GHOST</Button>
         <Button href='/' status='warning' text='LINK' />
         <Tooltip content='tip'>

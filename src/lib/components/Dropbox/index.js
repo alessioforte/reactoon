@@ -86,7 +86,7 @@ class Dropbox extends Component {
     return (
       <ThemeProvider theme={theme}>
         <Box ref={this.target}>
-          {renderTarget({ show: this.show })}
+          {renderTarget({ show: this.show, close: this.close })}
           {visible && (
             <Drop position={position} ref={this.dropdown}>
               {renderDropdown({ close: this.close })}

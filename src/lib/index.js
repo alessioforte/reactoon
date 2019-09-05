@@ -22,6 +22,9 @@ import Tooltip from './components/Tooltip';
 // import Calendar from './components/calendar/calendar'
 import DatePicker from './components/DatePicker';
 import Searchbar from './components/Searchbar';
+
+import withTooltip from './hoc/withTooltip'
+
 import Theme from './theme';
 
 export {
@@ -49,5 +52,6 @@ export {
   // Calendar,
   DatePicker,
   Searchbar,
+  withTooltip,
   Theme
 };
