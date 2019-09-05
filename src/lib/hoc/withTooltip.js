@@ -5,7 +5,7 @@ export default function withTooltip(Component) {
   return props => {
     const { tooltip, ...rest } = props
     return (
-      <Tooltip content={tooltip || 'empty'}>
+      <Tooltip render={tooltip || 'empty'}>
         <Component { ...rest } />
       </Tooltip>
     )

@@ -110,7 +110,7 @@ export default class Preview extends Component {
   render() {
     return (
       <Root>
-        <Tooltip content='This is a tooltip 4'>
+        <Tooltip render='This is a tooltip 4'>
           <Button status='primary'>4</Button>
         </Tooltip>
         <Checkbox />
@@ -123,7 +123,7 @@ export default class Preview extends Component {
           <div onClick={() => alert('delete')}>delete</div>
         </Dropdown>
         <br />
-        <Tooltip content='This is a tooltip 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'>
+        <Tooltip render='This is a tooltip 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'>
           <Button status='primary'>2</Button>
         </Tooltip>
         <br />
@@ -133,23 +133,23 @@ export default class Preview extends Component {
           onChange={values => console.log('Multiselect values:', values)}
         />
         <br />
-        <Button status='primary' type='submit' name='btn' value='primary'>
+        <ButtonTip status='primary' type='submit' name='btn' value='primary'>
           PRIMARY
-        </Button>
+        </ButtonTip>
         <Button status='error'>ERROR</Button>
         <Button status='primary' disabled>
           DISABLED
         </Button>
-        <ButtonTip status='successg' tooltip='fuckit'>SUCCESS</ButtonTip>
+        <ButtonTip status='successg' tooltip='success button'>SUCCESS</ButtonTip>
         <Button status='ghost'>GHOST</Button>
         <Button href='/' status='warning' text='LINK' />
-        <Tooltip content='tip'>
+        <Tooltip render='tip'>
           <Button status='primary'>1</Button>
         </Tooltip>
-        <Tooltip content='This is a tooltip 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'>
+        <Tooltip render='This is a tooltip 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'>
           <Button status='primary'>2</Button>
         </Tooltip>
-        <Tooltip content='This is a tooltip 3 Lorem ipsum dolor'>
+        <Tooltip render='This is a tooltip 3 Lorem ipsum dolor'>
           <Button status='primary'>3</Button>
         </Tooltip>
         <br />
@@ -189,7 +189,7 @@ export default class Preview extends Component {
           <div onClick={() => console.log('edit')}>edit</div>
           <div onClick={() => alert('delete')}>delete</div>
         </Dropdown>
-        <Tooltip content='This is a tooltip 6'>
+        <Tooltip render='This is a tooltip 6'>
           <Button status='primary'>6</Button>
         </Tooltip>
         <BottomRight>
@@ -198,7 +198,7 @@ export default class Preview extends Component {
             <div onClick={() => console.log('edit')}>edit</div>
             <div onClick={() => alert('delete')}>delete</div>
           </Dropdown>
-          <Tooltip content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'>
+          <Tooltip render='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'>
             <Button status='primary'>5</Button>
           </Tooltip>
         </BottomRight>

@@ -6,7 +6,7 @@ import { styles, getContrastYIQ } from '../../theme';
 
 const ROOT_NODE = document.createElement('div');
 
-const Tooltip = ({ content, children }) => {
+const Tooltip = ({ render, children }) => {
   const target = React.createRef();
   const tip = React.createRef();
 
@@ -23,7 +23,7 @@ const Tooltip = ({ content, children }) => {
         left: `${rect.left + rect.width / 2 - width / 2}px`
       };
 
-      if (rect.x < width / 2) {
+      if (rect.x < width / 2 && width > rect.width) {
         position.left = `${rect.left}px`;
       }
 
@@ -48,7 +48,7 @@ const Tooltip = ({ content, children }) => {
   };
 
   const renderTooltip = () => {
-    return createPortal(<Tip ref={tip}>{content}</Tip>, ROOT_NODE);
+    return createPortal(<Tip ref={tip}>{render}</Tip>, ROOT_NODE);
   };
 
   return (
@@ -75,7 +75,7 @@ function setRoot(APP_NODE, id) {
 
 Tooltip.propTypes = {
   children: PropTypes.node.isRequired,
-  content: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
+  render: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   theme: PropTypes.object
 };
 
