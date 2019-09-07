@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Toggle /> should render and match the snapshot 1`] = `
+<div
+  class="sc-bdVaJa iqfKyH"
+  height="20"
+/>
+`;

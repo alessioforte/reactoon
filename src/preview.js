@@ -115,7 +115,7 @@ export default class Preview extends Component {
         </Tooltip>
         <Checkbox />
         <br />
-        <Toggle />
+        <Toggle onChange={(e, data) => console.log(data)} />
         <br />
         <Dropdown>
           <div onClick={() => console.log('create')}>create</div>
@@ -140,7 +140,7 @@ export default class Preview extends Component {
         <Button status='primary' disabled>
           DISABLED
         </Button>
-        <ButtonTip status='successg' tooltip='success button'>SUCCESS</ButtonTip>
+        <ButtonTip status='success' tooltip='success button'>SUCCESS</ButtonTip>
         <Button status='ghost'>GHOST</Button>
         <Button href='/' status='warning' text='LINK' />
         <Tooltip render='tip'>

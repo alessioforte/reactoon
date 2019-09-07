@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import moment from 'moment';
-import Time from '../../utils/time';
+import Time from '../../utils/Time';
 import Month from './month';
 
 /* eslint-disable */

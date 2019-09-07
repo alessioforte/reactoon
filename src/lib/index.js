@@ -8,7 +8,7 @@ import Filterselect from './components/Filters/FilterSelect';
 // import Slider from './components/slider/slider'
 // import SliderRange from './components/slider/slider-range'
 // import SliderStep from './components/slider/slider-step'
-import Toggle from './components/Toogle';
+import Toggle from './components/Toggle';
 import Checkbox from './components/Checkbox';
 import Radio from './components/Radio';
 // import Loading from './components/loading/loading'

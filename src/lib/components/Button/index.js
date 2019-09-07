@@ -6,14 +6,7 @@ import { StyledButton, A, availableStatus } from './styled';
 
 const Button = ({ status, href, children, theme, text, ...rest }) => {
   let buttonStatus = status;
-  if (!availableStatus.includes(status)) {
-    // eslint-disable-next-line no-console
-    buttonStatus = 'primary';
-    console.log(`
-<Button status='${status}' ... />
-Prop status '${status}' not valid try instead: ${availableStatus.join(', ')}
-    `);
-  }
+  if (!availableStatus.includes(status)) buttonStatus = 'primary';
 
   let button = (
     <StyledButton {...rest} status={buttonStatus}>
