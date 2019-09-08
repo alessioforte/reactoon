@@ -1,6 +1,6 @@
 {
   "name": "reactoon",
-  "version": "0.1.6",
+  "version": "0.1.8",
   "license": "MIT",
   "author": {
     "name": "Alessio Forte",
@@ -58,6 +58,7 @@
   "devDependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
+    "@babel/plugin-transform-modules-commonjs": "^7.6.0",
     "@babel/preset-typescript": "^7.6.0",
     "@testing-library/jest-dom": "^4.1.0",
     "@testing-library/react": "^9.1.4",
