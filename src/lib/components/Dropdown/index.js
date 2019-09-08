@@ -21,7 +21,9 @@ const Dropdown = ({ placeholder, children }) => {
         ))}
     </Options>
   );
-  return <Dropbox renderTarget={renderTarget} renderDropdown={renderDropdown} />;
+  return (
+    <Dropbox renderTarget={renderTarget} renderDropdown={renderDropdown} />
+  );
 };
 
 export default Dropdown;

@@ -6,7 +6,7 @@ export const Svg = styled.svg`
   margin: ${props => props.margin || 0};
   transform: ${props => `rotate(${props.rotate || 0}deg)`};
 `;
-export const Wrapper = styled.div`
+export const Wrapper = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;

@@ -23,7 +23,7 @@ import Tooltip from './components/Tooltip';
 import DatePicker from './components/DatePicker';
 import Searchbar from './components/Searchbar';
 
-import withTooltip from './hoc/withTooltip'
+import withTooltip from './hoc/withTooltip';
 
 import Theme from './theme';
 

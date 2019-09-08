@@ -4,19 +4,27 @@ import styled, { withTheme, ThemeProvider } from 'styled-components';
 import { getContrastYIQ, styles } from '../../theme';
 import Icon from '../Icon';
 
-const Checkbox = ({ checked, label, onChange, theme }) => {
+const Checkbox = ({ label, name, checked, onChange, theme }) => {
   const [value, setValue] = useState(checked || false);
 
-  const handleOnChande = () => {
+  const handleOnClick = () => {
     setValue(!value);
+
     const data = { checked: !value, label };
     onChange(data);
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <Box onClick={handleOnChande}>
-        <Check check={value}>
+      <Box onClick={handleOnClick}>
+        <Check
+          role='checkbox'
+          name={name}
+          value={value}
+          aria-label={label}
+          aria-checked={value}
+          tabIndex='0'
+        >
           <Icon
             name='checkmark'
             size='9px'
@@ -31,6 +39,7 @@ const Checkbox = ({ checked, label, onChange, theme }) => {
 
 Checkbox.propTypes = {
   label: PropTypes.string,
+  name: PropTypes.string,
   checked: PropTypes.bool,
   onChange: PropTypes.func,
   theme: PropTypes.object
@@ -38,25 +47,24 @@ Checkbox.propTypes = {
 
 Checkbox.defaultProps = {
   checked: false,
-  label: null,
-  onChange: () => {},
+  onChange: value => console.log(value),
   theme: styles
 };
 
 export default withTheme(Checkbox);
 
-const Box = styled.div`
+const Box = styled.label`
   display: inline-flex;
   align-items: center;
   cursor: pointer;
 `;
-const Check = styled.div`
+const Check = styled.span`
   flex-shrink: 0;
   width: 16px;
   height: 16px;
   border-radius: 3px;
   background: ${props =>
-    props.check ? props.theme.colors.primary : props.theme.colors.background};
+    props.value ? props.theme.colors.primary : props.theme.colors.background};
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
@@ -66,10 +74,10 @@ const Check = styled.div`
     opacity: 0.8;
   }
   & svg {
-    opacity: ${props => (props.check ? 1 : 0)};
+    opacity: ${props => (props.value ? 1 : 0)};
   }
 `;
-const Label = styled.div`
+const Label = styled.span`
   display: inline-block;
   margin-left: 5px;
 `;

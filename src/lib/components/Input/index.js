@@ -6,6 +6,7 @@ import Theme, { getContrastYIQ } from '../../theme';
 const Input = ({
   type,
   placeholder,
+  name,
   value,
   isError,
   onChange,
@@ -27,6 +28,7 @@ const Input = ({
         <input
           ref={input}
           type={type}
+          name={name}
           onChange={handleChange}
           value={value}
           data-value={hasValue}

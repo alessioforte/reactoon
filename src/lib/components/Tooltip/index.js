@@ -28,11 +28,19 @@ const Tooltip = ({ render, children }) => {
       }
 
       if (right < width / 2) {
-        position.left = `${innerWidth - (innerWidth - rect.x) - width + rect.width}px`;
+        position.left = `${innerWidth -
+          (innerWidth - rect.x) -
+          width +
+          rect.width}px`;
       }
 
       if (rect.y < height) {
-        position.bottom = `${innerHeight - rect.top - scrollY - height - rect.height - 5}px`;
+        position.bottom = `${innerHeight -
+          rect.top -
+          scrollY -
+          height -
+          rect.height -
+          5}px`;
       }
 
       Object.assign(tip.current.style, position);

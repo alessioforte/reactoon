@@ -12,14 +12,11 @@ describe('<Input />', () => {
   });
 
   it('should render placeholder label', () => {
-    const placeholder = 'name'
+    const placeholder = 'name';
     const { container } = render(
-      <Input
-        type='input'
-        placeholder={placeholder}
-      />
-    )
-    const label = container.querySelector('label')
-    expect(label).toHaveTextContent(placeholder)
+      <Input type='input' placeholder={placeholder} />
+    );
+    const label = container.querySelector('label');
+    expect(label).toHaveTextContent(placeholder);
   });
 });

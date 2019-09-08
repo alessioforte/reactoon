@@ -79,7 +79,7 @@ const getSuggestions = value => {
   });
 };
 
-const ButtonTip = withTooltip(Button)
+const ButtonTip = withTooltip(Button);
 export default class Preview extends Component {
   constructor() {
     super();
@@ -113,7 +113,8 @@ export default class Preview extends Component {
         <Tooltip render='This is a tooltip 4'>
           <Button status='primary'>4</Button>
         </Tooltip>
-        <Checkbox />
+        <br />
+        <Checkbox label='checkbox label' name='accept' />
         <br />
         <Toggle onChange={(e, data) => console.log(data)} />
         <br />
@@ -140,7 +141,9 @@ export default class Preview extends Component {
         <Button status='primary' disabled>
           DISABLED
         </Button>
-        <ButtonTip status='success' tooltip='success button'>SUCCESS</ButtonTip>
+        <ButtonTip status='success' tooltip='success button'>
+          SUCCESS
+        </ButtonTip>
         <Button status='ghost'>GHOST</Button>
         <Button href='/' status='warning' text='LINK' />
         <Tooltip render='tip'>

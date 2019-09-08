@@ -40,7 +40,9 @@ const Select = ({ placeholder, options, isError, onChange, theme }) => {
         ))}
     </Options>
   );
-  return <Dropbox renderTarget={renderTarget} renderDropdown={renderDropdown} />;
+  return (
+    <Dropbox renderTarget={renderTarget} renderDropdown={renderDropdown} />
+  );
 };
 
 Select.propTypes = {
@@ -115,4 +117,3 @@ const Option = styled.li`
     cursor: default;
   }
 `;
-

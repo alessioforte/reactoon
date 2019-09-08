@@ -1,13 +1,13 @@
-import React from 'react'
-import Tooltip from '../components/Tooltip'
+import React from 'react';
+import Tooltip from '../components/Tooltip';
 
 export default function withTooltip(Component) {
   return props => {
-    const { tooltip, ...rest } = props
+    const { tooltip, ...rest } = props;
     return (
       <Tooltip render={tooltip || 'empty'}>
-        <Component { ...rest } />
+        <Component {...rest} />
       </Tooltip>
-    )
-  }
+    );
+  };
 }
