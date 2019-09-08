@@ -1,12 +1,20 @@
-import React, { Children } from 'react';
+import React, { FC, Children } from 'react';
 import PropTypes from 'prop-types';
 import { withTheme, ThemeProvider } from 'styled-components';
 import { styles } from '../../theme';
 import { StyledButton, A, availableStatus } from './styled';
 
-const Button = ({ status, href, children, theme, text, ...rest }) => {
-  let buttonStatus = status;
-  if (!availableStatus.includes(status)) buttonStatus = 'primary';
+type Props = {
+  status?: string,
+  href?: string,
+  children: React.ReactNode,
+  text?: string,
+  theme: any
+}
+
+const Button: FC<Props> = ({ status, href, children, theme, text, ...rest }) => {
+  let buttonStatus: string = status || 'primary';
+  if (status && !availableStatus.includes(status)) buttonStatus = 'primary';
 
   let button = (
     <StyledButton {...rest} status={buttonStatus}>

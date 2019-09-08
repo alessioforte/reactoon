@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { getContrastYIQ, getColorLuminance } from '../../theme';
 
 const buttonStyles = css`
-  height: ${props => props.height || '30px'};
+  height: 30px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -20,7 +20,7 @@ const buttonStyles = css`
 `;
 
 // prettier-ignore
-export const STATUS = {
+export const STATUS: any = {
   primary: css`
     background: ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors[getContrastYIQ(props.theme.colors.primary)]};
@@ -82,7 +82,7 @@ export const STATUS = {
 };
 
 // prettier-ignore
-export const StyledButton = styled.button`
+export const StyledButton = styled.button<{ status: string }>`
   ${buttonStyles};
   ${props => STATUS[props.status]}
   &:disabled {
