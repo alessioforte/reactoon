@@ -1,7 +1,7 @@
 import React, { Children, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, withTheme } from 'styled-components';
 import { styles, getContrastYIQ } from '../../theme';
 
 let ROOT_ID = 'root-tooltip'
@@ -57,7 +57,8 @@ const Tooltip = ({ render, children }) => {
 
   const renderTooltip = () => {
     const ROOT_NODE = document.getElementById(ROOT_ID)
-    return createPortal(<Tip ref={tip}>{render}</Tip>, ROOT_NODE);
+    const Root = <Tip ref={tip}>{render}</Tip>
+    return createPortal(Root, ROOT_NODE);
   };
 
   return (
@@ -78,10 +79,13 @@ const Tooltip = ({ render, children }) => {
 };
 
 function setRoot(APP_NODE, id) {
-  const node = document.createElement('div')
   ROOT_ID = id
-  node.setAttribute('id', ROOT_ID);
-  APP_NODE.insertAdjacentElement('afterend', node);
+  let node = document.getElementById(ROOT_ID)
+  if (!node) {
+    node = document.createElement('div')
+    node.setAttribute('id', ROOT_ID);
+    APP_NODE.insertAdjacentElement('afterend', node);
+  }
 }
 
 Tooltip.propTypes = {
@@ -96,7 +100,7 @@ Tooltip.defaultProps = {
 
 Tooltip.setRoot = setRoot;
 
-export default Tooltip;
+export default withTheme(Tooltip);
 
 export const delay = keyframes`
     0% {
@@ -111,6 +115,7 @@ export const delay = keyframes`
 `;
 export const Target = styled.div`
   display: inline-block;
+  width: fit-content;
 `;
 export const Tip = styled.div`
   position: absolute;

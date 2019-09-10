@@ -1,10 +1,10 @@
 {
   "name": "reactoon",
-  "version": "0.1.8",
+  "version": "0.1.10",
   "license": "MIT",
   "author": {
     "name": "Alessio Forte",
-    "email": "fortealessio@gmail.com"
+    "email": "alessioforte@mail.com"
   },
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -27,7 +27,8 @@
     "lint:eslint:fix": "eslint --ignore-path .gitignore \"src/**/*.js\" --fix",
     "lint:js": "npm run lint:eslint -- . ",
     "lint:staged": "lint-staged",
-    "format": "prettier --config .prettierrc \"src/**/*.js\" --write"
+    "format": "prettier --config .prettierrc \"src/**/*.js\" --write",
+    "pack": "npm run build && npm pack"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -55,8 +55,10 @@ export default withTheme(Checkbox);
 
 const Box = styled.label`
   display: inline-flex;
+  width: fit-content;
   align-items: center;
   cursor: pointer;
+  font-size: 1rem;
 `;
 const Check = styled.span`
   flex-shrink: 0;
