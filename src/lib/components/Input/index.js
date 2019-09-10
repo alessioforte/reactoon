@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { ThemeProvider, withTheme } from 'styled-components';
 import Theme, { getContrastYIQ } from '../../theme';
+import { focus } from '../Styled/css'
 
 const Input = ({
   type,
@@ -24,7 +25,7 @@ const Input = ({
 
   return (
     <ThemeProvider theme={theme}>
-      <Box>
+      <Box isError={isError}>
         <input
           ref={input}
           type={type}
@@ -34,7 +35,7 @@ const Input = ({
           data-value={hasValue}
         />
         <Label>{isError ? <span>{message}</span> : placeholder}</Label>
-        <Line isError={isError} />
+        {/* <Line isError={isError} /> */}
       </Box>
     </ThemeProvider>
   );
@@ -43,7 +44,7 @@ const Input = ({
 Input.propTypes = {
   type: PropTypes.string,
   placeholder: PropTypes.string,
-  error: PropTypes.bool,
+  isError: PropTypes.bool,
   onChange: PropTypes.func
 };
 
@@ -51,7 +52,7 @@ Input.defaultProps = {
   type: 'input',
   placeholder: '',
   onChange: () => {},
-  error: false,
+  isError: false,
   min: null,
   max: null,
   theme: Theme.styles
@@ -61,24 +62,22 @@ export default withTheme(Input);
 
 /* eslint-disable */
 const Box = styled.div`
-  border-radius: ${props => props.theme.border.radius + 'px'};
   box-sizing: border-box;
   position: relative;
   min-height: 30px;
   margin-top: 20px;
-  background: ${props => props.theme.colors.background};
-  border: 1px solid ${props => props.theme.colors.background};
   input {
     color: ${props =>
       props.theme.colors[getContrastYIQ(props.theme.colors.background)]};
-    border: 0;
+    background: ${props => props.theme.colors.background};
+    border-radius: ${props => props.theme.border.radius + 'px'};
+    border: 1px solid ${props =>  props.isError ? props.theme.colors.error : props.theme.colors.background};
     box-sizing: border-box;
-    background: transparent;
     width: 100%;
     min-height: 28px;
     padding: 0 10px;
     &:focus {
-      outline: none;
+      ${focus}
     }
   }
   input:focus + label,

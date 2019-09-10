@@ -12,6 +12,7 @@ import Tooltip from './components/Tooltip';
 import Dropdown from './components/Dropdown';
 import Filterselect from './components/Filters/FilterSelect';
 // import Filterslider from './components/Filters/FilterSlider'
+// import Modal from './components/modal/modal'
 // import Slider from './components/slider/slider'
 // import SliderRange from './components/slider/slider-range'
 // import SliderStep from './components/slider/slider-step'
@@ -20,7 +21,6 @@ import Filterselect from './components/Filters/FilterSelect';
 // import Spinner from './components/spinner/spinner'
 // import Notification from './components/notification'
 // import SideBar from './components/sidebar/sidebar'
-// import Modal from './components/modal/modal'
 // import Calendar from './components/calendar/calendar'
 
 import withTooltip from './hoc/withTooltip';

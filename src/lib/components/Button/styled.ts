@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { getContrastYIQ, getColorLuminance } from '../../theme';
+import { focus } from '../Styled/css'
 
 const buttonStyles = css`
   height: 30px;
@@ -91,8 +92,7 @@ export const StyledButton = styled.button<{ status: string }>`
     opacity: 0.5;
   }
   &:focus {
-    outline: none;
-    box-shadow: 0 0 2pt 1pt ${props => props.theme.colors.focus};
+    ${focus}
   }
 `;
 

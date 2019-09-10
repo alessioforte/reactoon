@@ -85,13 +85,19 @@ export default class Preview extends Component {
     super();
 
     this.state = {
-      inputValue: ''
+      inputValue: '',
+      inputError: false
     };
   }
 
   onInputChange(value) {
     console.log(value);
-    this.setState({ inputValue: value });
+    this.setState({ inputValue: value, inputError: false });
+
+    if (value === 'error') {
+      console.log('is error')
+      this.setState({ inputError: true })
+    }
   }
 
   fillInput() {
@@ -161,6 +167,7 @@ export default class Preview extends Component {
           placeholder='Name'
           onChange={(e, value) => this.onInputChange(value)}
           value={this.state.inputValue}
+          isError={this.state.inputError}
         />
         <Button onClick={() => this.fillInput()}>Fill Input</Button>
         <br />

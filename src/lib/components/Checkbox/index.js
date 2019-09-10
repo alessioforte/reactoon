@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { withTheme, ThemeProvider } from 'styled-components';
 import { getContrastYIQ, styles } from '../../theme';
 import Icon from '../Icon';
+import { focus } from '../Styled/css'
 
 const Checkbox = ({ label, name, checked, onChange, theme }) => {
   const [value, setValue] = useState(checked || false);
@@ -74,6 +75,9 @@ const Check = styled.span`
   justify-content: center;
   &:hover {
     opacity: 0.8;
+  }
+  &:focus {
+    ${focus}
   }
   & svg {
     opacity: ${props => (props.value ? 1 : 0)};
