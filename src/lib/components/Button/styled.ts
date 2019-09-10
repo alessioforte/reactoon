@@ -91,7 +91,8 @@ export const StyledButton = styled.button<{ status: string }>`
     opacity: 0.5;
   }
   &:focus {
-    outline: ${props => props.theme.colors.focus} auto 5px;
+    outline: none;
+    box-shadow: 0 0 2pt 1pt ${props => props.theme.colors.focus};
   }
 `;
 

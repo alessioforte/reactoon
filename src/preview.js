@@ -138,7 +138,7 @@ export default class Preview extends Component {
           PRIMARY
         </ButtonTip>
         <Button status='error'>ERROR</Button>
-        <Button status='primary' disabled>
+        <Button role='button' status='primary' disabled>
           DISABLED
         </Button>
         <ButtonTip status='success' tooltip='success button'>

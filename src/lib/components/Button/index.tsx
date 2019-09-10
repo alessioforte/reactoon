@@ -12,18 +12,18 @@ type Props = {
   theme: any
 }
 
-const Button: FC<Props> = ({ status, href, children, theme, text, ...rest }) => {
+const Button: FC<Props> = ({ status, href, children, theme, text, ...props }) => {
   let buttonStatus: string = status || 'primary';
   if (status && !availableStatus.includes(status)) buttonStatus = 'primary';
 
   let button = (
-    <StyledButton {...rest} status={buttonStatus}>
+    <StyledButton {...props} status={buttonStatus}>
       {children ? Children.toArray(children) : text}
     </StyledButton>
   );
   if (href) {
     button = (
-      <A {...rest} href={href} status={buttonStatus}>
+      <A {...props} href={href} status={buttonStatus}>
         {children ? Children.toArray(children) : text}
       </A>
     );
