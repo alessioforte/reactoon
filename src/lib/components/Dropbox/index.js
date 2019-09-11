@@ -26,11 +26,13 @@ class Dropbox extends Component {
 
   setDropdownPosition() {
     const rect = this.target.current.getBoundingClientRect();
+    const maxWidth = this.target.current.firstChild.getBoundingClientRect().width
     let position = {
       top: 35,
       left: '0',
       right: null,
-      bottom: null
+      bottom: null,
+      maxWidth
     };
 
     if (rect.x + 200 > window.innerWidth) {
