@@ -1,7 +1,7 @@
 export default function isClient() {
-  let isNode = false
+  let isNode = false;
   if (typeof module !== undefined && module.exports) {
-    isNode = true
+    isNode = true;
   }
-  return !isNode
+  return !isNode;
 }

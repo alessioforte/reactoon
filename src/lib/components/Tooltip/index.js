@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled, { keyframes, withTheme } from 'styled-components';
 import { styles, getContrastYIQ } from '../../theme';
 
-let ROOT_ID = 'root-tooltip'
+let ROOT_ID = 'root-tooltip';
 
 const Tooltip = ({ render, children }) => {
   const target = React.createRef();
@@ -56,8 +56,8 @@ const Tooltip = ({ render, children }) => {
   };
 
   const renderTooltip = () => {
-    const ROOT_NODE = document.getElementById(ROOT_ID)
-    const Root = <Tip ref={tip}>{render}</Tip>
+    const ROOT_NODE = document.getElementById(ROOT_ID);
+    const Root = <Tip ref={tip}>{render}</Tip>;
     return createPortal(Root, ROOT_NODE);
   };
 
@@ -79,10 +79,10 @@ const Tooltip = ({ render, children }) => {
 };
 
 function setRoot(APP_NODE, id) {
-  ROOT_ID = id
-  let node = document.getElementById(ROOT_ID)
+  ROOT_ID = id;
+  let node = document.getElementById(ROOT_ID);
   if (!node) {
-    node = document.createElement('div')
+    node = document.createElement('div');
     node.setAttribute('id', ROOT_ID);
     APP_NODE.insertAdjacentElement('afterend', node);
   }

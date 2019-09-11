@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import styled, { withTheme, ThemeProvider } from 'styled-components';
 import { getContrastYIQ, styles } from '../../theme';
 import Icon from '../Icon';
-import { focus } from '../Styled/css'
+import { focus } from '../Styled/css';
 
 const Checkbox = ({ label, name, checked, onChange, theme }) => {
   const [value, setValue] = useState(checked || false);
 
-  const handleOnClick = () => {
+  const handleOnClick = e => {
+    e.preventDefault();
     setValue(!value);
 
     const data = { checked: !value, label };
@@ -17,7 +18,8 @@ const Checkbox = ({ label, name, checked, onChange, theme }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box onClick={handleOnClick}>
+      <Wrapper onClick={handleOnClick}>
+        <input type='checkbox' name={name} value={value} />
         <Check
           role='checkbox'
           name={name}
@@ -33,7 +35,7 @@ const Checkbox = ({ label, name, checked, onChange, theme }) => {
           />
         </Check>
         {label && <Label>{label}</Label>}
-      </Box>
+      </Wrapper>
     </ThemeProvider>
   );
 };
@@ -54,12 +56,16 @@ Checkbox.defaultProps = {
 
 export default withTheme(Checkbox);
 
-const Box = styled.label`
+const Wrapper = styled.label`
   display: inline-flex;
   width: fit-content;
-  align-items: center;
   cursor: pointer;
   font-size: 1rem;
+  & > input {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+  }
 `;
 const Check = styled.span`
   flex-shrink: 0;

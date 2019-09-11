@@ -95,8 +95,8 @@ export default class Preview extends Component {
     this.setState({ inputValue: value, inputError: false });
 
     if (value === 'error') {
-      console.log('is error')
-      this.setState({ inputError: true })
+      console.log('is error');
+      this.setState({ inputError: true });
     }
   }
 

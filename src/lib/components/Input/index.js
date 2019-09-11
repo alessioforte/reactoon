@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { ThemeProvider, withTheme } from 'styled-components';
 import Theme, { getContrastYIQ } from '../../theme';
-import { focus } from '../Styled/css'
+import { focus } from '../Styled/css';
 
 const Input = ({
   type,
@@ -71,7 +71,11 @@ const Box = styled.div`
       props.theme.colors[getContrastYIQ(props.theme.colors.background)]};
     background: ${props => props.theme.colors.background};
     border-radius: ${props => props.theme.border.radius + 'px'};
-    border: 1px solid ${props =>  props.isError ? props.theme.colors.error : props.theme.colors.background};
+    border: 1px solid
+      ${props =>
+        props.isError
+          ? props.theme.colors.error
+          : props.theme.colors.background};
     box-sizing: border-box;
     width: 100%;
     min-height: 28px;
