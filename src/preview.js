@@ -172,8 +172,9 @@ export default class Preview extends Component {
         <Button onClick={() => this.fillInput()}>Fill Input</Button>
         <br />
         <Radio
-          name='radio'
-          label='Are you sure?'
+          name='language'
+          label='Select language: '
+          inline
           options={langs}
           onChange={value => console.log('Radio value: ', value)}
         />
