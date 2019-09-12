@@ -1,71 +1,54 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { ThemeProvider, withTheme } from 'styled-components';
 import Theme, { getContrastYIQ } from '../../theme';
 import { focus } from '../Styled/css';
 
-class Radio extends Component {
-  constructor(props) {
-    super(props);
+const Radio = ({ name, label, options, onChange, inline, theme }) => {
+  const initialValue = options.length > 0 ? options[0].value : null
+  const [value, setValue] = useState(initialValue)
 
-    this.options = props.options;
-    this.inline = props.inline;
-
-    const value = this.props.options[0].value;
-
-    this.state = {
-      value
-    };
+  const handleOnClick = (e, newValue) => {
+    setValue(newValue)
+    onChange(newValue)
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.options !== nextProps.options) {
-      this.setState({ value: nextProps.options[0].value });
-    }
-    return true;
-  }
-
-  onChange(e, value) {
-    this.setState({ value });
-    this.props.onChange(value);
-  }
-
-  render() {
-    const { theme, name, label } = this.props;
-
-    return (
-      <ThemeProvider theme={theme}>
-        <div>
-          {label && <Placeholder>{label}</Placeholder>}
-          <Options inline={this.inline}>
-            {this.options.map((option, i) => (
-              <label key={`${option.label}-${i}`}>
-                <input
-                  type='radio'
-                  name={name}
-                  value={option.value}
-                  tabIndex='-1'
-                />
-                <Option
-                  onClick={e => this.onChange(e, option.value)}
-                  active={this.state.value === option.value}
-                >
-                  <div className='selector' tabIndex='0' />
-                  <span>{option.label}</span>
-                </Option>
-              </label>
-            ))}
-          </Options>
-        </div>
-      </ThemeProvider>
-    );
-  }
+  return (
+    <ThemeProvider theme={theme}>
+      <div>
+        {label && <Placeholder>{label}</Placeholder>}
+        <Options inline={inline}>
+          {options.map((option, i) => (
+            <label key={`${option.label}-${i}`}>
+              <input
+                type='radio'
+                name={name}
+                value={option.value}
+                tabIndex='-1'
+              />
+              <Option
+                onClick={e => handleOnClick(e, option.value)}
+                active={value === option.value}
+              >
+                <div className='selector' tabIndex='0' />
+                <span>{option.label}</span>
+              </Option>
+            </label>
+          ))}
+        </Options>
+      </div>
+    </ThemeProvider>
+  )
 }
 
 Radio.propTypes = {
   options: PropTypes.arrayOf(PropTypes.object).isRequired,
   onChange: PropTypes.func.isRequired,
-  inline: PropTypes.bool
+  inline: PropTypes.bool,
+  name: PropTypes.string,
+  label: PropTypes.string,
+  theme: PropTypes.any
+
 };
 
 Radio.defaultProps = {
