@@ -125,9 +125,9 @@ export default class Preview extends Component {
         <Toggle onChange={(e, data) => console.log(data)} />
         <br />
         <Dropdown>
-          <div onClick={() => console.log('create')}>create</div>
-          <div onClick={() => console.log('edit')}>edit</div>
-          <div onClick={() => alert('delete')}>delete</div>
+          <Dropdown.Option action={() => console.log('create')} label='create' />
+          <Dropdown.Option action={() => console.log('edit')} label='edit' />
+          <Dropdown.Option action={() => alert('delete')} label='delete' />
         </Dropdown>
         <br />
         <Tooltip render='This is a tooltip 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'>

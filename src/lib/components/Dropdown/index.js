@@ -12,23 +12,24 @@ const Dropdown = ({ placeholder, children }) => {
     </Button>
   );
   const renderDropdown = ({ close }) => (
-    <Options>
-      {children &&
-        children.map((item, i) => (
-          <Option onClick={close} key={`select-${i}`}>
-            {item}
-          </Option>
-        ))}
-    </Options>
+    <div onClick={close}>
+      {children && children.map(child => child)}
+    </div>
   );
   return (
     <Dropbox renderTarget={renderTarget} renderDropdown={renderDropdown} />
   );
 };
 
+const Option = ({ label, action }) => {
+  return <Item onClick={action} key={label}>{label}</Item>
+}
+
+Dropdown.Option = Option
+
 export default Dropdown;
 
-const Option = styled.div`
+const Item = styled.div`
   margin: 0;
   min-height: 30px;
   padding: 0 10px;
@@ -43,4 +44,3 @@ const Option = styled.div`
     cursor: pointer;
   }
 `;
-const Options = styled.div``;
