@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled, { withTheme, ThemeProvider } from 'styled-components';
+import styled, { withTheme } from 'styled-components';
 import moment from 'moment';
 import Theme, { getContrastYIQ } from '../../theme';
 import Time from '../../utils/Time';
 import Icon from '../Icon';
 import Week from './Week';
 import Context from './Context';
+import Dropbox from '../Dropbox';
 
 class DatePicker extends Component {
   constructor(props) {
@@ -37,19 +38,11 @@ class DatePicker extends Component {
     }
 
     this.state = {
-      visible: false,
       text: null,
       selected: null,
       placeholder: props.placeholder,
       date
     };
-
-    this.dropdown = React.createRef();
-    this.content = React.createRef();
-    this.hide = this.hide.bind(this);
-    this.blur = this.blur.bind(this);
-    this.show = this.show.bind(this);
-    this.close = this.close.bind(this);
   }
 
   getMonth(pick) {
@@ -58,140 +51,111 @@ class DatePicker extends Component {
     else this.setState({ date: Time.getNextMonthWeeks(date) });
   }
 
-  show() {
+  open(callback) {
     const { selected } = this.state;
     let { date } = this.state;
-    if (!this.state.visible) {
-      if (selected) date = Time.getCurrentMonthWeeks(selected);
-      else date = Time.getCurrentMonthWeeks(this.today);
 
-      this.setState({ visible: true, date });
-      document.addEventListener('click', this.hide);
-      window.addEventListener('blur', this.blur);
-    }
+    if (selected) date = Time.getCurrentMonthWeeks(selected);
+    else date = Time.getCurrentMonthWeeks(this.today);
+    this.setState({ date });
+    callback()
   }
 
-  blur() {
-    this.setState({ visible: false });
-    document.removeEventListener('click', this.hide);
-    window.removeEventListener('blur', this.blur);
-  }
-
-  hide(e) {
-    let rect = this.content.current.getBoundingClientRect();
-    let x = e.clientX;
-    let y = e.clientY;
-    if (y < rect.top || y > rect.bottom || x < rect.left || x > rect.right) {
-      this.setState({ visible: false });
-      document.removeEventListener('click', this.hide);
-      window.removeEventListener('blur', this.blur);
-    }
-  }
-
-  close() {
-    this.setState({ visible: false });
-    document.removeEventListener('click', this.hide);
-    window.removeEventListener('blur', this.blur);
-  }
-
-  select(day) {
+  select(day, callback) {
     let text = `${day[1]} ${moment.months(day[2])} ${day[3]}`;
     let date = new Date(`${day[2] + 1}/${day[1]}/${day[3]}`);
-    this.setState({ text, visible: false, selected: day });
+    this.setState({ text, selected: day });
     this.props.onChange(date);
-
-    document.removeEventListener('click', this.hide);
-    window.removeEventListener('blur', this.blur);
+    callback()
   }
 
   clear(e) {
     e.stopPropagation();
-    this.setState({ visible: false, text: null, selected: null });
+    this.setState({ text: null, selected: null });
     document.removeEventListener('click', this.hide);
     window.removeEventListener('blur', this.blur);
   }
 
   render() {
     const { isError, theme } = this.props;
-    const { text, placeholder, visible, date, selected } = this.state;
+    const { text, placeholder, date, selected } = this.state;
 
     const weeks = date.weeks || [];
     const month = moment()
       .month(date.month)
       .format('MMMM');
 
-    return (
-      <ThemeProvider theme={theme}>
-        <Block ref={this.dropdown}>
-          <Button
-            onClick={this.show}
-            isError={isError}
-            isText={text ? false : true}
-          >
-            {text ? text : placeholder}
-            <div>
-              {selected && (
-                <IconDelete onClick={e => this.clear(e)}>
-                  <Icon
-                    name='delete'
-                    size='8px'
-                    color={theme.colors.background}
-                  />
-                </IconDelete>
-              )}
-              <div>
-                <Icon name='caret' size='5px' color={theme.colors.ground} />
-              </div>
-            </div>
-          </Button>
-          {visible && (
-            <Drop ref={this.content}>
-              <Month>
-                <Header>
-                  <CaretBox right={false} onClick={() => this.getMonth('last')}>
-                    <Icon
-                      name='caret'
-                      size='5px'
-                      color={theme[getContrastYIQ(theme.colors.background)]}
-                    />
-                  </CaretBox>
-                  {month} {date.year}
-                  <CaretBox right={true} onClick={() => this.getMonth('next')}>
-                    <Icon
-                      name='caret'
-                      size='5px'
-                      color={theme[getContrastYIQ(theme.colors.background)]}
-                    />
-                  </CaretBox>
-                </Header>
-                <Context.Provider
-                  value={{ today: this.today, month: date.month, selected }}
-                >
-                  <Weekdays>
-                    {this.weekdays.map(weekday => (
-                      <Weekday
-                        holiday={0 === weekday[1] || 6 === weekday[1]}
-                        key={weekday[0]}
-                      >
-                        {weekday[0]}
-                      </Weekday>
-                    ))}
-                  </Weekdays>
-                  <div>
-                    {weeks.map((week, i) => (
-                      <Week
-                        selectDay={day => this.select(day)}
-                        key={`${month}-${i}`}
-                        week={week}
-                      />
-                    ))}
-                  </div>
-                </Context.Provider>
-              </Month>
-            </Drop>
+    const renderTarget = ({ show }) => (
+      <Target
+        onClick={() => this.open(show)}
+        isError={isError}
+        isText={text ? false : true}
+      >
+        {text ? text : placeholder}
+        <div>
+          {selected && (
+            <IconDelete onClick={e => this.clear(e)}>
+              <Icon
+                name='delete'
+                size='8px'
+                color={theme.colors.background}
+              />
+            </IconDelete>
           )}
-        </Block>
-      </ThemeProvider>
+          <div>
+            <Icon name='caret' size='5px' color={theme.colors.ground} />
+          </div>
+        </div>
+      </Target>
+    )
+
+    const renderDropdown = ({ close }) => (
+      <Month>
+        <Header>
+          <CaretBox right={false} onClick={() => this.getMonth('last')}>
+            <Icon
+              name='caret'
+              size='5px'
+              color={theme[getContrastYIQ(theme.colors.background)]}
+            />
+          </CaretBox>
+          {month} {date.year}
+          <CaretBox right={true} onClick={() => this.getMonth('next')}>
+            <Icon
+              name='caret'
+              size='5px'
+              color={theme[getContrastYIQ(theme.colors.background)]}
+            />
+          </CaretBox>
+        </Header>
+        <Context.Provider
+          value={{ today: this.today, month: date.month, selected }}
+        >
+          <Weekdays>
+            {this.weekdays.map(weekday => (
+              <Weekday
+                holiday={0 === weekday[1] || 6 === weekday[1]}
+                key={weekday[0]}
+              >
+                {weekday[0]}
+              </Weekday>
+            ))}
+          </Weekdays>
+          <div>
+            {weeks.map((week, i) => (
+              <Week
+                selectDay={day => this.select(day, close)}
+                key={`${month}-${i}`}
+                week={week}
+              />
+            ))}
+          </div>
+        </Context.Provider>
+      </Month>
+    )
+
+    return (
+      <Dropbox renderTarget={renderTarget} renderDropdown={renderDropdown} />
     );
   }
 }
@@ -209,19 +173,13 @@ DatePicker.defaultProps = {
 export default withTheme(DatePicker);
 
 /* eslint-disable */
-const Block = styled.div`
-  box-sizing: border-box;
-  flex-shrink: 0;
-  position: relative;
-  max-width: 230px;
-`;
-const Button = styled.div`
+const Target = styled.div`
   border-radius: ${props => props.theme.border.radius + 'px'};
   box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-width: 200px;
+  max-width: 230px;
   min-height: 30px;
   font-size: 12px;
   background: ${props => props.theme.colors.background};
@@ -242,21 +200,6 @@ const Button = styled.div`
     align-items: center;
     justify-content: flex-end;
   }
-`;
-const Drop = styled.div`
-  border-radius: ${props => props.theme.border.radius + 'px'};
-  position: absolute;
-  top: 35px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  min-width: 200px;
-  width: 100%;
-  background: ${props => props.theme.colors.background};
-  border: 1px solid ${props => props.theme.colors.background};
-  box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.2);
-  font-size: 12px;
-  z-index: 3;
 `;
 const Month = styled.div`
   box-sizing: border-box;
