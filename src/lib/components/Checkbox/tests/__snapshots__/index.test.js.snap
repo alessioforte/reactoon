@@ -1,28 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Checkbox /> should render and match the snapshot 1`] = `
-<div
-  class="sc-htpNat jmEnvn"
+<label
+  class="sc-htpNat jDDgoq"
 >
-  <div
-    class="sc-bxivhb lijjMI"
+  <input
+    type="checkbox"
+    value="false"
+  />
+  <span
+    aria-checked="false"
+    class="sc-bxivhb dyPvwX"
+    role="checkbox"
+    tabindex="0"
+    value="false"
   >
-    <div
-      class="sc-bwzfXH cusHsC"
+    <svg
+      class="sc-bdVaJa htzKZE"
+      color="#1a1a1a"
+      height="9px"
+      viewBox="0 0 712 512"
+      x="0px"
+      y="0px"
     >
-      <svg
-        class="sc-bdVaJa htzKZE"
-        color="#1a1a1a"
-        height="9px"
-        viewBox="0 0 712 512"
-        x="0px"
-        y="0px"
-      >
-        <path
-          d="M256.2,512c-14.4,0-28.9-5.5-39.9-16.5L16.8,295.9c-22-22-22-57.8,0-79.8s57.8-22,79.8,0l159.6,159.6L615.4,16.5c22-22,57.8-22,79.8,0c22.1,22,22.1,57.8,0,79.8L296.1,495.5C285.1,506.5,270.7,512,256.2,512z"
-        />
-      </svg>
-    </div>
-  </div>
-</div>
+      <path
+        d="M256.2,512c-14.4,0-28.9-5.5-39.9-16.5L16.8,295.9c-22-22-22-57.8,0-79.8s57.8-22,79.8,0l159.6,159.6L615.4,16.5c22-22,57.8-22,79.8,0c22.1,22,22.1,57.8,0,79.8L296.1,495.5C285.1,506.5,270.7,512,256.2,512z"
+      />
+    </svg>
+  </span>
+</label>
 `;

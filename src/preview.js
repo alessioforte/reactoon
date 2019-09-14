@@ -123,6 +123,7 @@ export default class Preview extends Component {
         <Checkbox label='checkbox label' name='accept' />
         <br />
         <Toggle onChange={(e, data) => console.log(data)} />
+        <Icon size='60px' />
         <br />
         <Dropdown>
           <Dropdown.Option action={() => console.log('create')} label='create' />
