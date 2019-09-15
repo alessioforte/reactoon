@@ -3,14 +3,14 @@ import { getContrastYIQ, getColorLuminance } from '../../theme';
 import { focus } from '../Styled/css'
 
 const buttonStyles = css`
-  height: 30px;
+  min-height: 30px;
+  min-width: 30px;
   display: inline-flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   box-sizing: border-box;
-  padding: 0 1em;
+  /* padding: 0 1em; */
   text-decoration: none;
-  border-radius: 4px;
   -webkit-font-smoothing: antialiased;
   -webkit-touch-callout: none;
   user-select: none;
@@ -83,10 +83,21 @@ export const STATUS: any = {
 };
 
 // prettier-ignore
-export const StyledButton = styled.button<{ status: string, reverse?: boolean }>`
+export const StyledButton = styled.button<{ status: string, reverse?: boolean, round?: boolean }>`
+    & > span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      margin: ${props => props.reverse ? '0 0 0 1rem' : '0 1rem 0 0'};
+    }
   ${buttonStyles};
-  ${props => props.reverse && `flex-direction: row-reverse;`}
-  ${props => STATUS[props.status]}
+  ${props => props.reverse && `flex-direction: row-reverse;`};
+  ${props => STATUS[props.status]};
+  ${props => props.round ? `border-radius:50%;&>span{margin:0;}` : `
+    border-radius: ${props.theme.border.radius}px;
+    padding: 0 1em;
+    `};
   &:disabled {
     background: ${props => props.theme.colors.disabled};
     color: ${props => props.theme.colors[getContrastYIQ(props.theme.colors.disabled)]};
@@ -98,13 +109,5 @@ export const StyledButton = styled.button<{ status: string, reverse?: boolean }>
 `;
 
 export const A = styled(StyledButton.withComponent('a'))``;
-
-export const IconWrapper = styled.span<{ reverse?: boolean }>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  margin: ${props => props.reverse ? '0 0 0 1rem' : '0 1rem 0 0'};
-`
 
 export const availableStatus = Object.keys(STATUS);

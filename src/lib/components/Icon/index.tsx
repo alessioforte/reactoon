@@ -33,7 +33,7 @@ Icon.propTypes = {
 Icon.defaultProps = {
   name: 'default',
   color: '#DADEE1',
-  size: '30px'
+  size: '1rem'
 };
 
 export default Icon;

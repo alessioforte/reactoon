@@ -113,6 +113,7 @@ export default class Preview extends Component {
         <Toggle onChange={(e, data) => console.log(data)} />
         <Button status='error' icon='default' text='click me' />
         <Button status='primary' icon='default' text='click me' reverse />
+        <Button status='ghost' icon='default' round />
         <br />
         <Dropdown>
           <Dropdown.Option
