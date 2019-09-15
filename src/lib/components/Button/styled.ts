@@ -9,7 +9,6 @@ const buttonStyles = css`
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  /* padding: 0 1em; */
   text-decoration: none;
   -webkit-font-smoothing: antialiased;
   -webkit-touch-callout: none;
@@ -82,21 +81,31 @@ export const STATUS: any = {
   `
 };
 
+type StyledButtonProps = {
+  status: string,
+  reverse?: boolean,
+  round?: boolean,
+  hasLabel?: boolean
+}
+
 // prettier-ignore
-export const StyledButton = styled.button<{ status: string, reverse?: boolean, round?: boolean }>`
-    & > span {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      margin: ${props => props.reverse ? '0 0 0 1rem' : '0 1rem 0 0'};
-    }
+export const StyledButton = styled.button<StyledButtonProps>`
   ${buttonStyles};
-  ${props => props.reverse && `flex-direction: row-reverse;`};
   ${props => STATUS[props.status]};
-  ${props => props.round ? `border-radius:50%;&>span{margin:0;}` : `
+  ${props => props.reverse && `flex-direction: row-reverse;`};
+  & > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin: ${props => props.reverse ?
+      `0 0 0 1rem;` :
+      `0 ${props.round || !props.hasLabel ? '0' : '1rem'} 0 0;`
+    };
+  }
+  ${props => props.round ? `border-radius:50%;` : `
     border-radius: ${props.theme.border.radius}px;
-    padding: 0 1em;
+    padding: 0 ${props.hasLabel ? '0.9em' : '0'};
     `};
   &:disabled {
     background: ${props => props.theme.colors.disabled};

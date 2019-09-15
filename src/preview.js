@@ -111,9 +111,10 @@ export default class Preview extends Component {
         <Checkbox label='checkbox label' name='accept' />
         <br />
         <Toggle onChange={(e, data) => console.log(data)} />
-        <Button status='error' icon='default' text='click me' />
-        <Button status='primary' icon='default' text='click me' reverse />
+        <Button status='error' icon='default' label='click me' />
+        <Button status='primary' icon='default' label='click me' reverse />
         <Button status='ghost' icon='default' round />
+        <Button status='error' icon='default' href='/' />
         <br />
         <Dropdown>
           <Dropdown.Option
@@ -145,7 +146,7 @@ export default class Preview extends Component {
           SUCCESS
         </ButtonTip>
         <Button status='ghost'>GHOST</Button>
-        <Button href='/' status='warning' text='LINK' />
+        <Button href='/' status='warning' label='LINK' />
         <Tooltip render='tip'>
           <Button status='primary'>1</Button>
         </Tooltip>

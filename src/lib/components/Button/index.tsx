@@ -10,18 +10,19 @@ type Props = {
   status?: string,
   href?: string,
   children: React.ReactNode,
-  text?: string,
+  label?: string,
   icon?: string,
   reverse?: boolean,
   round?: boolean,
   theme: any,
 }
 
-const Button: FC<Props> = ({status, href, children, theme, text, icon, reverse, round, ...props }) => {
+const Button: FC<Props> =
+({ status, href, children, theme, label, icon, reverse, round, ...props }) => {
   let buttonStatus: string = status || 'primary';
   if (status && !availableStatus.includes(status)) buttonStatus = 'primary';
 
-  let inner: ReactNode = children ? Children.toArray(children) : text
+  let inner: ReactNode = children ? Children.toArray(children) : label
 
   if (icon && availableIcons.includes(icon)) {
     inner = (
@@ -29,20 +30,33 @@ const Button: FC<Props> = ({status, href, children, theme, text, icon, reverse, 
         <span>
           <Icon name={icon} />
         </span>
-        {text}
+        {label}
       </>
     )
   }
-
+  console.log(label !== '')
   let button: ReactElement = (
-    <StyledButton {...props} status={buttonStatus} reverse={reverse} round={round}>
+    <StyledButton
+      {...props}
+      status={buttonStatus}
+      reverse={reverse}
+      round={round}
+      hasLabel={label !== '' || children !== undefined}
+    >
       {inner}
     </StyledButton>
   );
 
   if (href) {
     button = (
-      <A {...props} href={href} status={buttonStatus} reverse={reverse} round={round}>
+      <A
+        {...props}
+        href={href}
+        status={buttonStatus}
+        reverse={reverse}
+        round={round}
+        hasLabel={label !== '' || children !== undefined}
+      >
         {inner}
       </A>
     );
@@ -55,7 +69,7 @@ Button.propTypes = {
   status: PropTypes.oneOf(availableStatus),
   href: PropTypes.string,
   children: PropTypes.node,
-  text: PropTypes.string,
+  label: PropTypes.string,
   icon: PropTypes.oneOf(availableIcons),
   reverse: PropTypes.bool,
   round: PropTypes.bool,
@@ -64,7 +78,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
   status: 'primary',
-  text: '',
+  label: '',
   reverse: false,
   round: false,
   theme: styles
