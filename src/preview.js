@@ -111,8 +111,8 @@ export default class Preview extends Component {
         <Checkbox label='checkbox label' name='accept' />
         <br />
         <Toggle onChange={(e, data) => console.log(data)} />
-        <Button status='error' icon='default' label='click me' />
-        <Button status='primary' icon='default' label='click me' reverse />
+        <Button status='warning' icon='default' label='icon label' />
+        <Button status='primary' icon='default' label='reverse' reverse />
         <Button status='ghost' icon='default' round />
         <Button status='error' icon='default' href='/' />
         <br />

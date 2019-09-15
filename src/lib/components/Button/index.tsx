@@ -9,7 +9,7 @@ import { availableIcons } from '../Icon/icons'
 type Props = {
   status?: string,
   href?: string,
-  children: React.ReactNode,
+  children: ReactNode,
   label?: string,
   icon?: string,
   reverse?: boolean,
