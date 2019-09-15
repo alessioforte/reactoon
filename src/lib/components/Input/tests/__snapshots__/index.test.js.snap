@@ -2,7 +2,7 @@
 
 exports[`<Input /> should render and match the snapshot 1`] = `
 <div
-  class="sc-bdVaJa equLuU"
+  class="sc-bdVaJa gtWLKC"
 >
   <input
     data-value="false"
@@ -14,8 +14,5 @@ exports[`<Input /> should render and match the snapshot 1`] = `
   >
     name
   </label>
-  <div
-    class="sc-htpNat dvsOBt"
-  />
 </div>
 `;

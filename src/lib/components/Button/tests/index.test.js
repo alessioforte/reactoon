@@ -9,27 +9,27 @@ describe('<Button />', () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it('Should render children if text prop is provided', () => {
-    const text = 'Submit';
+  it('Should render children if label prop is provided', () => {
+    const label = 'Submit';
     const children = 'Clear';
     const {
       container: { firstChild: buttonWithTextProps }
-    } = render(<Button text={text} />);
+    } = render(<Button label={label} />);
     const {
       container: { firstChild: buttonWithChildren }
     } = render(
-      <Button text={text}>
+      <Button label={label}>
         <span>{children}</span>
       </Button>
     );
 
-    expect(buttonWithTextProps).toHaveTextContent(text);
+    expect(buttonWithTextProps).toHaveTextContent(label);
     expect(buttonWithChildren).toHaveTextContent(children);
   });
 
   it('Should render primary button if status is not valid', () => {
     const { container: button1 } = render(
-      <Button status='status-not-valid' text='Not Valid' />
+      <Button status='status-not-valid' label='Not Valid' />
     );
     const { container: button2 } = render(
       <Button status='not-valid-status'>Not Valid</Button>
@@ -40,7 +40,7 @@ describe('<Button />', () => {
 
   it('should render button with disabled attribute', () => {
     const { container } = render(
-      <Button status='primary' text='disabled' disabled />
+      <Button status='primary' label='disabled' disabled />
     );
     const button = container.querySelector('button');
     expect(button).toHaveAttribute('disabled');

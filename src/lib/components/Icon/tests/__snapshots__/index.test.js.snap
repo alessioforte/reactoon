@@ -4,7 +4,7 @@ exports[`<Icon /> should render and match the snapshot 1`] = `
 <svg
   class="sc-bdVaJa cdZYju"
   color="#DADEE1"
-  height="30px"
+  height="1rem"
   viewBox="0 0 512 512"
   x="0px"
   y="0px"
