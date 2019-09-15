@@ -23,7 +23,7 @@ const Tooltip = ({ render, children }) => {
         left: `${rect.left + rect.width / 2 - width / 2}px`
       };
 
-      if (width / 2 > rect.x + (rect.width / 2) && width > rect.width) {
+      if (width / 2 > rect.x + rect.width / 2 && width > rect.width) {
         position.left = `${rect.left}px`;
       }
 

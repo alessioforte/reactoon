@@ -6,7 +6,7 @@ const buttonStyles = css`
   height: 30px;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   box-sizing: border-box;
   padding: 0 1em;
   text-decoration: none;
@@ -83,8 +83,9 @@ export const STATUS: any = {
 };
 
 // prettier-ignore
-export const StyledButton = styled.button<{ status: string }>`
+export const StyledButton = styled.button<{ status: string, reverse?: boolean }>`
   ${buttonStyles};
+  ${props => props.reverse && `flex-direction: row-reverse;`}
   ${props => STATUS[props.status]}
   &:disabled {
     background: ${props => props.theme.colors.disabled};
@@ -97,5 +98,13 @@ export const StyledButton = styled.button<{ status: string }>`
 `;
 
 export const A = styled(StyledButton.withComponent('a'))``;
+
+export const IconWrapper = styled.span<{ reverse?: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin: ${props => props.reverse ? '0 0 0 1rem' : '0 1rem 0 0'};
+`
 
 export const availableStatus = Object.keys(STATUS);

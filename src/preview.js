@@ -2,31 +2,19 @@
 import React, { Component, useState } from 'react';
 import styled from 'styled-components';
 import {
-  // Menu,
-  Dropdown,
-  Select,
-  Multiselect,
-  Filterselect,
-  // Filterslider,
-  // Slider,
-  // SliderRange,
-  // SliderStep,
-  Toggle,
-  Checkbox,
-  Radio,
-  // Loading,
-  // Spinner,
-  // Notification,
   Button,
+  Checkbox,
+  DatePicker,
+  Dropdown,
+  Filterselect,
+  Multiselect,
   Icon,
   Input,
-  Tooltip,
-  // SideBar,
-  // Modal,
-  // Calendar,
-  // DatePicker,
+  Radio,
   Searchbar,
-  DatePicker,
+  Select,
+  Toggle,
+  Tooltip,
   withTooltip
 } from './lib';
 
@@ -123,10 +111,14 @@ export default class Preview extends Component {
         <Checkbox label='checkbox label' name='accept' />
         <br />
         <Toggle onChange={(e, data) => console.log(data)} />
-        <Icon size='60px' />
+        <Button status='error' icon='default' text='click me' />
+        <Button status='primary' icon='default' text='click me' reverse />
         <br />
         <Dropdown>
-          <Dropdown.Option action={() => console.log('create')} label='create' />
+          <Dropdown.Option
+            action={() => console.log('create')}
+            label='create'
+          />
           <Dropdown.Option action={() => console.log('edit')} label='edit' />
           <Dropdown.Option action={() => alert('delete')} label='delete' />
         </Dropdown>

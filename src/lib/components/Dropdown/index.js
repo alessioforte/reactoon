@@ -12,9 +12,7 @@ const Dropdown = ({ placeholder, children }) => {
     </Button>
   );
   const renderDropdown = ({ close }) => (
-    <div onClick={close}>
-      {children && children.map(child => child)}
-    </div>
+    <div onClick={close}>{children && children.map(child => child)}</div>
   );
   return (
     <Dropbox renderTarget={renderTarget} renderDropdown={renderDropdown} />
@@ -22,10 +20,14 @@ const Dropdown = ({ placeholder, children }) => {
 };
 
 const Option = ({ label, action }) => {
-  return <Item onClick={action} key={label}>{label}</Item>
-}
+  return (
+    <Item onClick={action} key={label}>
+      {label}
+    </Item>
+  );
+};
 
-Dropdown.Option = Option
+Dropdown.Option = Option;
 
 export default Dropdown;
 

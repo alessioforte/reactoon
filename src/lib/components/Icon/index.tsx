@@ -1,9 +1,7 @@
 import React, { FC } from 'react';
 import PropTypes from 'prop-types';
 import { Svg } from './styled';
-import icons from './icons';
-
-const availableIcons = Object.keys(icons)
+import icons, { availableIcons } from './icons';
 
 type Props = {
   name?: string,

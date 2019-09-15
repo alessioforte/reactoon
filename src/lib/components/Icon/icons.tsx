@@ -41,4 +41,6 @@ const icons: any = {
   }
 };
 
+export const availableIcons = Object.keys(icons)
+
 export default icons

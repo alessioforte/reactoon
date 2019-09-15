@@ -5,13 +5,15 @@ import Theme, { getContrastYIQ } from '../../theme';
 import { focus } from '../Styled/css';
 
 const Radio = ({ name, label, options, onChange, inline, theme }) => {
-  const initialValue = options.length > 0 ? options[0].value : null
-  const [value, setValue] = useState(initialValue)
+  const initialValue = options.length > 0 ? options[0].value : null;
+  const [value, setValue] = useState(initialValue);
 
   const handleOnClick = (e, newValue) => {
-    setValue(newValue)
-    onChange(newValue)
-  }
+    if (newValue !== value) {
+      setValue(newValue);
+      onChange(newValue);
+    }
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -38,8 +40,8 @@ const Radio = ({ name, label, options, onChange, inline, theme }) => {
         </Options>
       </div>
     </ThemeProvider>
-  )
-}
+  );
+};
 
 Radio.propTypes = {
   options: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -48,7 +50,6 @@ Radio.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
   theme: PropTypes.any
-
 };
 
 Radio.defaultProps = {
@@ -62,7 +63,7 @@ export default withTheme(Radio);
 /* eslint-disable */
 const Placeholder = styled.span`
   font-weight: bold;
-`
+`;
 const Options = styled.div`
   display: flex;
   flex-direction: ${props => (props.inline ? 'row' : 'column')};
@@ -87,7 +88,7 @@ const Option = styled.div`
     background: ${props => props.theme.colors.background};
     transition: all 0.3s ease;
     &:hover {
-        opacity: 0.8;
+      opacity: 0.8;
     }
     &:focus {
       ${focus}
@@ -95,12 +96,10 @@ const Option = styled.div`
     &:after {
       content: '';
       width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: ${props =>
-          props.active
-            ? props.theme.colors.primary
-            : props.theme.colors.ground};
+      height: 10px;
+      border-radius: 50%;
+      background: ${props =>
+        props.active ? props.theme.colors.primary : props.theme.colors.ground};
     }
   }
   span {

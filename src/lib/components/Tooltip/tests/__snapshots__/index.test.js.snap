@@ -3,9 +3,13 @@
 exports[`<Tooltip /> should render and match the snapshot 1`] = `
 .c0 {
   display: inline-block;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 <div
+  aria-haspopup="true"
   class="c0"
 >
   TEST

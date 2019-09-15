@@ -58,7 +58,7 @@ class DatePicker extends Component {
     if (selected) date = Time.getCurrentMonthWeeks(selected);
     else date = Time.getCurrentMonthWeeks(this.today);
     this.setState({ date });
-    callback()
+    callback();
   }
 
   select(day, callback) {
@@ -66,7 +66,7 @@ class DatePicker extends Component {
     let date = new Date(`${day[2] + 1}/${day[1]}/${day[3]}`);
     this.setState({ text, selected: day });
     this.props.onChange(date);
-    callback()
+    callback();
   }
 
   clear(e) {
@@ -95,11 +95,7 @@ class DatePicker extends Component {
         <div>
           {selected && (
             <IconDelete onClick={e => this.clear(e)}>
-              <Icon
-                name='delete'
-                size='8px'
-                color={theme.colors.background}
-              />
+              <Icon name='delete' size='8px' color={theme.colors.background} />
             </IconDelete>
           )}
           <div>
@@ -107,25 +103,17 @@ class DatePicker extends Component {
           </div>
         </div>
       </Target>
-    )
+    );
 
     const renderDropdown = ({ close }) => (
       <Month>
         <Header>
           <CaretBox right={false} onClick={() => this.getMonth('last')}>
-            <Icon
-              name='caret'
-              size='5px'
-              color={theme[getContrastYIQ(theme.colors.background)]}
-            />
+            <Icon name='caret' size='5px' color={theme.colors.background} />
           </CaretBox>
           {month} {date.year}
           <CaretBox right={true} onClick={() => this.getMonth('next')}>
-            <Icon
-              name='caret'
-              size='5px'
-              color={theme[getContrastYIQ(theme.colors.background)]}
-            />
+            <Icon name='caret' size='5px' color={theme.colors.background} />
           </CaretBox>
         </Header>
         <Context.Provider
@@ -152,7 +140,7 @@ class DatePicker extends Component {
           </div>
         </Context.Provider>
       </Month>
-    )
+    );
 
     return (
       <Dropbox renderTarget={renderTarget} renderDropdown={renderDropdown} />
