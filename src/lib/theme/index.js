@@ -45,7 +45,7 @@ const SIZE = {
   is: 'xs',
   xs: {
     height: '',
-    fontSize: ''
+    font: ''
   },
   sm: {},
   md: {},

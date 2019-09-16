@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { withTheme, ThemeProvider } from 'styled-components';
 import { styles } from '../../theme';
 import { StyledButton, A, availableStatus } from './styled';
-import Icon from '../Icon'
-import { availableIcons } from '../Icon/icons'
+import Icon from '../Icon';
+import { availableIcons } from '../Icon/icons';
 
 type Props = {
   status?: string,
@@ -34,7 +34,7 @@ const Button: FC<Props> =
       </>
     )
   }
-  console.log(label !== '')
+
   let button: ReactElement = (
     <StyledButton
       {...props}

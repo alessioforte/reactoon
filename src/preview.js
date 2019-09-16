@@ -114,6 +114,7 @@ export default class Preview extends Component {
         <Button status='warning' icon='default' label='icon label' />
         <Button status='primary' icon='default' label='reverse' reverse />
         <Button status='ghost' icon='default' round />
+        <Button status='ghost' label='ghost' />
         <Button status='error' icon='default' href='/' />
         <br />
         <Dropdown>
