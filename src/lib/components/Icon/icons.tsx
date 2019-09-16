@@ -27,9 +27,8 @@ const icons: any = {
     width: '512'
   },
   default: {
-    d: '',
     width: '512',
-    children: (
+    group: (
       <>
         <circle cx="151.3" cy="186.2" r="34.9"/>
         <circle cx="360.7" cy="186.2" r="34.9"/>
