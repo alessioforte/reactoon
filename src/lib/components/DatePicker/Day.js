@@ -1,40 +1,35 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { getContrastYIQ } from '../../theme';
 import Context from './Context';
 
 export default ({ day, select }) => {
   const numberday = day[1];
+  const value = useContext(Context)
+
+  let today = false;
+  if (value.selected) {
+    today =
+      day[0] === value.selected[0] &&
+      day[1] === value.selected[1] &&
+      day[2] === value.selected[2] &&
+      day[3] === value.selected[3];
+  }
+  const selected =
+    day[0] === value.today[0] &&
+    day[1] === value.today[1] &&
+    day[2] === value.today[2] &&
+    day[3] === value.today[3];
 
   return (
-    <Context.Consumer>
-      {value => {
-        let today = false;
-        if (value.selected) {
-          today =
-            day[0] === value.selected[0] &&
-            day[1] === value.selected[1] &&
-            day[2] === value.selected[2] &&
-            day[3] === value.selected[3];
-        }
-        const selected =
-          day[0] === value.today[0] &&
-          day[1] === value.today[1] &&
-          day[2] === value.today[2] &&
-          day[3] === value.today[3];
-
-        return (
-          <Day
-            onClick={() => select(day)}
-            selected={selected || today}
-            today={today}
-            month={day[2] === value.month}
-          >
-            <NumberDay>{numberday}</NumberDay>
-          </Day>
-        );
-      }}
-    </Context.Consumer>
+    <Day
+      onClick={() => select(day)}
+      selected={selected || today}
+      today={today}
+      month={day[2] === value.month}
+    >
+      <NumberDay>{numberday}</NumberDay>
+    </Day>
   );
 };
 
