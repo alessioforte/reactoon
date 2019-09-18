@@ -5,7 +5,7 @@ import Context from './Context';
 
 export default ({ day, select }) => {
   const numberday = day[1];
-  const value = useContext(Context)
+  const value = useContext(Context);
 
   let today = false;
   if (value.selected) {
