@@ -296,7 +296,7 @@ const Box = styled.div`
   width: 30px;
   height: 30px;
   background: red;
-`
+`;
 const BottomRight = styled.div`
   position: absolute;
   bottom: 10px;

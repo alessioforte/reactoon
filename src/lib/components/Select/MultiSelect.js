@@ -4,7 +4,7 @@ import { withTheme } from 'styled-components';
 import Theme, { getContrastYIQ } from '../../theme';
 import Dropbox from '../Dropbox';
 import Icon from '../Icon';
-import { Target, Options, Option, Selected } from './styled'
+import { Target, Options, Option, Selected } from './styled';
 
 const Multiselect = ({ placeholder, options, isError, onChange, theme }) => {
   const label = placeholder || 'select...';
@@ -35,7 +35,7 @@ const Multiselect = ({ placeholder, options, isError, onChange, theme }) => {
       }
       return o;
     });
-    setState({ selected, values, options })
+    setState({ selected, values, options });
     onChange(values);
   };
 
