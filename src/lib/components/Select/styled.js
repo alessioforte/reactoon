@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { getContrastYIQ } from '../../theme';
+import { focus } from '../Styled/css';
 
 export const Target = styled.div`
   border-radius: ${props => props.theme.border.radius + 'px'};
@@ -24,7 +25,7 @@ export const Target = styled.div`
     border-color: ${props => props.theme.colors.ground};
   }
   &:focus {
-    outline-color: ${props => props.theme.colors.focus};
+    ${focus}
   }
   .icon {
     min-width: 20px;
