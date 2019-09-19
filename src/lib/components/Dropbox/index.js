@@ -26,13 +26,10 @@ class Dropbox extends Component {
 
   setDropdownPosition() {
     const rect = this.target.current.getBoundingClientRect();
-    const maxWidth = this.target.current.firstChild.getBoundingClientRect()
-      .width;
+    const maxWidth = this.target.current.firstChild.getBoundingClientRect().width;
     let position = {
-      top: 35,
-      left: '0',
+      left: 0,
       right: null,
-      bottom: null,
       maxWidth
     };
 
@@ -43,7 +40,7 @@ class Dropbox extends Component {
 
     if (rect.bottom + 300 > window.innerHeight) {
       position.top = null;
-      position.bottom = 35;
+      position.bottom = 30;
     }
 
     this.setState({ position });
@@ -125,6 +122,7 @@ const Drop = styled.div.attrs(({ position }) => ({ style: position }))`
     props.theme.colors[getContrastYIQ(props.theme.colors.primary)]};
   box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.2);
   padding: 5px 0;
+  margin: 5px 0;
   font-size: 12px;
   min-width: 200px;
   width: 100%;

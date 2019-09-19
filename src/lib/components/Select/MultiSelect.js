@@ -1,42 +1,42 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styled, { withTheme } from 'styled-components';
+import { withTheme } from 'styled-components';
 import Theme, { getContrastYIQ } from '../../theme';
 import Dropbox from '../Dropbox';
 import Icon from '../Icon';
+import { Target, Options, Option, Selected } from './styled'
 
 const Multiselect = ({ placeholder, options, isError, onChange, theme }) => {
+  const label = placeholder || 'select...';
+
   const [state, setState] = useState({
-    label: placeholder || 'select...',
     values: [],
     selected: [],
     options
   });
 
-  const select = item => {
+  const select = (item, i) => {
     let selected = state.selected;
     let values = state.values;
     selected.push(item);
     values.push(item.value);
-
-    setState({ selected, values });
+    options[i].selected = true;
+    setState({ selected, values, options });
     onChange(values);
   };
 
   const unselect = (e, item) => {
-    // e.stopPropagation();
-    // // let sIndex = this.state.selected.indexOf(item)
-    // // selected.splice(sIndex, 1)
-    // let values = state.values
-    // let vIndex = values.indexOf(item.value);
-    // values.splice(vIndex, 1);
-    // let newOptions = options.filter(item => !state.selected.includes(item));
-    // this.setState({
-    //   selected,
-    //   options: newOptions,
-    //   values
-    // });
-    // this.props.onChange(values);
+    e.stopPropagation();
+    let selected = state.selected.filter(s => s.value !== item.value);
+    let values = state.values.filter(v => v !== item.value);
+    let options = state.options.map(o => {
+      if (o.value === item.value) {
+        o.selected = false;
+      }
+      return o;
+    });
+    setState({ selected, values, options })
+    onChange(values);
   };
 
   const renderSelected = () => {
@@ -60,25 +60,24 @@ const Multiselect = ({ placeholder, options, isError, onChange, theme }) => {
       {state.selected.length > 0 ? (
         <Selected>{renderSelected()}</Selected>
       ) : (
-        <Placeholder>{state.label}</Placeholder>
+        <div>{label}</div>
       )}
     </Target>
   );
 
   const renderDropdown = ({ close }) => (
-    <List>
+    <Options>
       {options &&
-        options.map((item, i) => (
-          <li
-            key={`${item.value}-${i}`}
-            onClick={e => {
-              select(item);
-            }}
+        options.map((option, i) => (
+          <Option
+            key={`${option.value}-${i}`}
+            onClick={e => !option.selected && select(option, i)}
+            selected={option.selected}
           >
-            {item.label}
-          </li>
+            {option.label}
+          </Option>
         ))}
-    </List>
+    </Options>
   );
   return (
     <Dropbox renderTarget={renderTarget} renderDropdown={renderDropdown} />
@@ -97,70 +96,3 @@ Multiselect.defaultProps = {
 };
 
 export default withTheme(Multiselect);
-
-const Target = styled.div`
-  border-radius: ${props => props.theme.border.radius + 'px'};
-  border: 1px solid
-    ${props =>
-      props.isError ? props.theme.colors.error : props.theme.colors.background};
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-width: 200px;
-  min-height: 30px;
-  font-size: 12px;
-  background: ${props => props.theme.colors.background};
-  color: ${props =>
-    props.value
-      ? props.theme.colors[getContrastYIQ(props.theme.colors.background)]
-      : props.theme.colors.idle};
-  padding: 0 10px;
-  &:hover {
-    border-color: ${props => props.theme.colors.ground};
-  }
-`;
-const List = styled.div`
-  display: flex;
-  flex-direction: ${props => (props.reverse ? 'column' : 'column-reverse')};
-  order: ${props => (props.reverse ? '0' : '-1')};
-  overflow: scroll;
-  max-height: 338px;
-  li {
-    display: flex;
-    align-items: center;
-    min-height: 28px;
-    padding: 0 10px;
-    list-style-type: none;
-    margin: 0;
-  }
-  li:hover {
-    background: ${props => props.theme.colors.primary};
-    color: ${props =>
-      props.theme.colors[getContrastYIQ(props.theme.colors.primary)]};
-    cursor: pointer;
-  }
-`;
-const Selected = styled.div`
-  color: ${props =>
-    props.isText
-      ? props.theme.colors.idle
-      : props.theme.colors[getContrastYIQ(props.theme.colors.primary)]};
-  & > div {
-    display: inline-block;
-    background: ${props => props.theme.colors.primary};
-    padding: 3px 6px;
-    margin: 1px;
-    border-radius: 3px;
-    div {
-      display: inline-block;
-      margin-left: 10px;
-    }
-  }
-  svg:hover {
-    cursor: pointer;
-  }
-`;
-const Placeholder = styled.div`
-  color: ${props => props.theme.colors.idle};
-`;
