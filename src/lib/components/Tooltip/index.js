@@ -120,6 +120,7 @@ export const Target = styled.div`
 export const Tip = styled.div`
   position: absolute;
   left: -800px;
+  z-index: 99;
   padding: 9px;
   animation: 1.2s ${delay} ease;
   font-size: 12px;

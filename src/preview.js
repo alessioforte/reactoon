@@ -15,7 +15,8 @@ import {
   Select,
   Toggle,
   Tooltip,
-  withTooltip
+  withTooltip,
+  SideBar
 } from './lib';
 
 import 'moment/locale/it';
@@ -74,7 +75,8 @@ export default class Preview extends Component {
 
     this.state = {
       inputValue: '',
-      inputError: false
+      inputError: false,
+      showMenu: false
     };
   }
 
@@ -103,137 +105,145 @@ export default class Preview extends Component {
 
   render() {
     return (
-      <Root>
-        <Tooltip render='This is a tooltip 4'>
-          <Button status='primary'>4</Button>
-        </Tooltip>
-        <br />
-        <Checkbox label='checkbox label' name='accept' />
-        <br />
-        <Toggle onChange={(e, data) => console.log(data)} />
-        <Button status='warning' icon='default' label='icon label' />
-        <Button status='primary' icon='default' label='reverse' reverse />
-        <Button status='ghost' icon='default' round />
-        <Button status='ghost' label='ghost' />
-        <Button status='error' icon='default' href='/' />
-        <br />
-        <Dropdown>
-          <Dropdown.Option
-            action={() => console.log('create')}
-            label='create'
+      <Layout>
+        <SideBar
+          isWide={this.state.showMenu}
+          renderHeader={() => <MenuHeader><span onClick={() => this.setState({ showMenu: false })}>&times;</span></MenuHeader>}
+          renderMenu={() => <Item>menu item</Item>}
+        >
+        </SideBar>
+        <Root>
+          <Tooltip render='This is a tooltip 4'>
+            <Button status='primary' onClick={() => this.setState({ showMenu: !this.state.showMenu })}>4</Button>
+          </Tooltip>
+          <br />
+          <Checkbox label='checkbox label' name='accept' />
+          <br />
+          <Toggle onChange={(e, data) => console.log(data)} />
+          <Button status='warning' icon='default' label='icon label' />
+          <Button status='primary' icon='default' label='reverse' reverse />
+          <Button status='ghost' icon='default' round />
+          <Button status='ghost' label='ghost' />
+          <Button status='error' icon='default' href='/' />
+          <br />
+          <Dropdown>
+            <Dropdown.Option
+              action={() => console.log('create')}
+              label='create'
+            />
+            <Dropdown.Option action={() => console.log('edit')} label='edit' />
+            <Dropdown.Option action={() => alert('delete')} label='delete' />
+          </Dropdown>
+          <br />
+          <Tooltip render='This is a tooltip 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'>
+            <Button status='primary'>2</Button>
+          </Tooltip>
+          <br />
+          <Filterselect
+            options={bands}
+            placeholder='select your favorite rock bands'
+            onChange={values => console.log('Multiselect values:', values)}
           />
-          <Dropdown.Option action={() => console.log('edit')} label='edit' />
-          <Dropdown.Option action={() => alert('delete')} label='delete' />
-        </Dropdown>
-        <br />
-        <Tooltip render='This is a tooltip 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'>
-          <Button status='primary'>2</Button>
-        </Tooltip>
-        <br />
-        <Filterselect
-          options={bands}
-          placeholder='select your favorite rock bands'
-          onChange={values => console.log('Multiselect values:', values)}
-        />
-        <br />
-        <ButtonTip status='primary' type='submit' name='btn' value='primary'>
-          PRIMARY
-        </ButtonTip>
-        <Button status='error'>ERROR</Button>
-        <Button role='button' status='primary' disabled>
-          DISABLED
-        </Button>
-        <ButtonTip status='success' tooltip='success button'>
-          SUCCESS
-        </ButtonTip>
-        <Button status='ghost'>GHOST</Button>
-        <Button href='/' status='warning' label='LINK' />
-        <Tooltip render='tip'>
-          <Button status='primary'>1</Button>
-        </Tooltip>
-        <Tooltip render='This is a tooltip 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'>
-          <Button status='primary'>2</Button>
-        </Tooltip>
-        <Tooltip render='This is a tooltip 3 Lorem ipsum dolor'>
-          <Button status='primary'>3</Button>
-        </Tooltip>
-        <br />
-        <Input placeholder='email' />
-        <Input
-          placeholder='Name'
-          onChange={(e, value) => this.onInputChange(value)}
-          value={this.state.inputValue}
-          isError={this.state.inputError}
-        />
-        <Button onClick={() => this.fillInput()}>Fill Input</Button>
-        <br />
-        <Radio
-          name='language'
-          label='Select language: '
-          inline
-          options={langs}
-          onChange={value => console.log('Radio value: ', value)}
-        />
-        <br />
-        <SearchComponent />
-        <br />
-        <Select
-          options={langs}
-          placeholder='select a language'
-          onChange={value => console.log('select value:', value)}
-        />
-        <br />
-        <Multiselect
-          options={bands}
-          placeholder='select your favorite rock bands'
-          onChange={values => console.log('Multiselect values:', values)}
-        />
-        <br />
-        <DatePicker />
-        <br />
-        <Dropdown>
-          <div onClick={() => console.log('create')}>create</div>
-          <div onClick={() => console.log('edit')}>edit</div>
-          <div onClick={() => alert('delete')}>delete</div>
-        </Dropdown>
-        <Tooltip render='This is a tooltip 6'>
-          <Button status='primary'>6</Button>
-        </Tooltip>
-        <BottomRight>
+          <br />
+          <ButtonTip status='primary' type='submit' name='btn' value='primary'>
+            PRIMARY
+          </ButtonTip>
+          <Button status='error'>ERROR</Button>
+          <Button role='button' status='primary' disabled>
+            DISABLED
+          </Button>
+          <ButtonTip status='success' tooltip='success button'>
+            SUCCESS
+          </ButtonTip>
+          <Button status='ghost'>GHOST</Button>
+          <Button href='/' status='warning' label='LINK' />
+          <Tooltip render='tip'>
+            <Button status='primary'>1</Button>
+          </Tooltip>
+          <Tooltip render='This is a tooltip 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'>
+            <Button status='primary'>2</Button>
+          </Tooltip>
+          <Tooltip render='This is a tooltip 3 Lorem ipsum dolor'>
+            <Button status='primary'>3</Button>
+          </Tooltip>
+          <br />
+          <Input placeholder='email' />
+          <Input
+            placeholder='Name'
+            onChange={(e, value) => this.onInputChange(value)}
+            value={this.state.inputValue}
+            isError={this.state.inputError}
+          />
+          <Button onClick={() => this.fillInput()}>Fill Input</Button>
+          <br />
+          <Radio
+            name='language'
+            label='Select language: '
+            inline
+            options={langs}
+            onChange={value => console.log('Radio value: ', value)}
+          />
+          <br />
+          <SearchComponent />
+          <br />
+          <Select
+            options={langs}
+            placeholder='select a language'
+            onChange={value => console.log('select value:', value)}
+          />
+          <br />
+          <Multiselect
+            options={bands}
+            placeholder='select your favorite rock bands'
+            onChange={values => console.log('Multiselect values:', values)}
+          />
+          <br />
+          <DatePicker />
+          <br />
           <Dropdown>
             <div onClick={() => console.log('create')}>create</div>
             <div onClick={() => console.log('edit')}>edit</div>
             <div onClick={() => alert('delete')}>delete</div>
           </Dropdown>
-          <Tooltip render='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'>
-            <Button status='primary'>5</Button>
+          <Tooltip render='This is a tooltip 6'>
+            <Button status='primary'>6</Button>
           </Tooltip>
-        </BottomRight>
-        <Select
-          options={langs}
-          placeholder='select a language'
-          onChange={value => console.log('select value:', value)}
-        />
-        <br />
-        <Select
-          options={langs}
-          placeholder='select a language'
-          onChange={value => console.log('select value:', value)}
-        />
-        <br />
-        <Select
-          options={langs}
-          placeholder='select a language'
-          onChange={value => console.log('select value:', value)}
-        />
-        <br />
-        <Select
-          options={langs}
-          placeholder='select a language'
-          onChange={value => console.log('select value:', value)}
-        />
-        <br />
-      </Root>
+          <BottomRight>
+            <Dropdown>
+              <div onClick={() => console.log('create')}>create</div>
+              <div onClick={() => console.log('edit')}>edit</div>
+              <div onClick={() => alert('delete')}>delete</div>
+            </Dropdown>
+            <Tooltip render='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'>
+              <Button status='primary'>5</Button>
+            </Tooltip>
+          </BottomRight>
+          <Select
+            options={langs}
+            placeholder='select a language'
+            onChange={value => console.log('select value:', value)}
+          />
+          <br />
+          <Select
+            options={langs}
+            placeholder='select a language'
+            onChange={value => console.log('select value:', value)}
+          />
+          <br />
+          <Select
+            options={langs}
+            placeholder='select a language'
+            onChange={value => console.log('select value:', value)}
+          />
+          <br />
+          <Select
+            options={langs}
+            placeholder='select a language'
+            onChange={value => console.log('select value:', value)}
+          />
+          <br />
+        </Root>
+      </Layout>
     );
   }
 }
@@ -260,45 +270,27 @@ const SearchComponent = () => {
 
 const Root = styled.div`
   padding: 10px;
+  flex-grow: 1;
 `;
-// const Body = styled.div`
-//     color: white;
-//     width: 100%;
-//     padding: 30px;
-//     flex-grow: 1;
-//     overflow: scroll;
-// `
-// const Section = styled.div`
-//     margin: 30px 0;
-// `
-// const Inline = styled.div`
-//     display: flex;
-//     align-items: center;
-// `
-// const Column = styled.div`
-//     display: flex;
-//     flex-direction: column;
-// `
-// const Container = styled.div`
-//     margin: 30px 0;
-//     max-width: 800px;
-// `
-// const BottomAnchor = styled.div`
-//     position: absolute;
-//     bottom: -200px;
-//     right: 0;
-//     width: 300px;
-//     height: 50px;
-//     display: flex;
-//     align-items: center;
-// `
-const Box = styled.div`
-  width: 30px;
-  height: 30px;
-  background: red;
-`;
+const Layout = styled.div`
+  display: flex;
+`
 const BottomRight = styled.div`
   position: absolute;
   bottom: 10px;
   right: 50px;
 `;
+const MenuHeader = styled.div`
+  height: 300px;
+  background: darkgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  & > span {
+    cursor: pointer;
+  }
+`
+const Item = styled.div`
+
+`
