@@ -4,12 +4,7 @@ import { withTheme } from 'styled-components';
 import Dropbox from '../Dropbox';
 import Theme, { getContrastYIQ } from '../../theme';
 import { Delete } from '../../icons';
-import {
-  Options,
-  Option,
-  Selected,
-  Control,
-} from './styled';
+import { Options, Option, Selected, Control } from './styled';
 import Icon from '../Icon';
 import { Target } from '../Styled';
 
@@ -25,7 +20,7 @@ const FilterSelect = ({ placeholder, options, onChange, isError, theme }) => {
 
     setState({ selected, values });
     onChange(values);
-  }
+  };
 
   const selectAll = () => {
     let all = [...options];
@@ -33,12 +28,12 @@ const FilterSelect = ({ placeholder, options, onChange, isError, theme }) => {
 
     setState({ selected: all, values });
     onChange(values);
-  }
+  };
 
   const unselectAll = () => {
     setState({ selected: [], values: [] });
     onChange([]);
-  }
+  };
 
   const unselect = (e, item) => {
     e.stopPropagation();
@@ -52,31 +47,30 @@ const FilterSelect = ({ placeholder, options, onChange, isError, theme }) => {
 
     setState({ selected, values });
     onChange(values);
-  }
+  };
 
   const renderTarget = ({ show }) => (
-
     <Target onClick={show} isError={isError} value={state.value} tabIndex='0'>
       {label}
       <div className='icon'>
         <Icon name='caret' size='5px' color={theme.colors.ground} />
       </div>
     </Target>
+  );
 
-  )
-
-  const renderSelected = () => state.selected.map((item, i) => (
-    <div key={`${item.value}`}>
-      {item.label}
-      <div onClick={e => unselect(e, item)}>
-        <Delete
-          size={8}
-          color={theme.colors[getContrastYIQ(theme.colors.primary)]}
-          margin='0 0 0 8px'
-        />
+  const renderSelected = () =>
+    state.selected.map((item, i) => (
+      <div key={`${item.value}`}>
+        {item.label}
+        <div onClick={e => unselect(e, item)}>
+          <Delete
+            size={8}
+            color={theme.colors[getContrastYIQ(theme.colors.primary)]}
+            margin='0 0 0 8px'
+          />
+        </div>
       </div>
-    </div>
-  ));
+    ));
 
   const renderDropdown = () => (
     <>
@@ -93,30 +87,29 @@ const FilterSelect = ({ placeholder, options, onChange, isError, theme }) => {
         )}
       </Control>
       <Options>
-        {
-          options && options.map((item, i) => {
+        {options &&
+          options.map((item, i) => {
             let isSelected = state.selected.includes(item);
             return (
               <Option
                 key={`${item.value}`}
                 isSelected={isSelected}
                 onClick={
-                  isSelected
-                    ? e => unselect(e, item)
-                    : e => select(e, item)
+                  isSelected ? e => unselect(e, item) : e => select(e, item)
                 }
               >
                 {item.label}
               </Option>
             );
-          })
-        }
+          })}
       </Options>
     </>
-  )
+  );
 
-  return <Dropbox renderTarget={renderTarget} renderDropdown={renderDropdown} />
-}
+  return (
+    <Dropbox renderTarget={renderTarget} renderDropdown={renderDropdown} />
+  );
+};
 
 FilterSelect.propTypes = {
   options: PropTypes.arrayOf(PropTypes.object).isRequired,

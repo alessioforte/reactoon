@@ -9,8 +9,8 @@ const SideBar = ({ isWide, renderHeader, renderMenu, size }) => {
         {renderMenu && renderMenu()}
       </div>
     </Container>
-  )
-}
+  );
+};
 
 export default withTheme(SideBar);
 
@@ -20,7 +20,7 @@ const Container = styled.div`
   z-index: 20;
   flex-shrink: 0;
   overflow: hidden;
-  transition: all .7s cubic-bezier(.86,0,.07,1);
+  transition: all 0.7s cubic-bezier(0.86, 0, 0.07, 1);
   background: ${props => props.theme.colors.primary};
   & > div {
     width: ${props => props.size};

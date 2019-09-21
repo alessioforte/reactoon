@@ -20,7 +20,7 @@ import Filterselect from './components/Filters/FilterSelect';
 // import Loading from './components/loading/loading'
 // import Spinner from './components/spinner/spinner'
 // import Notification from './components/notification'
-import SideBar from './components/Sidebar'
+import SideBar from './components/Sidebar';
 // import Calendar from './components/calendar/calendar'
 
 import withTooltip from './hoc/withTooltip';

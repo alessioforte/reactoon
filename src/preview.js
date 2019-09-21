@@ -108,13 +108,23 @@ export default class Preview extends Component {
       <Layout>
         <SideBar
           isWide={this.state.showMenu}
-          renderHeader={() => <MenuHeader><span onClick={() => this.setState({ showMenu: false })}>&times;</span></MenuHeader>}
+          renderHeader={() => (
+            <MenuHeader>
+              <span onClick={() => this.setState({ showMenu: false })}>
+                &times;
+              </span>
+            </MenuHeader>
+          )}
           renderMenu={() => <Item>menu item</Item>}
-        >
-        </SideBar>
+        ></SideBar>
         <Root>
           <Tooltip render='This is a tooltip 4'>
-            <Button status='primary' onClick={() => this.setState({ showMenu: !this.state.showMenu })}>4</Button>
+            <Button
+              status='primary'
+              onClick={() => this.setState({ showMenu: !this.state.showMenu })}
+            >
+              4
+            </Button>
           </Tooltip>
           <br />
           <Checkbox label='checkbox label' name='accept' />
@@ -274,7 +284,7 @@ const Root = styled.div`
 `;
 const Layout = styled.div`
   display: flex;
-`
+`;
 const BottomRight = styled.div`
   position: absolute;
   bottom: 10px;
@@ -290,7 +300,5 @@ const MenuHeader = styled.div`
   & > span {
     cursor: pointer;
   }
-`
-const Item = styled.div`
-
-`
+`;
+const Item = styled.div``;
