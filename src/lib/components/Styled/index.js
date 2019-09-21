@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { getContrastYIQ } from '../../theme';
-import { focus } from '../Styled/css';
+import { focus } from './css';
 
 export const Target = styled.div`
   border-radius: ${props => props.theme.border.radius + 'px'};

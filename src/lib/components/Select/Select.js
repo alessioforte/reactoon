@@ -4,7 +4,7 @@ import { withTheme } from 'styled-components';
 import Theme from '../../theme';
 import Dropbox from '../Dropbox';
 import Icon from '../Icon';
-import { Target, Options, Option } from './styled';
+import { Target, Options, Option } from '../Styled';
 
 const Select = ({ placeholder, options, isError, onChange, theme }) => {
   const [state, setState] = useState({
