@@ -128,7 +128,8 @@ function colorHexToRgb(hex) {
 }
 
 export default {
+  create,
   styles,
   getContrastYIQ,
-  create
+  getColorLuminance
 };

@@ -10,12 +10,10 @@ import Searchbar from './components/Searchbar';
 import Icon from './components/Icon';
 import Tooltip from './components/Tooltip';
 import Dropdown from './components/Dropdown';
+import Slider from './components/Slider';
 import Filterselect from './components/Filters/FilterSelect';
 // import Filterslider from './components/Filters/FilterSlider'
 // import Modal from './components/modal/modal'
-// import Slider from './components/slider/slider'
-// import SliderRange from './components/slider/slider-range'
-// import SliderStep from './components/slider/slider-step'
 // import Menu from './components/menu/menu'
 // import Loading from './components/loading/loading'
 // import Spinner from './components/spinner/spinner'
@@ -43,5 +41,6 @@ export {
   Filterselect,
   withTooltip,
   Theme,
-  SideBar
+  SideBar,
+  Slider
 };

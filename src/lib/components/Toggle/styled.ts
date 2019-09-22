@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 import { KnobProps } from './interfaces'
 
+export const Block = styled.div`
+  display: inline-block;
+`
 export const Knob = styled.div<KnobProps>`
   flex-shrink: 0;
   position: relative;

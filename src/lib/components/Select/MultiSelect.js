@@ -65,7 +65,7 @@ const Multiselect = ({ placeholder, options, isError, onChange, theme }) => {
     </Target>
   );
 
-  const renderDropdown = ({ close }) => (
+  const renderDropdown = () => (
     <Options>
       {options &&
         options.map((option, i) => (

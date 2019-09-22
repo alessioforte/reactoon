@@ -16,7 +16,8 @@ import {
   Toggle,
   Tooltip,
   withTooltip,
-  SideBar
+  SideBar,
+  Slider
 } from './lib';
 
 import 'moment/locale/it';
@@ -105,7 +106,7 @@ export default class Preview extends Component {
 
   render() {
     return (
-      <Layout>
+      <Flex>
         <SideBar
           isWide={this.state.showMenu}
           renderHeader={() => (
@@ -127,14 +128,23 @@ export default class Preview extends Component {
             </Button>
           </Tooltip>
           <br />
+          <Slider showTootip={true} />
+          <br />
+          <Slider min={100} max={300} range showTootip />
+          <br />
+          <Slider range showTootip min={2012} max={2032} />
+          <br />
           <Checkbox label='checkbox label' name='accept' />
           <br />
           <Toggle onChange={(e, data) => console.log(data)} />
-          <Button status='warning' icon='default' label='icon label' />
-          <Button status='primary' icon='default' label='reverse' reverse />
-          <Button status='ghost' icon='default' round />
-          <Button status='ghost' label='ghost' />
-          <Button status='error' icon='default' href='/' />
+          <br />
+          <Flex>
+            <Button status='warning' icon='default' label='icon label' />
+            <Button status='primary' icon='default' label='reverse' reverse />
+            <Button status='ghost' icon='default' round />
+            <Button status='ghost' label='ghost' />
+            <Button status='error' icon='default' href='/' />
+          </Flex>
           <br />
           <Dropdown>
             <Dropdown.Option
@@ -253,7 +263,7 @@ export default class Preview extends Component {
           />
           <br />
         </Root>
-      </Layout>
+      </Flex>
     );
   }
 }
@@ -282,7 +292,7 @@ const Root = styled.div`
   padding: 10px;
   flex-grow: 1;
 `;
-const Layout = styled.div`
+const Flex = styled.div`
   display: flex;
 `;
 const BottomRight = styled.div`
