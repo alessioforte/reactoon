@@ -6,7 +6,7 @@ import { styles } from '../../theme';
 const SIZE = {
   width: 300,
   height: 32
-}
+};
 class Slider extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +18,7 @@ class Slider extends Component {
     this.step = 100 / (this.max - this.min);
     this.height = SIZE.height;
     this.width = SIZE.width;
-    this.unit = this.width / 100
+    this.unit = this.width / 100;
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
     this.onMouseDown = this.onMouseDown.bind(this);
@@ -45,11 +45,11 @@ class Slider extends Component {
     const rect = this.slider.current.getBoundingClientRect();
     this.width = rect.width;
     this.height = rect.height;
-    this.unit = this.width / 100
+    this.unit = this.width / 100;
   }
 
   componentDidMount() {
-    this.setSize()
+    this.setSize();
   }
 
   onMouseDown(e) {

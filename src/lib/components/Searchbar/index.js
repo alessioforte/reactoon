@@ -134,7 +134,7 @@ const Searchbar = ({
           </Clear>
         )}
         <Submit type='submit' onClick={handleSubmit}>
-        <Icon
+          <Icon
             name='search'
             size='15px'
             color={theme.colors[getContrastYIQ(theme.colors.primary)]}
