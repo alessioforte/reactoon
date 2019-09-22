@@ -16,29 +16,9 @@ export const Content = styled(Options)`
   justify-content: center;
   min-height: 100px;
 `;
-export const Selected = styled.div`
-  color: ${props =>
-    props.isText
-      ? props.theme.colors.idle
-      : props.theme.colors[getContrastYIQ(props.theme.colors.primary)]};
-  flex-grow: 1;
-  & > div {
-    display: inline-block;
-    background: ${props => props.theme.colors.primary};
-    padding: 2px 5px;
-    margin: 2px;
-    border-radius: 3px;
-    font-size: 12px;
-    div {
-      display: inline-block;
-    }
-  }
-  svg:hover {
-    cursor: pointer;
-  }
-`;
 export const Control = styled.div`
   display: flex;
+  justify-content: space-between;
   margin: 7px;
   min-height: 28px;
   order: ${props => (props.reverse ? '0' : '-1')};

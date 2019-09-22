@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { ThemeProvider, withTheme } from 'styled-components';
-import { SearchIcon, Delete } from '../../icons';
+import Icon from '../Icon';
 import Theme, { getContrastYIQ } from '../../theme/';
 
 const Searchbar = ({
@@ -126,15 +126,17 @@ const Searchbar = ({
         />
         {showClear && (
           <Clear onClick={clearInput}>
-            <Delete
-              size={8}
-              color={theme.colors[getContrastYIQ(theme.colors.ground)]}
+            <Icon
+              name='delete'
+              size='8px'
+              color={theme.colors[getContrastYIQ(theme.colors.primary)]}
             />
           </Clear>
         )}
         <Submit type='submit' onClick={handleSubmit}>
-          <SearchIcon
-            size={15}
+        <Icon
+            name='search'
+            size='15px'
             color={theme.colors[getContrastYIQ(theme.colors.primary)]}
           />
         </Submit>

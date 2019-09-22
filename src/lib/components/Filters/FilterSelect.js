@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import { withTheme } from 'styled-components';
 import Dropbox from '../Dropbox';
 import Theme, { getContrastYIQ } from '../../theme';
-import { Delete } from '../../icons';
-import { Options, Option, Selected, Control } from './styled';
+import { Options, Option, Control } from './styled';
 import Icon from '../Icon';
-import { Target } from '../Styled';
+import { Target, Selected } from '../Styled';
 
 const FilterSelect = ({ placeholder, options, onChange, isError, theme }) => {
   const [state, setState] = useState({ selected: [], values: [] });
@@ -63,8 +62,9 @@ const FilterSelect = ({ placeholder, options, onChange, isError, theme }) => {
       <div key={`${item.value}`}>
         {item.label}
         <div onClick={e => unselect(e, item)}>
-          <Delete
-            size={8}
+          <Icon
+            name='delete'
+            size='8px'
             color={theme.colors[getContrastYIQ(theme.colors.primary)]}
             margin='0 0 0 8px'
           />

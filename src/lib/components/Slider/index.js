@@ -2,24 +2,29 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { styles } from '../../theme';
+
+const SIZE = {
+  width: 300,
+  height: 32
+}
 class Slider extends Component {
   constructor(props) {
     super(props);
 
     this.min = props.min || 0;
     this.max = props.max || 100;
-    this.domain = this.max - this.min;
+    this.range = this.max - this.min;
     this.stepsCount = this.max - this.min;
     this.step = 100 / (this.max - this.min);
-    this.height = 30;
-    this.width = props.width || 300;
+    this.height = SIZE.height;
+    this.width = SIZE.width;
+    this.unit = this.width / 100
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
     this.onMouseDown = this.onMouseDown.bind(this);
     this.onMouseDownRight = this.onMouseDownRight.bind(this);
     this.onMouseMoveRight = this.onMouseMoveRight.bind(this);
     this.onMouseUpRight = this.onMouseUpRight.bind(this);
-    this.clickOnBar = this.clickOnBar.bind(this);
     this.handleInput = this.handleInput.bind(this);
 
     this.slider = React.createRef();
@@ -34,6 +39,17 @@ class Slider extends Component {
       isError: false,
       over: true
     };
+  }
+
+  setSize() {
+    const rect = this.slider.current.getBoundingClientRect();
+    this.width = rect.width;
+    this.height = rect.height;
+    this.unit = this.width / 100
+  }
+
+  componentDidMount() {
+    this.setSize()
   }
 
   onMouseDown(e) {
@@ -57,7 +73,7 @@ class Slider extends Component {
     let { right } = this.state;
     let endX = e.clientX - this.startX;
     let offset = this.state.offset + endX;
-    let value = Math.round((this.domain / this.width) * offset) + this.min;
+    let value = Math.round((this.range / this.width) * offset) + this.min;
     let left =
       Math.round(((100 / this.width) * offset) / this.step) * this.step;
     this.setState({ value, left });
@@ -104,7 +120,7 @@ class Slider extends Component {
     let rightOffset = this.state.rightOffset - endX;
     let maxValue =
       this.max -
-      Math.round((this.domain / this.width) * rightOffset) +
+      Math.round((this.range / this.width) * rightOffset) +
       this.min -
       this.min;
     let right =
@@ -140,15 +156,6 @@ class Slider extends Component {
     document.removeEventListener('mouseup', this.onMouseUpRight);
   }
 
-  clickOnBar(e) {
-    // let barLeft = this.slider.current.getBoundingClientRect().left,
-    //   x = e.clientX,
-    //   offset = x - barLeft - this.height / 2,
-    //   value = Math.round((this.domain / this.width) * offset) + this.min;
-    // if (this.props.onChange) this.props.onChange(value);
-    // this.setState({ value, offset, left: offset });
-  }
-
   handleInput(e) {
     let width = this.width - this.height;
     let value = Number(e.target.value);
@@ -162,7 +169,7 @@ class Slider extends Component {
       left = width;
       this.setState({ isError: true });
     } else {
-      left = (width * (value - this.min)) / this.domain;
+      left = (width * (value - this.min)) / this.range;
       this.setState({ isError: false });
     }
 
@@ -174,13 +181,12 @@ class Slider extends Component {
   render() {
     const { left, right, value, maxValue, over } = this.state;
     const { range, showTootip } = this.props;
-    const middleTootip = range && right - left < 20;
+    const middleTootip = range && (right - left) * this.unit < this.height * 2;
 
     return (
       <Block>
-        <Slide ref={this.slider} width={this.width} height={this.height}>
+        <Slide ref={this.slider}>
           <Selector
-            width={this.height}
             left={left}
             onMouseDown={this.onMouseDown}
             idle={!range && left === 0}
@@ -190,7 +196,6 @@ class Slider extends Component {
           </Selector>
           {range && (
             <Selector
-              width={this.height}
               left={right}
               onMouseDown={this.onMouseDownRight}
               over={!over}
@@ -198,10 +203,7 @@ class Slider extends Component {
               {showTootip && !middleTootip && <Tooltip>{maxValue}</Tooltip>}
             </Selector>
           )}
-          <Bar
-            // onClick={this.clickOnBar}
-            margin={((100 / this.width) * this.height) / 2}
-          >
+          <Bar margin={this.height / 2}>
             {range ? (
               <Progress left={left} right={100 - right}>
                 {showTootip && middleTootip && (
@@ -217,16 +219,6 @@ class Slider extends Component {
             )}
           </Bar>
         </Slide>
-        {/* {this.props.input && (
-          <Input
-            type='number'
-            min={this.min}
-            max={this.max}
-            value={String(value)}
-            onChange={this.handleInput}
-            isError={isError}
-          />
-        )} */}
       </Block>
     );
   }
@@ -235,12 +227,18 @@ class Slider extends Component {
 Slider.propTypes = {
   min: PropTypes.number,
   max: PropTypes.number,
-  label: PropTypes.string
+  label: PropTypes.string,
+  name: PropTypes.string,
+  range: PropTypes.bool,
+  showTootip: PropTypes.bool
 };
 
 Slider.defaultProps = {
-  name: '',
+  min: 0,
+  max: 100,
   onChange: value => console.log(value),
+  range: false,
+  showTootip: false,
   theme: styles
 };
 
@@ -250,13 +248,13 @@ const Block = styled.div`
   position: relative;
   display: inline-flex;
   height: 30px;
-  width: 330px;
+  width: calc(100% - ${SIZE.height}px);
   margin-top: 30px;
 `;
 const Slide = styled.div`
   box-sizing: border-box;
-  height: ${props => props.height + 'px'};
-  width: ${props => props.width + 'px'};
+  height: ${SIZE.height}px;
+  width: 100%;
   position: relative;
   cursor: default;
   display: flex;
@@ -265,8 +263,8 @@ const Slide = styled.div`
 `;
 const Bar = styled.div`
   position: relative;
-  margin-left: ${props => props.margin + '%'};
-  margin-right: ${props => -props.margin + '%'};
+  margin-left: ${props => props.margin + 'px'};
+  margin-right: ${props => -props.margin + 'px'};
   height: 5px;
   border-radius: 2.5px;
   background: ${props => props.theme.colors.background};
@@ -275,8 +273,8 @@ const Bar = styled.div`
 const Selector = styled.div.attrs(props => ({
   style: { left: props.left + '%' }
 }))`
-  width: ${props => props.width}px;
-  height: ${props => props.width}px;
+  width: ${SIZE.height}px;
+  height: ${SIZE.height}px;
   position: absolute;
   display: flex;
   justify-content: center;
@@ -288,8 +286,8 @@ const Selector = styled.div.attrs(props => ({
     position: absolute;
     background: ${props =>
       props.idle ? props.theme.colors.ground : props.theme.colors.primary};
-    width: ${props => props.width / 2}px;
-    height: ${props => props.width / 2}px;
+    width: ${SIZE.height / 2}px;
+    height: ${SIZE.height / 2}px;
     box-sizing: border-box;
     border-radius: 50%;
     transition: all 0.1s ease-out;
@@ -297,8 +295,8 @@ const Selector = styled.div.attrs(props => ({
   }
   &:active {
     &::after {
-      width: ${props => props.width}px;
-      height: ${props => props.width}px;
+      width: ${SIZE.height}px;
+      height: ${SIZE.height}px;
       background: ${props => props.theme.colors.primary};
     }
   }
@@ -348,44 +346,3 @@ const Progress = styled.div.attrs(({ left, right }) => ({
   -moz-box-shadow: inset 0px 0px 6px 3px rgba(0, 0, 0, 0.3);
   box-shadow: inset 0px 0px 6px 3px rgba(0, 0, 0, 0.3);
 `;
-// const StartValue = styled.div`
-//   ${props => (props.right === true ? 'right: 0' : 'left: 0')};
-//   position: absolute;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   height: 18px;
-//   background: #1a1a1a;
-//   top: -20px;
-//   padding: 0 3px;
-//   border-radius: 3px;
-//   color: white;
-//   font-size: 12px;
-// `;
-// const BoxValue = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   height: 18px;
-//   background: #1a1a1a;
-//   padding: 0 3px;
-//   border-radius: 3px;
-//   color: white;
-//   font-size: 12px;
-// `;
-// const Input = styled.input`
-//   font-size: 14px;
-//   width: 40px;
-//   margin-left: 6px;
-//   text-align: left;
-//   padding: 0;
-//   border: 0;
-//   background: none;
-//   color: ${props => (props.isError ? props.theme.colors.error : '#fff')};
-//   &:focus {
-//     outline: none;
-//   }
-//   &[type='number']::-webkit-inner-spin-button {
-//     -webkit-appearance: none;
-//   }
-// `;
