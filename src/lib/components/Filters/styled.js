@@ -15,6 +15,7 @@ export const Content = styled(Options)`
   align-items: center;
   justify-content: center;
   min-height: 100px;
+  padding: 1rem;
 `;
 export const Control = styled.div`
   display: flex;

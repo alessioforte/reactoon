@@ -159,7 +159,7 @@ export default class Preview extends Component {
             <Button status='primary'>2</Button>
           </Tooltip>
           <br />
-          <Filterslider placeholder='select range' min={0} max={100} />
+          <Filterslider placeholder='select range' min={100} max={500} />
           <Filterselect
             options={bands}
             placeholder='select your favorite rock bands'
