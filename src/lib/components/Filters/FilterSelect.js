@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withTheme } from 'styled-components';
 import Dropbox from '../Dropbox';
-import Theme, { getContrastYIQ } from '../../theme';
+import { styles, getContrastYIQ } from '../../theme';
 import { Options, Option, Control } from './styled';
 import Icon from '../Icon';
 import { Target, Selected } from '../Styled';
@@ -49,7 +49,7 @@ const FilterSelect = ({ placeholder, options, onChange, isError, theme }) => {
   };
 
   const renderTarget = ({ show }) => (
-    <Target onClick={show} isError={isError} value={state.value} tabIndex='0'>
+    <Target onClick={show} isError={isError} tabIndex='0'>
       {label}
       <div className='icon'>
         <Icon name='caret' size='5px' color={theme.colors.ground} />
@@ -118,8 +118,8 @@ FilterSelect.propTypes = {
 
 FilterSelect.defaultProps = {
   placeholder: 'select...',
-  onChange: () => {},
-  theme: Theme.styles
+  onChange: value => console.log(value),
+  theme: styles
 };
 
 export default withTheme(FilterSelect);

@@ -180,7 +180,7 @@ class Slider extends Component {
 
   render() {
     const { left, right, value, maxValue, over } = this.state;
-    const { range, showTootip } = this.props;
+    const { range, showTooltip } = this.props;
     const middleTootip = range && (right - left) * this.unit < this.height * 2;
 
     return (
@@ -192,7 +192,7 @@ class Slider extends Component {
             idle={!range && left === 0}
             over={over}
           >
-            {showTootip && !middleTootip && <Tooltip>{value}</Tooltip>}
+            {showTooltip && !middleTootip && <Tooltip>{value}</Tooltip>}
           </Selector>
           {range && (
             <Selector
@@ -200,13 +200,13 @@ class Slider extends Component {
               onMouseDown={this.onMouseDownRight}
               over={!over}
             >
-              {showTootip && !middleTootip && <Tooltip>{maxValue}</Tooltip>}
+              {showTooltip && !middleTootip && <Tooltip>{maxValue}</Tooltip>}
             </Selector>
           )}
           <Bar margin={this.height / 2}>
             {range ? (
               <Progress left={left} right={100 - right}>
-                {showTootip && middleTootip && (
+                {showTooltip && middleTootip && (
                   <TooltipMiddle>
                     <div>
                       {value} - {maxValue}

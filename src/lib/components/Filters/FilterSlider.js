@@ -1,227 +1,67 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import colors from '../../theme/colors';
-import { Caret, Delete } from '../../icons';
-import { SliderRange } from '../../';
-import {
-  Block,
-  Button,
-  Drop,
-  Content,
-  Selected,
-  Head,
-  Placeholder,
-  Icon,
-  Control,
-  IsSelected
-} from './styled';
+import { withTheme } from 'styled-components';
+import Dropbox from '../Dropbox';
+import Slider from '../Slider';
+import Icon from '../Icon';
+import { Content, Control } from './styled';
+import { Target, Selected } from '../Styled';
+import { styles } from '../../theme';
 
-class FilterSlider extends Component {
-  constructor(props) {
-    super(props);
+const FilterSlider = ({ placeholder, min, max, onChange, isError, theme }) => {
+  const [state, setState] = useState({ value: [min, max] });
+  const label = placeholder || 'select...';
 
-    this.state = {
-      visible: false,
-      value: {
-        min: props.min || 0,
-        max: props.max || 100
-      },
-      position: {},
-      reset: true
-    };
+  const unselectAll = e => {
+    const value = [min, max];
+    setState({ value });
+    onChange(value);
+  };
 
-    this.placeholder = props.placeholder || 'select...';
-    this.dropdown = React.createRef();
-    this.content = React.createRef();
-    this.hide = this.hide.bind(this);
-    this.blur = this.blur.bind(this);
-    this.show = this.show.bind(this);
-    this.close = this.close.bind(this);
+  const onSliderChange = data => {
+    const { value } = data;
+    setState({ value });
+    onChange(value);
+  };
 
-    this.selectAll = this.selectAll.bind(this);
-    this.unselectAll = this.unselectAll.bind(this);
-    this.onSliderChange = this.onSliderChange.bind(this);
-  }
-
-  componentDidMount() {
-    this.setDropdownPosition();
-  }
-
-  setDropdownPosition() {
-    let rect = this.dropdown.current.getBoundingClientRect();
-    let position = {
-      top: '0',
-      left: '0',
-      right: null,
-      bottom: null
-    };
-
-    if (rect.x + 200 > window.innerWidth) {
-      position.left = null;
-      position.right = '0';
-    }
-
-    if (rect.bottom + 200 > window.innerHeight) {
-      position.top = null;
-      position.bottom = '0';
-    }
-
-    this.setState({ position });
-  }
-
-  show(e) {
-    this.setDropdownPosition();
-
-    if (!this.state.visible) {
-      this.setState({ visible: true });
-      document.addEventListener('click', this.hide);
-      window.addEventListener('blur', this.blur);
-    }
-  }
-
-  blur() {
-    this.setState({ visible: false });
-    document.removeEventListener('click', this.hide);
-    window.removeEventListener('blur', this.blur);
-  }
-
-  hide(e) {
-    var rect = this.content.current.getBoundingClientRect();
-    var x = e.clientX;
-    var y = e.clientY;
-    if (y < rect.top || y > rect.bottom || x < rect.left || x > rect.right) {
-      this.setState({ visible: false });
-      document.removeEventListener('click', this.hide);
-      window.removeEventListener('blur', this.blur);
-    }
-  }
-
-  close() {
-    this.setState({ visible: false });
-    document.removeEventListener('click', this.hide);
-    window.removeEventListener('blur', this.blur);
-  }
-
-  select(e, item) {
-    let selected = this.state.selected;
-    let value = this.state.value;
-    selected.push(item);
-    value.push(item.value);
-
-    this.setState({
-      selected,
-      value
-    });
-
-    this.props.onChange(value);
-  }
-
-  selectAll(e) {
-    let all = [...this.options];
-    let value = all.map(item => item.value);
-
-    this.setState({
-      selected: all,
-      value
-    });
-
-    this.props.onChange(value);
-  }
-
-  unselectAll(e) {
-    const { min, max } = this.props;
-    const value = { min, max };
-    const reset = !this.state.reset;
-
-    this.setState({ reset, value });
-
-    this.props.onChange(value);
-  }
-
-  unselect(e, item) {
-    e.stopPropagation();
-
-    let sIndex = this.state.selected.indexOf(item);
-    let selected = this.state.selected;
-    selected.splice(sIndex, 1);
-
-    let vIndex = this.state.value.indexOf(item.value);
-    let value = this.state.value;
-    value.splice(vIndex, 1);
-
-    this.setState({
-      selected,
-      value
-    });
-
-    this.props.onChange(value);
-  }
-
-  renderSelected() {
-    const { selected } = this.state;
-
-    return selected.map((item, i) => (
-      <div key={`${item}-${i}`}>
-        {item.text}
-        <div onClick={e => this.unselect(e, item)}>
-          <Delete size={8} color={colors.text} margin='0 0 0 8px' />
-        </div>
+  const renderTarget = ({ show }) => (
+    <Target onClick={show} isError={isError} tabIndex='0'>
+      {label}
+      <div className='icon'>
+        <Icon name='caret' size='5px' color={theme.colors.ground} />
       </div>
-    ));
-  }
+    </Target>
+  );
 
-  onSliderChange(value) {
-    this.setState({ value });
-    this.props.onChange({ ...value });
-  }
-
-  render() {
-    const { isError, min, max } = this.props;
-    const { visible, position, value, reset } = this.state;
-
-    return (
-      <Block ref={this.dropdown}>
-        {(min !== value.min || max !== value.max) && <IsSelected />}
-        <Button onClick={this.show} isError={isError}>
-          <Placeholder>{this.placeholder}</Placeholder>
-          <Icon>
-            <Caret size={8} color={colors.idle} />
-          </Icon>
-        </Button>
-        {visible && (
-          <Drop position={position} ref={this.content}>
-            <Head>
-              <Placeholder>{this.placeholder}</Placeholder>
-              <Icon>
-                <Caret size={8} color={colors.idle} />
-              </Icon>
-            </Head>
-            <Control reverse={position.top ? true : false}>
-              <Selected>
-                {value.min} - {value.max}
-              </Selected>
-              {(min !== value.min || max !== value.max) && (
-                <div className='button' onClick={this.unselectAll}>
-                  Reset
-                </div>
-              )}
-            </Control>
-            <Content reverse={position.top ? true : false}>
-              <SliderRange
-                min={min}
-                max={max}
-                initialValue={{ min: value.min, max: value.max }}
-                onChange={this.onSliderChange}
-                reset={reset}
-                width={220}
-              />
-            </Content>
-          </Drop>
+  const renderDropdown = () => (
+    <>
+      <Control>
+        <Selected>
+          {state.value[0]} - {state.value[1]}
+        </Selected>
+        {(min !== state.value[0] || max !== state.value[1]) && (
+          <div className='button' onClick={unselectAll}>
+            Reset
+          </div>
         )}
-      </Block>
-    );
-  }
-}
+      </Control>
+      <Content>
+        <Slider
+          range
+          showTooltip
+          min={min}
+          max={max}
+          initialValue={[...state.value]}
+          onChange={onSliderChange}
+        />
+      </Content>
+    </>
+  );
+
+  return (
+    <Dropbox renderTarget={renderTarget} renderDropdown={renderDropdown} />
+  );
+};
 
 FilterSlider.propTypes = {
   onChange: PropTypes.func.isRequired
@@ -229,7 +69,8 @@ FilterSlider.propTypes = {
 
 FilterSlider.defaultProps = {
   placeholder: 'select...',
-  onChange: () => {}
+  onChange: value => console.log(value),
+  theme: styles
 };
 
-export default FilterSlider;
+export default withTheme(FilterSlider);

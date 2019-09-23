@@ -7,8 +7,8 @@ import {
   DatePicker,
   Dropdown,
   Filterselect,
+  Filterslider,
   Multiselect,
-  Icon,
   Input,
   Radio,
   Searchbar,
@@ -128,11 +128,11 @@ export default class Preview extends Component {
             </Button>
           </Tooltip>
           <br />
-          <Slider showTootip={true} />
+          <Slider showTooltip />
           <br />
-          <Slider min={100} max={300} range showTootip />
+          <Slider min={100} max={300} range showTooltip />
           <br />
-          <Slider range showTootip min={2012} max={2032} />
+          <Slider range showTooltip min={2012} max={2032} />
           <br />
           <Checkbox label='checkbox label' name='accept' />
           <br />
@@ -159,6 +159,7 @@ export default class Preview extends Component {
             <Button status='primary'>2</Button>
           </Tooltip>
           <br />
+          <Filterslider placeholder='select range' min={0} max={100} />
           <Filterselect
             options={bands}
             placeholder='select your favorite rock bands'
@@ -291,9 +292,11 @@ const SearchComponent = () => {
 const Root = styled.div`
   padding: 10px;
   flex-grow: 1;
+  overflow: scroll;
 `;
 const Flex = styled.div`
   display: flex;
+  max-height: 100vh;
 `;
 const BottomRight = styled.div`
   position: absolute;

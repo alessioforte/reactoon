@@ -13,7 +13,7 @@ import Dropdown from './components/Dropdown';
 import Slider from './components/Slider';
 import SideBar from './components/Sidebar';
 import Filterselect from './components/Filters/FilterSelect';
-// import Filterslider from './components/Filters/FilterSlider'
+import Filterslider from './components/Filters/FilterSlider';
 // import Notification from './components/notification'
 // import Modal from './components/modal/modal'
 // Confirm Component
@@ -37,6 +37,7 @@ export {
   Tooltip,
   Dropdown,
   Filterselect,
+  Filterslider,
   withTooltip,
   Theme,
   SideBar,
