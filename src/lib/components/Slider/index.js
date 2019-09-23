@@ -54,7 +54,7 @@ class Slider extends Component {
         maxValue: props.max,
         left: 0,
         right: 100,
-        leftOffset: 0,
+        offset: 0,
         rightOffset: 0,
         reset: props.reset
       };
