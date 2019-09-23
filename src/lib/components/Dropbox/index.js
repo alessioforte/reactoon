@@ -28,7 +28,7 @@ class Dropbox extends Component {
     const rect = this.target.current.getBoundingClientRect();
     const maxWidth = this.target.current.firstChild.getBoundingClientRect()
       .width;
-    let position = {
+    const position = {
       left: 0,
       right: null,
       maxWidth
@@ -47,7 +47,7 @@ class Dropbox extends Component {
     this.setState({ position });
   }
 
-  show(e) {
+  show() {
     this.setDropdownPosition();
 
     if (!this.state.visible) {
@@ -64,9 +64,9 @@ class Dropbox extends Component {
   }
 
   hide(e) {
-    var rect = this.dropdown.current.getBoundingClientRect();
-    var x = e.clientX;
-    var y = e.clientY;
+    const rect = this.dropdown.current.getBoundingClientRect();
+    const x = e.clientX;
+    const y = e.clientY;
     if (y < rect.top || y > rect.bottom || x < rect.left || x > rect.right) {
       this.setState({ visible: false });
       document.removeEventListener('click', this.hide);
