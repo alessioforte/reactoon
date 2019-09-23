@@ -30,7 +30,6 @@ class Slider extends Component {
 
     const value = props.initialValue ? props.initialValue[0] : this.min;
     const maxValue = props.initialValue ? props.initialValue[1] : this.max;
-
     const left = (100 / this.range) * (value - this.min);
     const right = (100 / this.range) * (maxValue - this.min);
 
@@ -42,8 +41,25 @@ class Slider extends Component {
       left,
       right,
       isError: false,
-      over: true
+      over: true,
+      reset: props.reset || false
     };
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (state.reset !== props.reset) {
+      return {
+        ...state,
+        value: props.min,
+        maxValue: props.max,
+        left: 0,
+        right: 100,
+        leftOffset: 0,
+        rightOffset: 0,
+        reset: props.reset
+      };
+    }
+    return null;
   }
 
   setSize() {

@@ -6,7 +6,6 @@ let ROOT_ID = 'root-modal';
 
 const Modal = ({ size, children, render, shouldCloseOnOverlayClick }) => {
   const [visible, setState] = useState(false);
-  const outer = React.createRef();
 
   const open = () => {
     setState(true);

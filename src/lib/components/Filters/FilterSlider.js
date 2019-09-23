@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { withTheme } from 'styled-components';
 import Dropbox from '../Dropbox';
@@ -10,12 +10,14 @@ import { styles } from '../../theme';
 
 const FilterSlider = ({ placeholder, min, max, onChange, isError, theme }) => {
   const [state, setState] = useState({ value: [min, max] });
+  const [reset, setReset] = useState(false);
   const label = placeholder || 'select...';
 
-  const unselectAll = e => {
+  const resetValue = () => {
     const value = [min, max];
     setState({ value });
     onChange(value);
+    setReset(!reset);
   };
 
   const onSliderChange = data => {
@@ -40,7 +42,7 @@ const FilterSlider = ({ placeholder, min, max, onChange, isError, theme }) => {
           {state.value[0]} - {state.value[1]}
         </Selected>
         {(min !== state.value[0] || max !== state.value[1]) && (
-          <div className='button' onClick={unselectAll}>
+          <div className='button' onClick={resetValue}>
             Reset
           </div>
         )}
@@ -53,6 +55,7 @@ const FilterSlider = ({ placeholder, min, max, onChange, isError, theme }) => {
           max={max}
           initialValue={[...state.value]}
           onChange={onSliderChange}
+          reset={reset}
         />
       </Content>
     </>
