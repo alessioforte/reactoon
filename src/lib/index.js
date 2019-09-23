@@ -14,8 +14,8 @@ import Slider from './components/Slider';
 import SideBar from './components/Sidebar';
 import Filterselect from './components/Filters/FilterSelect';
 import Filterslider from './components/Filters/FilterSlider';
+import Modal from './components/Modal';
 // import Notification from './components/notification'
-// import Modal from './components/modal/modal'
 // Confirm Component
 // Message Component
 
@@ -31,6 +31,7 @@ export {
   Radio,
   Select,
   Multiselect,
+  Modal,
   DatePicker,
   Searchbar,
   Icon,

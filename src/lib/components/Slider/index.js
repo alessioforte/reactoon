@@ -28,11 +28,11 @@ class Slider extends Component {
     this.handleInput = this.handleInput.bind(this);
     this.slider = React.createRef();
 
-    const value = props.initialValue ? props.initialValue[0] : this.min
-    const maxValue = props.initialValue ? props.initialValue[1] : this.max
+    const value = props.initialValue ? props.initialValue[0] : this.min;
+    const maxValue = props.initialValue ? props.initialValue[1] : this.max;
 
-    const left = 100 / this.range * (value - this.min)
-    const right = 100 / this.range * (maxValue - this.min)
+    const left = (100 / this.range) * (value - this.min);
+    const right = (100 / this.range) * (maxValue - this.min);
 
     this.state = {
       value,
@@ -51,10 +51,10 @@ class Slider extends Component {
     this.width = rect.width;
     this.height = rect.height;
     this.unit = this.width / 100;
-    const { left, right } = this.state
-    const offset = this.unit * left
-    const rightOffset = this.unit * (100 - right)
-    this.setState({ offset, rightOffset })
+    const { left, right } = this.state;
+    const offset = this.unit * left;
+    const rightOffset = this.unit * (100 - right);
+    this.setState({ offset, rightOffset });
   }
 
   componentDidMount() {
@@ -83,7 +83,8 @@ class Slider extends Component {
     let endX = e.clientX - this.startX;
     let offset = this.state.offset + endX;
     let value = Math.round((this.range / this.width) * offset) + this.min;
-    let left = Math.round(((100 / this.width) * offset) / this.step) * this.step;
+    let left =
+      Math.round(((100 / this.width) * offset) / this.step) * this.step;
     this.setState({ value, left });
 
     if (left < 0) {

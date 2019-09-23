@@ -9,6 +9,7 @@ import {
   Filterselect,
   Filterslider,
   Multiselect,
+  Modal,
   Input,
   Radio,
   Searchbar,
@@ -155,9 +156,11 @@ export default class Preview extends Component {
             <Dropdown.Option action={() => alert('delete')} label='delete' />
           </Dropdown>
           <br />
-          <Tooltip render='This is a tooltip 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'>
-            <Button status='primary'>2</Button>
-          </Tooltip>
+          <Modal shouldCloseOnOverlayClick>
+            <Tooltip render='This is a tooltip 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'>
+              <Button status='primary'>2</Button>
+            </Tooltip>
+          </Modal>
           <br />
           <Filterslider placeholder='select range' min={100} max={500} />
           <Filterselect
