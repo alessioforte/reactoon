@@ -2,6 +2,15 @@
 
 exports[`<Toggle /> should render and match the snapshot 1`] = `
 <div
-  class="sc-bdVaJa qdcTO"
-/>
+  class="sc-bdVaJa bSrzPW"
+>
+  <div
+    class="sc-bwzfXH fNnYsN"
+  />
+  <div
+    class="sc-htpNat iULkUd"
+  >
+    text
+  </div>
+</div>
 `;
