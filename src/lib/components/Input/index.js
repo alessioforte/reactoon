@@ -108,12 +108,12 @@ const Label = styled.label`
     color: ${props => props.theme.colors.error};
   }
 `;
-const Line = styled.div`
-  position: absolute;
-  bottom: -1px;
-  left: -1px;
-  right: -1px;
-  height: 2px;
-  pointer-events: none;
-  background: ${props => (props.isError ? props.theme.colors.error : 'none')};
-`;
+// const Line = styled.div`
+//   position: absolute;
+//   bottom: -1px;
+//   left: -1px;
+//   right: -1px;
+//   height: 2px;
+//   pointer-events: none;
+//   background: ${props => (props.isError ? props.theme.colors.error : 'none')};
+// `;

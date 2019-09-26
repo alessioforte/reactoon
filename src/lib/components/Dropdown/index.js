@@ -5,12 +5,13 @@ import Icon from '../Icon';
 import Button from '../Button';
 import Dropbox from '../Dropbox';
 
-const Dropdown = ({ placeholder, children }) => {
-  const renderTarget = ({ show }) => (
+const Dropdown = ({ placeholder, children, renderButton }) => {
+  const renderTarget = ({ show }) => renderButton ? renderButton(show) : (
     <Button onClick={show}>
       {placeholder ? placeholder : <Icon name='caret' size='5px' />}
     </Button>
-  );
+  )
+
   const renderDropdown = ({ close }) => (
     <div onClick={close}>{children && children.map(child => child)}</div>
   );

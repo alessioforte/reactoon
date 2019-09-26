@@ -19,6 +19,15 @@ import Modal from './components/Modal';
 // Confirm Component
 // Message Component
 
+// Step
+// Progress Bar
+// Accordion
+// Tag
+// Tab
+// Toggle Buttons
+// Linked buttons
+// Carousel
+
 import withTooltip from './hoc/withTooltip';
 
 import Theme from './theme';
