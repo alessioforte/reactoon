@@ -18,7 +18,8 @@ import {
   Tooltip,
   withTooltip,
   SideBar,
-  Slider
+  Slider,
+  Tag
 } from './lib';
 
 import 'moment/locale/it';
@@ -120,6 +121,7 @@ export default class Preview extends Component {
           renderMenu={() => <Item>menu item</Item>}
         ></SideBar>
         <Root>
+          <Tag label='badge' icon='delete' />
           <Tooltip render='This is a tooltip 4'>
             <Button
               status='primary'

@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withTheme } from 'styled-components';
 import Dropbox from '../Dropbox';
-import { styles, getContrastYIQ } from '../../theme';
+import { styles } from '../../theme';
 import { Options, Option, Control } from './styled';
 import Icon from '../Icon';
-import { Target, Selected } from '../Styled';
+import Tag from '../Tag';
+import { Target } from '../Styled';
 
 const FilterSelect = ({ placeholder, options, onChange, isError, theme }) => {
   const [state, setState] = useState({ selected: [], values: [] });
@@ -59,23 +60,13 @@ const FilterSelect = ({ placeholder, options, onChange, isError, theme }) => {
 
   const renderSelected = () =>
     state.selected.map((item, i) => (
-      <div key={`${item.value}`}>
-        {item.label}
-        <div onClick={e => unselect(e, item)}>
-          <Icon
-            name='delete'
-            size='8px'
-            color={theme.colors[getContrastYIQ(theme.colors.primary)]}
-            margin='0 0 0 8px'
-          />
-        </div>
-      </div>
+      <Tag key={`${item.value}`} label={item.label} icon='delete' action={e => unselect(e, item)} />
     ));
 
   const renderDropdown = () => (
     <>
       <Control>
-        <Selected>{renderSelected()}</Selected>
+        <div>{renderSelected()}</div>
         {state.selected.length === 0 ? (
           <div className='button' onClick={selectAll}>
             All

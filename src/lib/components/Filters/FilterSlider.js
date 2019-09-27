@@ -1,11 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withTheme } from 'styled-components';
 import Dropbox from '../Dropbox';
 import Slider from '../Slider';
 import Icon from '../Icon';
 import { Content, Control } from './styled';
-import { Target, Selected } from '../Styled';
+import { Target } from '../Styled';
 import { styles } from '../../theme';
 
 const FilterSlider = ({ placeholder, min, max, onChange, isError, theme }) => {
@@ -38,9 +38,7 @@ const FilterSlider = ({ placeholder, min, max, onChange, isError, theme }) => {
   const renderDropdown = () => (
     <>
       <Control>
-        <Selected>
-          {state.value[0]} - {state.value[1]}
-        </Selected>
+        <div>{state.value[0]} - {state.value[1]}</div>
         {(min !== state.value[0] || max !== state.value[1]) && (
           <div className='button' onClick={resetValue}>
             Reset

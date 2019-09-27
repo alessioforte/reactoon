@@ -15,6 +15,7 @@ import SideBar from './components/Sidebar';
 import Filterselect from './components/Filters/FilterSelect';
 import Filterslider from './components/Filters/FilterSlider';
 import Modal from './components/Modal';
+import Tag from './components/Tag';
 // import Notification from './components/notification'
 // Confirm Component
 // Message Component
@@ -22,7 +23,6 @@ import Modal from './components/Modal';
 // Step
 // Progress Bar
 // Accordion
-// Tag
 // Tab
 // Toggle Buttons
 // Linked buttons
@@ -51,5 +51,6 @@ export {
   withTooltip,
   Theme,
   SideBar,
-  Slider
+  Slider,
+  Tag
 };

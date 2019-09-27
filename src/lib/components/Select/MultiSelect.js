@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withTheme } from 'styled-components';
-import Theme, { getContrastYIQ } from '../../theme';
+import { styles } from '../../theme';
 import Dropbox from '../Dropbox';
-import Icon from '../Icon';
-import { Target, Options, Option, Selected } from '../Styled';
+import Tag from '../Tag';
+import { Target, Options, Option } from '../Styled';
 
 const Multiselect = ({ placeholder, options, isError, onChange, theme }) => {
   const label = placeholder || 'select...';
@@ -41,25 +41,13 @@ const Multiselect = ({ placeholder, options, isError, onChange, theme }) => {
 
   const renderSelected = () => {
     return state.selected.map((item, i) => (
-      <div key={`${item}-${i}`}>
-        {item.label}
-        <div onClick={e => unselect(e, item)}>
-          <Icon
-            name='delete'
-            size='8px'
-            color={theme.colors[getContrastYIQ(theme.colors.primary)]}
-            margin='0 0 0 8px'
-          />
-        </div>
-      </div>
+      <Tag key={`${item}-${i}`} label={item.label} icon='delete' action={e => unselect(e, item)} />
     ));
   };
 
   const renderTarget = ({ show }) => (
     <Target onClick={show} isError={isError} tabIndex='0'>
-      {state.selected.length > 0 ? (
-        <Selected>{renderSelected()}</Selected>
-      ) : (
+      {state.selected.length > 0 ? <div>{renderSelected()}</div> : (
         <div>{label}</div>
       )}
     </Target>
@@ -92,7 +80,7 @@ Multiselect.propTypes = {
 Multiselect.defaultProps = {
   placeholder: 'select...',
   onChange: () => {},
-  theme: Theme.styles
+  theme: styles
 };
 
 export default withTheme(Multiselect);

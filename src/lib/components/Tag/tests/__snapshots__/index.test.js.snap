@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Tag /> should render and match the snapshop 1`] = `
+<div
+  class="sc-htpNat ikGEGQ"
+>
+  test
+</div>
+`;

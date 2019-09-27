@@ -62,24 +62,3 @@ export const Option = styled.li`
     cursor: default;
   }
 `;
-
-export const Selected = styled.div`
-  color: ${props =>
-    props.isText
-      ? props.theme.colors.idle
-      : props.theme.colors[getContrastYIQ(props.theme.colors.primary)]};
-  & > div {
-    display: inline-block;
-    background: ${props => props.theme.colors.primary};
-    padding: 3px 6px;
-    margin: 1px;
-    border-radius: 3px;
-    div {
-      display: inline-block;
-      margin-left: 10px;
-    }
-  }
-  svg:hover {
-    cursor: pointer;
-  }
-`;
