@@ -149,7 +149,7 @@ export default class Preview extends Component {
             <Button status='error' icon='default' href='/' />
           </Flex>
           <br />
-          <DatePicker />
+          <DatePicker label='start date' />
           <br />
           <Dropdown>
             <Dropdown.Option

@@ -9,7 +9,7 @@ import Week from './Week';
 import Context from './Context';
 import Dropbox from '../Dropbox';
 
-const DatePicker = ({ placeholder, onChange, isError, theme }) => {
+const DatePicker = ({ label, placeholder, onChange, name, isError, theme }) => {
   const today = [
     moment().weekday(),
     moment().date(),
@@ -68,6 +68,7 @@ const DatePicker = ({ placeholder, onChange, isError, theme }) => {
     e.stopPropagation();
     setText(null);
     setSelected(null);
+    onChange(null);
   };
 
   const renderTarget = ({ show }) => (
@@ -75,6 +76,7 @@ const DatePicker = ({ placeholder, onChange, isError, theme }) => {
       onClick={() => open(show)}
       isError={isError}
       isText={text ? false : true}
+      name={name}
     >
       {text ? text : placeholder}
       <div>
@@ -132,7 +134,10 @@ const DatePicker = ({ placeholder, onChange, isError, theme }) => {
   };
 
   return (
-    <Dropbox renderTarget={renderTarget} renderDropdown={renderDropdown} />
+    <>
+      {label && <span>{label}</span>}
+      <Dropbox renderTarget={renderTarget} renderDropdown={renderDropdown} />
+    </>
   );
 };
 
@@ -142,7 +147,7 @@ DatePicker.propTypes = {
 
 DatePicker.defaultProps = {
   placeholder: 'select date...',
-  onChange: () => {},
+  onChange: date => console.log(date),
   theme: Theme.styles
 };
 

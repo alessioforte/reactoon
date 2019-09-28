@@ -1,98 +1,75 @@
-import React, { Component } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled, { ThemeProvider, withTheme } from 'styled-components';
 import Theme, { getContrastYIQ } from '../../theme';
 
-class Dropbox extends Component {
-  constructor(props) {
-    super(props);
+const Dropbox = ({ renderTarget, renderDropdown, theme }) => {
+  const [visible, setVisible] = useState(false);
+  const [position, setPosition] = useState({});
+  const target = useRef();
+  const dropdown = useRef();
 
-    this.state = {
-      visible: false,
-      position: {}
-    };
+  useEffect(() => {
+    setDropdownPosition();
+  }, []);
 
-    this.target = React.createRef();
-    this.dropdown = React.createRef();
-    this.hide = this.hide.bind(this);
-    this.blur = this.blur.bind(this);
-    this.show = this.show.bind(this);
-    this.close = this.close.bind(this);
-  }
-
-  componentDidMount() {
-    this.setDropdownPosition();
-  }
-
-  setDropdownPosition() {
-    const rect = this.target.current.getBoundingClientRect();
-    const maxWidth = this.target.current.firstChild.getBoundingClientRect()
-      .width;
-    const position = {
-      left: 0,
-      right: null,
-      maxWidth
-    };
-
+  const setDropdownPosition = () => {
+    const rect = target.current.getBoundingClientRect();
+    const maxWidth = target.current.firstChild.getBoundingClientRect().width;
+    const position = { left: 0, right: null, maxWidth };
     if (rect.x + 200 > window.innerWidth) {
       position.left = null;
       position.right = '0';
     }
-
     if (rect.bottom + 300 > window.innerHeight) {
       position.bottom = 30;
     }
+    setPosition(position);
+  };
 
-    this.setState({ position });
-  }
-
-  show() {
-    this.setDropdownPosition();
-    if (!this.state.visible) {
-      this.setState({ visible: true });
-      document.addEventListener('click', this.hide);
-      window.addEventListener('blur', this.blur);
+  const show = () => {
+    setDropdownPosition();
+    if (!visible) {
+      setVisible(true);
+      document.addEventListener('click', hide);
+      window.addEventListener('blur', blur);
     }
-  }
+  };
 
-  blur() {
-    this.setState({ visible: false });
-    document.removeEventListener('click', this.hide);
-    window.removeEventListener('blur', this.blur);
-  }
+  const blur = () => {
+    setVisible(false);
+    document.removeEventListener('click', hide);
+    window.removeEventListener('blur', blur);
+  };
 
-  hide(e) {
-    if (!this.dropdown.current.contains(e.target)) {
-      this.setState({ visible: false });
-      document.removeEventListener('click', this.hide);
-      window.removeEventListener('blur', this.blur);
+  const hide = e => {
+    if (dropdown.current && !dropdown.current.contains(e.target)) {
+      setVisible(false);
     }
-  }
+    if (!dropdown.current) {
+      document.removeEventListener('click', hide);
+      window.removeEventListener('blur', blur);
+    }
+  };
 
-  close() {
-    this.setState({ visible: false });
-    document.removeEventListener('click', this.hide);
-    window.removeEventListener('blur', this.blur);
-  }
-
-  render() {
-    const { theme, renderTarget, renderDropdown } = this.props;
-    const { visible, position } = this.state;
-
-    return (
-      <ThemeProvider theme={theme}>
-        <Box ref={this.target}>
-          {renderTarget({ show: this.show, close: this.close })}
-          {visible && (
-            <Drop position={position} ref={this.dropdown}>
-              {renderDropdown({ close: this.close })}
-            </Drop>
-          )}
-        </Box>
-      </ThemeProvider>
-    );
-  }
-}
+  const close = e => {
+    setVisible(false);
+    document.removeEventListener('click', hide);
+    window.removeEventListener('blur', blur);
+  };
+  return (
+    <ThemeProvider theme={theme}>
+      <Box ref={target}>
+        {renderTarget({ show, close })}
+        {visible && (
+          <Drop position={position} ref={dropdown}>
+            {renderDropdown({ close })}
+          </Drop>
+        )}
+      </Box>
+    </ThemeProvider>
+  );
+};
 
 Dropbox.propTypes = {
   renderTarget: PropTypes.func,
