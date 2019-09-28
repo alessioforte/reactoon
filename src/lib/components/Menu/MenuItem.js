@@ -10,7 +10,7 @@ const MenuItem = props => {
   }
 
   return (
-    <Wrapper onBlur={() => setState(false)} tabIndex="-1">
+    <Wrapper onBlur={() => setState(false)} tabIndex='-1'>
       <First
         isOpen={state}
         onClick={() => props.submenu && setState(!state)}
@@ -19,7 +19,7 @@ const MenuItem = props => {
         {props.label}
         {props.submenu && (
           <Rotate isOpen={state}>
-            <Icon name="arrow-down" size="9px" />
+            <Icon name='arrow-down' size='9px' />
           </Rotate>
         )}
       </First>

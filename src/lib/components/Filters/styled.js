@@ -40,6 +40,9 @@ export const Control = styled.div`
       color: ${props => props.theme.colors.primary};
     }
   }
+  .reset {
+    display: ${props => (props.reset ? 'flex' : 'none')};
+  }
 `;
 export const Option = styled.div`
   display: flex;

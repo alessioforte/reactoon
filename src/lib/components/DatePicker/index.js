@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { withTheme } from 'styled-components';
 import moment from 'moment';
@@ -9,118 +9,106 @@ import Week from './Week';
 import Context from './Context';
 import Dropbox from '../Dropbox';
 
-class DatePicker extends Component {
-  constructor(props) {
-    super(props);
+const DatePicker = ({ placeholder, onChange, isError, theme }) => {
+  const today = [
+    moment().weekday(),
+    moment().date(),
+    moment().month(),
+    moment().year()
+  ];
 
-    this.today = [
-      moment().weekday(),
-      moment().date(),
-      moment().month(),
-      moment().year()
-    ];
-
-    const date = Time.getCurrentMonthWeeks(this.today);
-
-    this.weekdays = [];
-    let weekday;
-    /* eslint-disable-next-line */
-    for (let i = 0; i < 7; i++) {
-      weekday = moment().weekday(i);
-      this.weekdays.push([
-        weekday.format('ddd'),
-        Number(
-          moment()
-            .weekday(i)
-            .format('d')
-        )
-      ]);
-    }
-
-    this.state = {
-      text: null,
-      selected: null,
-      placeholder: props.placeholder,
-      date
-    };
+  const [date, setDate] = useState(Time.getCurrentMonthWeeks(today));
+  const [selected, setSelected] = useState(null);
+  const [text, setText] = useState(null);
+  const weekdays = [];
+  let weekday;
+  /* eslint-disable-next-line */
+  for (let i = 0; i < 7; i++) {
+    weekday = moment().weekday(i);
+    weekdays.push([
+      weekday.format('ddd'),
+      Number(
+        moment()
+          .weekday(i)
+          .format('d')
+      )
+    ]);
   }
 
-  getMonth(pick) {
-    const { date } = this.state;
-    if (pick === 'last') this.setState({ date: Time.getLastMonthWeeks(date) });
-    else this.setState({ date: Time.getNextMonthWeeks(date) });
-  }
+  const getLastMonth = e => {
+    e.stopPropagation();
+    const newDate = Time.getLastMonthWeeks(date);
+    setDate(newDate);
+  };
 
-  open(callback) {
-    const { selected } = this.state;
-    let { date } = this.state;
+  const getNextMonth = e => {
+    e.stopPropagation();
+    const newDate = Time.getNextMonthWeeks(date);
+    setDate(newDate);
+  };
 
-    if (selected) date = Time.getCurrentMonthWeeks(selected);
-    else date = Time.getCurrentMonthWeeks(this.today);
-    this.setState({ date });
-    callback();
-  }
+  const open = callback => {
+    let newDate;
+    if (selected) newDate = Time.getCurrentMonthWeeks(selected);
+    else newDate = Time.getCurrentMonthWeeks(today);
+    setDate(newDate);
+    if (callback) callback();
+  };
 
-  select(day, callback) {
+  const select = (day, callback) => {
     let text = `${day[1]} ${moment.months(day[2])} ${day[3]}`;
     let date = new Date(`${day[2] + 1}/${day[1]}/${day[3]}`);
-    this.setState({ text, selected: day });
-    this.props.onChange(date);
-    callback();
-  }
+    setText(text);
+    setSelected(day);
+    onChange(date);
+    if (callback) callback();
+  };
 
-  clear(e) {
+  const clear = e => {
     e.stopPropagation();
-    this.setState({ text: null, selected: null });
-    document.removeEventListener('click', this.hide);
-    window.removeEventListener('blur', this.blur);
-  }
+    setText(null);
+    setSelected(null);
+  };
 
-  render() {
-    const { isError, theme } = this.props;
-    const { text, placeholder, date, selected } = this.state;
+  const renderTarget = ({ show }) => (
+    <Target
+      onClick={() => open(show)}
+      isError={isError}
+      isText={text ? false : true}
+    >
+      {text ? text : placeholder}
+      <div>
+        {selected && (
+          <IconDelete onClick={clear}>
+            <Icon name='delete' size='8px' color={theme.colors.background} />
+          </IconDelete>
+        )}
+        <div>
+          <Icon name='caret' size='5px' color={theme.colors.ground} />
+        </div>
+      </div>
+    </Target>
+  );
 
+  const renderDropdown = ({ close }) => {
     const weeks = date.weeks || [];
     const month = moment()
       .month(date.month)
       .format('MMMM');
-
-    const renderTarget = ({ show }) => (
-      <Target
-        onClick={() => this.open(show)}
-        isError={isError}
-        isText={text ? false : true}
-      >
-        {text ? text : placeholder}
-        <div>
-          {selected && (
-            <IconDelete onClick={e => this.clear(e)}>
-              <Icon name='delete' size='8px' color={theme.colors.background} />
-            </IconDelete>
-          )}
-          <div>
-            <Icon name='caret' size='5px' color={theme.colors.ground} />
-          </div>
-        </div>
-      </Target>
-    );
-
-    const renderDropdown = ({ close }) => (
+    return (
       <Month>
         <Header>
-          <CaretBox right={false} onClick={() => this.getMonth('last')}>
+          <CaretBox right={false} onClick={getLastMonth}>
             <Icon name='caret' size='5px' color={theme.colors.background} />
           </CaretBox>
           {month} {date.year}
-          <CaretBox right={true} onClick={() => this.getMonth('next')}>
+          <CaretBox right={true} onClick={getNextMonth}>
             <Icon name='caret' size='5px' color={theme.colors.background} />
           </CaretBox>
         </Header>
-        <Context.Provider
-          value={{ today: this.today, month: date.month, selected }}
-        >
+        <Context.Provider value={{ today, month: date.month, selected }}>
           <Weekdays>
-            {this.weekdays.map(weekday => (
+            {weekdays.map(weekday => (
               <Weekday
                 holiday={0 === weekday[1] || 6 === weekday[1]}
                 key={weekday[0]}
@@ -132,8 +120,8 @@ class DatePicker extends Component {
           <div>
             {weeks.map((week, i) => (
               <Week
-                selectDay={day => this.select(day, close)}
                 key={`${month}-${i}`}
+                selectDay={day => select(day, close)}
                 week={week}
               />
             ))}
@@ -141,12 +129,12 @@ class DatePicker extends Component {
         </Context.Provider>
       </Month>
     );
+  };
 
-    return (
-      <Dropbox renderTarget={renderTarget} renderDropdown={renderDropdown} />
-    );
-  }
-}
+  return (
+    <Dropbox renderTarget={renderTarget} renderDropdown={renderDropdown} />
+  );
+};
 
 DatePicker.propTypes = {
   onChange: PropTypes.func.isRequired

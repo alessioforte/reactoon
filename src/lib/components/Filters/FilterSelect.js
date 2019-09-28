@@ -60,7 +60,12 @@ const FilterSelect = ({ placeholder, options, onChange, isError, theme }) => {
 
   const renderSelected = () =>
     state.selected.map((item, i) => (
-      <Tag key={`${item.value}`} label={item.label} icon='delete' action={e => unselect(e, item)} />
+      <Tag
+        key={`${item.value}`}
+        label={item.label}
+        icon='delete'
+        action={e => unselect(e, item)}
+      />
     ));
 
   const renderDropdown = () => (

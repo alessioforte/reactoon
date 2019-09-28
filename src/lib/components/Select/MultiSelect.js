@@ -41,13 +41,20 @@ const Multiselect = ({ placeholder, options, isError, onChange, theme }) => {
 
   const renderSelected = () => {
     return state.selected.map((item, i) => (
-      <Tag key={`${item}-${i}`} label={item.label} icon='delete' action={e => unselect(e, item)} />
+      <Tag
+        key={`${item}-${i}`}
+        label={item.label}
+        icon='delete'
+        action={e => unselect(e, item)}
+      />
     ));
   };
 
   const renderTarget = ({ show }) => (
     <Target onClick={show} isError={isError} tabIndex='0'>
-      {state.selected.length > 0 ? <div>{renderSelected()}</div> : (
+      {state.selected.length > 0 ? (
+        <div>{renderSelected()}</div>
+      ) : (
         <div>{label}</div>
       )}
     </Target>

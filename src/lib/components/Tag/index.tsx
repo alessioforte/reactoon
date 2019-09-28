@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC } from 'react';
 import PropTypes from 'prop-types';
 import styled, { withTheme, ThemeProvider } from 'styled-components';
 import Icon from '../Icon';

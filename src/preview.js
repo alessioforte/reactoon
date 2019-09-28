@@ -149,13 +149,23 @@ export default class Preview extends Component {
             <Button status='error' icon='default' href='/' />
           </Flex>
           <br />
+          <DatePicker />
+          <br />
           <Dropdown>
-            <Dropdown.Option action={() => console.log('create')} label='create'/>
+            <Dropdown.Option
+              action={() => console.log('create')}
+              label='create'
+            />
             <Dropdown.Option action={() => console.log('edit')} label='edit' />
             <Dropdown.Option action={() => alert('delete')} label='delete' />
           </Dropdown>
-          <Dropdown renderButton={(show) => <span onClick={show}>Custom Dropdown</span>}>
-            <Dropdown.Option action={() => console.log('create')} label='create'/>
+          <Dropdown
+            renderButton={show => <span onClick={show}>Custom Dropdown</span>}
+          >
+            <Dropdown.Option
+              action={() => console.log('create')}
+              label='create'
+            />
             <Dropdown.Option action={() => console.log('edit')} label='edit' />
             <Dropdown.Option action={() => alert('delete')} label='delete' />
           </Dropdown>

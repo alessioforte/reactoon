@@ -40,7 +40,6 @@ class Dropbox extends Component {
     }
 
     if (rect.bottom + 300 > window.innerHeight) {
-      position.top = null;
       position.bottom = 30;
     }
 
@@ -49,7 +48,6 @@ class Dropbox extends Component {
 
   show() {
     this.setDropdownPosition();
-
     if (!this.state.visible) {
       this.setState({ visible: true });
       document.addEventListener('click', this.hide);
@@ -64,10 +62,7 @@ class Dropbox extends Component {
   }
 
   hide(e) {
-    const rect = this.dropdown.current.getBoundingClientRect();
-    const x = e.clientX;
-    const y = e.clientY;
-    if (y < rect.top || y > rect.bottom || x < rect.left || x > rect.right) {
+    if (!this.dropdown.current.contains(e.target)) {
       this.setState({ visible: false });
       document.removeEventListener('click', this.hide);
       window.removeEventListener('blur', this.blur);

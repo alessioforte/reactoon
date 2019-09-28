@@ -37,13 +37,13 @@ const FilterSlider = ({ placeholder, min, max, onChange, isError, theme }) => {
 
   const renderDropdown = () => (
     <>
-      <Control>
-        <div>{state.value[0]} - {state.value[1]}</div>
-        {(min !== state.value[0] || max !== state.value[1]) && (
-          <div className='button' onClick={resetValue}>
-            Reset
-          </div>
-        )}
+      <Control reset={min !== state.value[0] || max !== state.value[1]}>
+        <div>
+          {state.value[0]} - {state.value[1]}
+        </div>
+        <div className='button reset' onClick={resetValue}>
+          Reset
+        </div>
       </Control>
       <Content>
         <Slider
