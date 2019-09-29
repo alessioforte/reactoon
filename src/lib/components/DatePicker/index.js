@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { withTheme } from 'styled-components';
 import moment from 'moment';
-import Theme, { getContrastYIQ } from '../../theme';
+import { styles, getContrastYIQ } from '../../theme';
 import Time from '../../utils/Time';
 import Icon from '../Icon';
 import Week from './Week';
@@ -142,13 +142,18 @@ const DatePicker = ({ label, placeholder, onChange, name, isError, theme }) => {
 };
 
 DatePicker.propTypes = {
-  onChange: PropTypes.func.isRequired
+  label: PropTypes.string,
+  placeholder: PropTypes.string,
+  name: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  isError: PropTypes.bool,
+  theme: PropTypes.object
 };
 
 DatePicker.defaultProps = {
   placeholder: 'select date...',
   onChange: date => console.log(date),
-  theme: Theme.styles
+  theme: styles
 };
 
 export default withTheme(DatePicker);

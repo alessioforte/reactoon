@@ -60,7 +60,7 @@ const Day = styled.div`
   justify-content: center;
   font-size: 8px;
   &:hover {
-    border: 1px solid ${({ theme }) => theme.colors.hover};
+    border: 2px solid ${({ theme }) => theme.colors.hover};
     cursor: pointer;
   }
 `;
