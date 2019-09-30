@@ -120,3 +120,20 @@ export const StyledButton = styled.button<StyledButtonProps>`
 export const A = styled(StyledButton.withComponent('a'))``;
 
 export const availableStatus = Object.keys(STATUS);
+
+export const Group = styled.div`
+  display: inline-flex;
+  border-radius: ${props => props.theme.border.radius}px;
+  * {
+    border-radius: 0;
+  }
+  & > *:first-child,
+  & > *:first-child > button {
+    border-radius: ${props => `${props.theme.border.radius}px 0 0 ${props.theme.border.radius}px`};
+  }
+  & > *:last-child,
+  & > *:last-child > button {
+    border-radius: ${props => `0 ${props.theme.border.radius}px ${props.theme.border.radius}px 0`};
+  }
+`
+

@@ -1,4 +1,4 @@
-import Button from './components/Button';
+import Button, { ButtonGroup } from './components/Button';
 import Input from './components/Input';
 import Checkbox from './components/Checkbox';
 import Toggle from './components/Toggle';
@@ -34,6 +34,7 @@ import Theme from './theme';
 
 export {
   Button,
+  ButtonGroup,
   Input,
   Checkbox,
   Toggle,

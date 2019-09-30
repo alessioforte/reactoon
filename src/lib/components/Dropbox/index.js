@@ -52,7 +52,7 @@ const Dropbox = ({ renderTarget, renderDropdown, theme }) => {
     }
   };
 
-  const close = e => {
+  const close = () => {
     setVisible(false);
     document.removeEventListener('click', hide);
     window.removeEventListener('blur', blur);
