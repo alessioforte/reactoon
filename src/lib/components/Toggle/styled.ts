@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { KnobProps } from './interfaces'
+import { focus } from '../Styled/css'
 
 export const Block = styled.div`
   display: inline-block;
@@ -16,6 +17,9 @@ export const Knob = styled.div<KnobProps>`
   transition: all 0.3s ease;
   &:hover {
     opacity: 0.8;
+  }
+  &:focus {
+    ${focus}
   }
   &:after {
     content: '';

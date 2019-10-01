@@ -123,9 +123,15 @@ export const availableStatus = Object.keys(STATUS);
 
 export const Group = styled.div`
   display: inline-flex;
+  background: ${props => props.theme.colors.primary};
   border-radius: ${props => props.theme.border.radius}px;
   * {
     border-radius: 0;
+    background: transparent;
+  }
+  & > * > button,
+  & > button {
+    border-right: 1px solid rgba(255,255,255,0.2);
   }
   & > *:first-child,
   & > *:first-child > button {
@@ -133,6 +139,7 @@ export const Group = styled.div`
   }
   & > *:last-child,
   & > *:last-child > button {
+    border-right: 0;
     border-radius: ${props => `0 ${props.theme.border.radius}px ${props.theme.border.radius}px 0`};
   }
 `

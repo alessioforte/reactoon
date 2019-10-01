@@ -4,7 +4,7 @@ import { styles } from '../../theme';
 import { Props, Data } from './interfaces'
 import { Block, Knob, Label } from './styled'
 
-const Toggle: FC<Props> = ({ label, initialValue, onChange, theme }) => {
+const Toggle: FC<Props> = ({ label, initialValue, name, onChange, theme }) => {
   const [value, setValue] = useState<boolean>(initialValue)
 
   const handleOnClick = (e: any): any => {
@@ -18,8 +18,14 @@ const Toggle: FC<Props> = ({ label, initialValue, onChange, theme }) => {
     <ThemeProvider theme={theme}>
       <Block>
         <Knob
+          role='checkbox'
+          name={name}
+          value={value}
+          aria-label={label}
+          aria-checked={value}
           onClick={handleOnClick}
           active={value}
+          tabIndex={0}
         >
         </Knob>
         {label && <Label>{label}</Label>}
