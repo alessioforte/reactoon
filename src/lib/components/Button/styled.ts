@@ -123,11 +123,9 @@ export const availableStatus = Object.keys(STATUS);
 
 export const Group = styled.div`
   display: inline-flex;
-  background: ${props => props.theme.colors.primary};
   border-radius: ${props => props.theme.border.radius}px;
   * {
     border-radius: 0;
-    background: transparent;
   }
   & > * > button,
   & > button {

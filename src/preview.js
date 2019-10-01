@@ -150,26 +150,31 @@ export default class Preview extends Component {
           </Flex>
           <ButtonGroup>
             <Dropdown>
-                <Dropdown.Option
-                  action={() => console.log('create')}
-                  label='create'
-                />
-                <Dropdown.Option action={() => console.log('edit')} label='edit' />
-                <Dropdown.Option action={() => alert('delete')} label='delete' />
-              </Dropdown>
+              <Dropdown.Option
+                action={() => console.log('create')}
+                label='create'
+              />
+              <Dropdown.Option
+                action={() => console.log('edit')}
+                label='edit'
+              />
+              <Dropdown.Option action={() => alert('delete')} label='delete' />
+            </Dropdown>
             <Button icon='default' label='icon label' />
             <Button icon='default' label='reverse' reverse />
             <Dropdown>
-                <Dropdown.Option
-                  action={() => console.log('create')}
-                  label='create'
-                />
-                <Dropdown.Option action={() => console.log('edit')} label='edit' />
-                <Dropdown.Option action={() => alert('delete')} label='delete' />
-              </Dropdown>
+              <Dropdown.Option
+                action={() => console.log('create')}
+                label='create'
+              />
+              <Dropdown.Option
+                action={() => console.log('edit')}
+                label='edit'
+              />
+              <Dropdown.Option action={() => alert('delete')} label='delete' />
+            </Dropdown>
             <Button label='ghost' />
             <Button icon='default' href='/' />
-
           </ButtonGroup>
           <br />
           <DatePicker label='start date' />
