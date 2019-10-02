@@ -3,6 +3,7 @@ import React, { Component, useState } from 'react';
 import styled from 'styled-components';
 import {
   Button,
+  ButtonGroup,
   Checkbox,
   DatePicker,
   Dropdown,
@@ -21,7 +22,6 @@ import {
   Slider,
   Tag
 } from './lib';
-
 import 'moment/locale/it';
 
 const langs = [
@@ -148,6 +148,34 @@ export default class Preview extends Component {
             <Button status='ghost' label='ghost' />
             <Button status='error' icon='default' href='/' />
           </Flex>
+          <ButtonGroup>
+            <Dropdown>
+              <Dropdown.Option
+                action={() => console.log('create')}
+                label='create'
+              />
+              <Dropdown.Option
+                action={() => console.log('edit')}
+                label='edit'
+              />
+              <Dropdown.Option action={() => alert('delete')} label='delete' />
+            </Dropdown>
+            <Button icon='default' label='icon label' />
+            <Button icon='default' label='reverse' reverse />
+            <Dropdown>
+              <Dropdown.Option
+                action={() => console.log('create')}
+                label='create'
+              />
+              <Dropdown.Option
+                action={() => console.log('edit')}
+                label='edit'
+              />
+              <Dropdown.Option action={() => alert('delete')} label='delete' />
+            </Dropdown>
+            <Button label='ghost' />
+            <Button icon='default' href='/' />
+          </ButtonGroup>
           <br />
           <DatePicker label='start date' />
           <br />

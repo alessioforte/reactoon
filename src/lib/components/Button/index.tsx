@@ -2,7 +2,7 @@ import React, { FC, Children, ReactNode, ReactElement } from 'react';
 import PropTypes from 'prop-types';
 import { withTheme, ThemeProvider } from 'styled-components';
 import { styles } from '../../theme';
-import { StyledButton, A, availableStatus } from './styled';
+import { StyledButton, A, availableStatus, Group } from './styled';
 import Icon from '../Icon';
 import { availableIcons } from '../Icon/icons';
 
@@ -64,6 +64,14 @@ const Button: FC<Props> =
 
   return <ThemeProvider theme={theme}>{button}</ThemeProvider>;
 };
+
+export const ButtonGroup: FC<{children: ReactNode}> = ({ children }) => {
+  return (
+    <Group>
+      {Children.toArray(children)}
+    </Group>
+  )
+}
 
 Button.propTypes = {
   status: PropTypes.oneOf(availableStatus),

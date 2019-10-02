@@ -1,4 +1,5 @@
-import React, { FunctionComponent, ReactNode, Children, useState, ReactElement } from 'react';
+import React, { FunctionComponent, ReactNode, Children, useState, useRef, ReactElement } from 'react';
+import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 
@@ -17,25 +18,25 @@ interface FC<P> extends FunctionComponent<P> {
 
 const Modal: FC<Props> = ({ size, children, render, shouldCloseOnOverlayClick }): ReactElement => {
   const [visible, setState] = useState(false);
+  const overlay: React.MutableRefObject<undefined> = useRef();
 
   const open = () => {
     setState(true);
   };
 
-  const close = () => {
-    setState(false);
+  const close = (e: any) => {
+    if (e.target === overlay.current) {
+      setState(false);
+    }
   };
 
   const renderModal = () => {
     const ROOT_NODE: any = document.getElementById(ROOT_ID);
     const handleClickOnOverlay = shouldCloseOnOverlayClick ? close : () => {}
     const Root = (
-      <Wrapper>
-        <Overlay onClick={handleClickOnOverlay} />
-        <Content size={size || [600, 800]}>
-          {render && render({ close })}
-        </Content>
-      </Wrapper>
+      <Overlay onClick={handleClickOnOverlay} ref={overlay}>
+        <Content size={size}>{render && render({ close })}</Content>
+      </Overlay>
     );
     return createPortal(Root, ROOT_NODE);
   };
@@ -58,39 +59,44 @@ Modal.setRoot = (APP_NODE, id) => {
   }
 };
 
+Modal.defaultProps = {
+  size: [600, 800]
+};
+
 export default Modal;
 
 export const Target = styled.div`
   display: inline-block;
   width: fit-content;
 `;
-const Wrapper = styled.div`
-  position: fixed;
+const Overlay = styled.div<{ref: any}>`
+  position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+  width: 100%;
+  min-height: 100vh;
+  z-index: 999;
+  overflow: scroll;
+  background: rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  flex-wrap: wrap;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999;
-`;
-const Overlay = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  padding: 60px 0;
 `;
 const Content = styled.div<{size: number[]}>`
   padding: 20;
   background: ${props => props.theme.colors.groundzero};
   border-radius: 5px;
-  display: inline-block;
-  min-height: ${props => props.size[1]}px;
-  min-width: ${props => props.size[0]}px;
-  margin: 1rem;
-  position: relative;
+  height: ${props => props.size[1]}px;
+  width: ${props => props.size[0]}px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   justify-self: center;
+  align-self: center;
+  flex-basis: auto;
   z-index: 999;
+  overflow: scroll;
 `;
