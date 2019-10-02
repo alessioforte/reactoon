@@ -1,5 +1,4 @@
 import React, { FunctionComponent, ReactNode, Children, useState, useRef, ReactElement } from 'react';
-import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 
