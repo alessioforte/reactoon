@@ -1,10 +1,21 @@
-import React, { Children, useState } from 'react';
+import React, { FunctionComponent, ReactNode, Children, useState, ReactElement } from 'react';
 import { createPortal } from 'react-dom';
-import styled, { withTheme } from 'styled-components';
+import styled from 'styled-components';
 
 let ROOT_ID = 'root-modal';
 
-const Modal = ({ size, children, render, shouldCloseOnOverlayClick }) => {
+type Props = {
+  size: number[],
+  children: React.ReactElement,
+  render: (props: any) => ReactNode,
+  shouldCloseOnOverlayClick: boolean,
+}
+
+interface FC<P> extends FunctionComponent<P> {
+  setRoot: (APP_NODE: Element, id: string) => void
+}
+
+const Modal: FC<Props> = ({ size, children, render, shouldCloseOnOverlayClick }): ReactElement => {
   const [visible, setState] = useState(false);
 
   const open = () => {
@@ -16,10 +27,11 @@ const Modal = ({ size, children, render, shouldCloseOnOverlayClick }) => {
   };
 
   const renderModal = () => {
-    const ROOT_NODE = document.getElementById(ROOT_ID);
+    const ROOT_NODE: any = document.getElementById(ROOT_ID);
+    const handleClickOnOverlay = shouldCloseOnOverlayClick ? close : () => {}
     const Root = (
       <Wrapper>
-        <Overlay onClick={shouldCloseOnOverlayClick && close} />
+        <Overlay onClick={handleClickOnOverlay} />
         <Content size={size || [600, 800]}>
           {render && render({ close })}
         </Content>
@@ -46,7 +58,7 @@ Modal.setRoot = (APP_NODE, id) => {
   }
 };
 
-export default withTheme(Modal);
+export default Modal;
 
 export const Target = styled.div`
   display: inline-block;
@@ -69,9 +81,9 @@ const Overlay = styled.div`
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
 `;
-const Content = styled.div`
+const Content = styled.div<{size: number[]}>`
   padding: 20;
-  background: white;
+  background: ${props => props.theme.colors.groundzero};
   border-radius: 5px;
   display: inline-block;
   min-height: ${props => props.size[1]}px;
