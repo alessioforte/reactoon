@@ -5,7 +5,7 @@ import { Props, Data } from './interfaces'
 import { Block, Knob, Label } from './styled'
 
 const Toggle: FC<Props> = ({ label, initialValue, name, onChange, theme }) => {
-  const [value, setValue] = useState<boolean>(initialValue)
+  const [value, setValue] = useState<boolean>(initialValue || false)
 
   const handleOnClick = (e: any): any => {
     const checked: boolean = !value

@@ -5,7 +5,12 @@ exports[`<Toggle /> should render and match the snapshot 1`] = `
   class="sc-bdVaJa bSrzPW"
 >
   <div
-    class="sc-bwzfXH fNnYsN"
+    aria-checked="false"
+    aria-label="text"
+    class="sc-bwzfXH iKLlWz"
+    role="checkbox"
+    tabindex="0"
+    value="false"
   />
   <div
     class="sc-htpNat iULkUd"

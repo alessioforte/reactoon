@@ -8,7 +8,7 @@ export interface Data {
 export interface Props {
   label?: string,
   name?: string,
-  initialValue: boolean,
+  initialValue?: boolean,
   theme: any,
   onChange: (e: React.ChangeEvent<HTMLDivElement>, data: Data) => void
 }
