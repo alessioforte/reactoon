@@ -23,6 +23,7 @@ import {
   Tag
 } from './lib';
 import 'moment/locale/it';
+import { withNotification } from './lib/hoc'
 
 const langs = [
   { label: 'italiano', value: 'it' },
@@ -72,6 +73,8 @@ const getSuggestions = value => {
 };
 
 const ButtonTip = withTooltip(Button);
+
+const ButtonNoty = withNotification(Button)
 export default class Preview extends Component {
   constructor() {
     super();
@@ -187,6 +190,7 @@ export default class Preview extends Component {
             <Dropdown.Option action={() => console.log('edit')} label='edit' />
             <Dropdown.Option action={() => alert('delete')} label='delete' />
           </Dropdown>
+          <ButtonNoty status='warning' count='3' label='0' />
           <Dropdown
             renderButton={show => <span onClick={show}>Custom Dropdown</span>}
           >
