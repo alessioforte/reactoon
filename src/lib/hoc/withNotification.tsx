@@ -6,7 +6,7 @@ export default function withNotification(Component: any) {
     const { count, ...rest } = props;
     return (
       <Wrapper>
-        <Badge>{count}</Badge>
+        <Badge><span>{count}</span></Badge>
         <Component { ...rest } />
       </Wrapper>
     )
@@ -19,15 +19,23 @@ const Wrapper = styled.div`
 `
 const Badge = styled.div`
   position: absolute;
+  top: -9px;
+  left: calc(100% - 9px);
+  user-select: none;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
-  top: -10px;
-  right: -10px;
-  background: red;
-  color: white;
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    padding: 0 5px;
+    text-align: center;
+    height: 18px;
+    min-width: 18px;
+    font-size: 0.8rem;
+    border-radius: 9px;
+    background: red;
+    color: white;
+  }
 `

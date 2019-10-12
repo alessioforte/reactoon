@@ -190,7 +190,7 @@ export default class Preview extends Component {
             <Dropdown.Option action={() => console.log('edit')} label='edit' />
             <Dropdown.Option action={() => alert('delete')} label='delete' />
           </Dropdown>
-          <ButtonNoty status='warning' count='3' label='0' />
+          <ButtonNoty status='warning' count='9' label='0' />
           <Dropdown
             renderButton={show => <span onClick={show}>Custom Dropdown</span>}
           >

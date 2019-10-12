@@ -19,14 +19,16 @@ import Tag from './components/Tag';
 // import Notification from './components/notification'
 // Confirm Component
 // Message Component
+// DataRangePicker Component
 
 // Step
 // Progress Bar
 // Accordion
+// Carousel
 // Tab
 // Toggle Buttons
+// Radio Buttons
 // Linked buttons
-// Carousel
 
 import withTooltip from './hoc/withTooltip';
 
