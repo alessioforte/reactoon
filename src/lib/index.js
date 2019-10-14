@@ -16,9 +16,9 @@ import Filterselect from './components/Filters/FilterSelect';
 import Filterslider from './components/Filters/FilterSlider';
 import Modal from './components/Modal';
 import Tag from './components/Tag';
+import Message from './components/Message'
 // import Notification from './components/notification'
 // Confirm Component
-// Message Component
 // DataRangePicker Component
 
 // Step
@@ -42,6 +42,7 @@ export {
   Toggle,
   Radio,
   Select,
+  Message,
   Multiselect,
   Modal,
   DatePicker,

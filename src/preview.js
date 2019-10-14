@@ -9,6 +9,7 @@ import {
   Dropdown,
   Filterselect,
   Filterslider,
+  Message,
   Multiselect,
   Modal,
   Input,
@@ -133,6 +134,10 @@ export default class Preview extends Component {
               4
             </Button>
           </Tooltip>
+          <br />
+          <Message status='success'>
+            <p>Message Component</p>
+          </Message>
           <br />
           <Slider showTooltip />
           <br />
