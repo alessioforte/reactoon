@@ -24,7 +24,7 @@ import {
   Tag
 } from './lib';
 import 'moment/locale/it';
-import { withNotification } from './lib/hoc'
+import { withNotification } from './lib/hoc';
 
 const langs = [
   { label: 'italiano', value: 'it' },
@@ -75,7 +75,7 @@ const getSuggestions = value => {
 
 const ButtonTip = withTooltip(Button);
 
-const ButtonNoty = withNotification(Button)
+const ButtonNoty = withNotification(Button);
 export default class Preview extends Component {
   constructor() {
     super();
