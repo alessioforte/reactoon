@@ -20,7 +20,8 @@ const Input = ({
   const handleChange = e => {
     let value = e.target.value;
     input.current.setAttribute('data-value', value !== '' ? true : false);
-    onChange(e, value);
+    const data = { value: e.target.value, name, type }
+    onChange(e, data);
   };
 
   return (
