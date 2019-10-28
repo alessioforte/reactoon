@@ -16,15 +16,15 @@ const Dropbox = ({ renderTarget, renderDropdown, theme }) => {
   const setDropdownPosition = () => {
     const rect = target.current.getBoundingClientRect();
     const maxWidth = target.current.firstChild.getBoundingClientRect().width;
-    const position = { left: 0, right: null, maxWidth };
+    const p = { left: 0, right: null, maxWidth };
     if (rect.x + 200 > window.innerWidth) {
-      position.left = null;
-      position.right = '0';
+      p.left = null;
+      p.right = '0';
     }
     if (rect.bottom + 300 > window.innerHeight) {
-      position.bottom = 30;
+      p.bottom = 30;
     }
-    setPosition(position);
+    setPosition(p);
   };
 
   const show = () => {
