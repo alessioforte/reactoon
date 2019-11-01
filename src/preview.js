@@ -88,7 +88,7 @@ export default class Preview extends Component {
   }
 
   onInputChange(data) {
-    const { value } = data
+    const { value } = data;
     this.setState({ inputValue: value, inputError: false });
 
     if (value === 'error') {
