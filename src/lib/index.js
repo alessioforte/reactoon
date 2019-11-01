@@ -12,6 +12,7 @@ import Tooltip from './components/Tooltip';
 import Dropdown from './components/Dropdown';
 import Slider from './components/Slider';
 import SideBar from './components/Sidebar';
+import Slideshow from './components/Slideshow';
 import Filterselect from './components/Filters/FilterSelect';
 import Filterslider from './components/Filters/FilterSlider';
 import Modal from './components/Modal';
@@ -24,7 +25,7 @@ import Message from './components/Message';
 // Step
 // Progress Bar
 // Accordion
-// Carousel
+// Collapse
 // Tab
 // Toggle Buttons
 // Radio Buttons
@@ -56,5 +57,6 @@ export {
   Theme,
   SideBar,
   Slider,
+  Slideshow,
   Tag
 };

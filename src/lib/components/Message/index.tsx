@@ -5,23 +5,23 @@ import { styles, getColorLuminance, getContrastYIQ } from '../../theme';
 import Icon from '../Icon';
 
 type Props = {
-  status?: string,
+  kind?: string,
   title?: string,
   content?: string,
   children: React.ReactChildren,
   theme: any
 }
 
-const Message: FC<Props> = ({ status, title, content, children, theme }): any => {
+const Message: FC<Props> = ({ kind, title, content, children, theme }): any => {
   const [state, setState] = useState(true)
 
   return state && (
     <ThemeProvider theme={theme}>
-      <Box status={status || 'info'}>
+      <Box kind={kind || 'info'}>
         <Close onClick={() => setState(false)}>
           <Icon
             name='delete'
-            color={theme.colors[getContrastYIQ(theme.colors[status || 'info'])]}
+            color={theme.colors[getContrastYIQ(theme.colors[kind || 'info'])]}
             size='8px'
           />
         </Close>
@@ -35,21 +35,21 @@ const Message: FC<Props> = ({ status, title, content, children, theme }): any =>
 }
 
 Message.propTypes = {
-  status: PropTypes.string.isRequired,
+  kind: PropTypes.string.isRequired,
 }
 
 Message.defaultProps = {
-  status: 'info',
+  kind: 'info',
   theme: styles
 }
 
 export default withTheme(Message)
 
-const Box = styled.div<{status: string}>`
+const Box = styled.div<{kind: string}>`
   border-radius: ${props => props.theme.border.radius}px;
-  border: 1px solid ${props => props.theme.colors[props.status]};
-  background: ${props => getColorLuminance(props.theme.colors[props.status], 0.3)};
-  color: ${props => props.theme.colors[getContrastYIQ(props.theme.colors[props.status])]};
+  border: 1px solid ${props => props.theme.colors[props.kind]};
+  background: ${props => getColorLuminance(props.theme.colors[props.kind], 0.3)};
+  color: ${props => props.theme.colors[getContrastYIQ(props.theme.colors[props.kind])]};
   padding: 1rem;
   position: relative;
 `

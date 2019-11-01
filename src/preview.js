@@ -128,14 +128,14 @@ export default class Preview extends Component {
           <Tag label='badge' icon='delete' />
           <Tooltip render='This is a tooltip 4'>
             <Button
-              status='primary'
+              kind='primary'
               onClick={() => this.setState({ showMenu: !this.state.showMenu })}
             >
               4
             </Button>
           </Tooltip>
           <br />
-          <Message status='success'>
+          <Message kind='success'>
             <p>Message Component</p>
           </Message>
           <br />
@@ -150,11 +150,11 @@ export default class Preview extends Component {
           <Toggle onChange={(e, data) => console.log(data)} />
           <br />
           <Flex>
-            <Button status='warning' icon='default' label='icon label' />
-            <Button status='primary' icon='default' label='reverse' reverse />
-            <Button status='ghost' icon='default' round />
-            <Button status='ghost' label='ghost' />
-            <Button status='error' icon='default' href='/' />
+            <Button kind='warning' icon='default' label='icon label' />
+            <Button kind='primary' icon='default' label='reverse' reverse />
+            <Button kind='ghost' icon='default' round />
+            <Button kind='ghost' label='ghost' />
+            <Button kind='error' icon='default' href='/' />
           </Flex>
           <ButtonGroup>
             <Dropdown>
@@ -195,7 +195,7 @@ export default class Preview extends Component {
             <Dropdown.Option action={() => console.log('edit')} label='edit' />
             <Dropdown.Option action={() => alert('delete')} label='delete' />
           </Dropdown>
-          <ButtonNoty status='warning' count='9' label='0' />
+          <ButtonNoty kind='warning' count='9' label='0' />
           <Dropdown
             renderButton={show => <span onClick={show}>Custom Dropdown</span>}
           >
@@ -209,7 +209,7 @@ export default class Preview extends Component {
           <br />
           <Modal shouldCloseOnOverlayClick>
             <Tooltip render='This is a tooltip 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'>
-              <Button status='primary'>2</Button>
+              <Button kind='primary'>2</Button>
             </Tooltip>
           </Modal>
           <br />
@@ -220,26 +220,26 @@ export default class Preview extends Component {
             onChange={values => console.log('Multiselect values:', values)}
           />
           <br />
-          <ButtonTip status='primary' type='submit' name='btn' value='primary'>
+          <ButtonTip kind='primary' type='submit' name='btn' value='primary'>
             PRIMARY
           </ButtonTip>
-          <Button status='error'>ERROR</Button>
-          <Button role='button' status='primary' disabled>
+          <Button kind='error'>ERROR</Button>
+          <Button role='button' kind='primary' disabled>
             DISABLED
           </Button>
-          <ButtonTip status='success' tooltip='success button'>
+          <ButtonTip kind='success' tooltip='success button'>
             SUCCESS
           </ButtonTip>
-          <Button status='ghost'>GHOST</Button>
-          <Button href='/' status='warning' label='LINK' />
+          <Button kind='ghost'>GHOST</Button>
+          <Button href='/' kind='warning' label='LINK' />
           <Tooltip render='tip'>
-            <Button status='primary'>1</Button>
+            <Button kind='primary'>1</Button>
           </Tooltip>
           <Tooltip render='This is a tooltip 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'>
-            <Button status='primary'>2</Button>
+            <Button kind='primary'>2</Button>
           </Tooltip>
           <Tooltip render='This is a tooltip 3 Lorem ipsum dolor'>
-            <Button status='primary'>3</Button>
+            <Button kind='primary'>3</Button>
           </Tooltip>
           <br />
           <Input placeholder='email' />
@@ -281,7 +281,7 @@ export default class Preview extends Component {
             <div onClick={() => alert('delete')}>delete</div>
           </Dropdown>
           <Tooltip render='This is a tooltip 6'>
-            <Button status='primary'>6</Button>
+            <Button kind='primary'>6</Button>
           </Tooltip>
           <BottomRight>
             <Dropdown>
@@ -290,7 +290,7 @@ export default class Preview extends Component {
               <div onClick={() => alert('delete')}>delete</div>
             </Dropdown>
             <Tooltip render='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'>
-              <Button status='primary'>5</Button>
+              <Button kind='primary'>5</Button>
             </Tooltip>
           </BottomRight>
           <Select

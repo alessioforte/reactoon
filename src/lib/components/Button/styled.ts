@@ -20,7 +20,7 @@ const buttonStyles = css`
 `;
 
 // prettier-ignore
-export const STATUS: any = {
+export const KINDS: any = {
   primary: css`
     background: ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors[getContrastYIQ(props.theme.colors.primary)]};
@@ -82,7 +82,7 @@ export const STATUS: any = {
 };
 
 type StyledButtonProps = {
-  status: string,
+  kind: string,
   reverse?: boolean,
   round?: boolean,
   hasLabel?: boolean
@@ -91,7 +91,7 @@ type StyledButtonProps = {
 // prettier-ignore
 export const StyledButton = styled.button<StyledButtonProps>`
   ${buttonStyles};
-  ${props => STATUS[props.status]};
+  ${props => KINDS[props.kind]};
   ${props => props.reverse && `flex-direction: row-reverse;`};
   & > span {
     display: flex;
@@ -119,7 +119,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
 
 export const A = styled(StyledButton.withComponent('a'))``;
 
-export const availableStatus = Object.keys(STATUS);
+export const availableKinds = Object.keys(KINDS);
 
 export const Group = styled.div`
   display: inline-flex;

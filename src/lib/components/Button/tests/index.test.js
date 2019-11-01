@@ -27,12 +27,12 @@ describe('<Button />', () => {
     expect(buttonWithChildren).toHaveTextContent(children);
   });
 
-  it('Should render primary button if status is not valid', () => {
+  it('Should render primary button if kind is not valid', () => {
     const { container: button1 } = render(
-      <Button status='status-not-valid' label='Not Valid' />
+      <Button kind='kind-not-valid' label='Not Valid' />
     );
     const { container: button2 } = render(
-      <Button status='not-valid-status'>Not Valid</Button>
+      <Button kind='not-valid-kind'>Not Valid</Button>
     );
 
     expect(button1).toStrictEqual(button2);
@@ -40,7 +40,7 @@ describe('<Button />', () => {
 
   it('should render button with disabled attribute', () => {
     const { container } = render(
-      <Button status='primary' label='disabled' disabled />
+      <Button kind='primary' label='disabled' disabled />
     );
     const button = container.querySelector('button');
     expect(button).toHaveAttribute('disabled');

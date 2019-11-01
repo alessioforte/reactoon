@@ -17,15 +17,17 @@ const Slideshow: FC<Props> = ({ children, enableTransition, height, duration, th
   const size = useResize();
   const [selected, setSelected] = useState(0);
 
-  if (enableTransition) {
+
     useEffect(() => {
-      const interval = setInterval(() => {
-        let i = (selected + 1) % React.Children.count(children);
-        setSelected(i);
-      }, duration)
-      return () => clearInterval(interval)
+      if (enableTransition) {
+        const interval = setInterval(() => {
+          let i = (selected + 1) % React.Children.count(children);
+          setSelected(i);
+        }, duration)
+        return () => clearInterval(interval)
+      }
     }, [selected]);
-  }
+
 
   const shiftSlide = (i: number) => {
     setSelected(i);

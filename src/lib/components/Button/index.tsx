@@ -2,12 +2,12 @@ import React, { FC, Children, ReactNode, ReactElement } from 'react';
 import PropTypes from 'prop-types';
 import { withTheme, ThemeProvider } from 'styled-components';
 import { styles } from '../../theme';
-import { StyledButton, A, availableStatus, Group } from './styled';
+import { StyledButton, A, availableKinds, Group } from './styled';
 import Icon from '../Icon';
 import { availableIcons } from '../Icon/icons';
 
 type Props = {
-  status?: string,
+  kind?: string,
   href?: string,
   children: ReactNode,
   label?: string,
@@ -18,9 +18,9 @@ type Props = {
 }
 
 const Button: FC<Props> =
-({ status, href, children, theme, label, icon, reverse, round, ...props }) => {
-  let buttonStatus: string = status || 'primary';
-  if (status && !availableStatus.includes(status)) buttonStatus = 'primary';
+({ kind, href, children, theme, label, icon, reverse, round, ...props }) => {
+  let buttonKinds: string = kind || 'primary';
+  if (kind && !availableKinds.includes(kind)) buttonKinds = 'primary';
 
   let inner: ReactNode = children ? Children.toArray(children) : label
 
@@ -38,7 +38,7 @@ const Button: FC<Props> =
   let button: ReactElement = (
     <StyledButton
       {...props}
-      status={buttonStatus}
+      kind={buttonKinds}
       reverse={reverse}
       round={round}
       hasLabel={label !== '' || children !== undefined}
@@ -52,7 +52,7 @@ const Button: FC<Props> =
       <A
         {...props}
         href={href}
-        status={buttonStatus}
+        kind={buttonKinds}
         reverse={reverse}
         round={round}
         hasLabel={label !== '' || children !== undefined}
@@ -74,7 +74,7 @@ export const ButtonGroup: FC<{children: ReactNode}> = ({ children }) => {
 }
 
 Button.propTypes = {
-  status: PropTypes.oneOf(availableStatus),
+  kind: PropTypes.oneOf(availableKinds),
   href: PropTypes.string,
   children: PropTypes.node,
   label: PropTypes.string,
@@ -85,7 +85,7 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
-  status: 'primary',
+  kind: 'primary',
   label: '',
   reverse: false,
   round: false,
