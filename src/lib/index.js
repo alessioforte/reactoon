@@ -18,7 +18,7 @@ import Filterslider from './components/Filters/FilterSlider';
 import Modal from './components/Modal';
 import Tag from './components/Tag';
 import Message from './components/Message';
-// import Notification from './components/notification'
+import toast from './components/Toast';
 // Confirm Component
 // DataRangePicker Component
 
@@ -46,6 +46,7 @@ export {
   Message,
   Multiselect,
   Modal,
+  toast,
   DatePicker,
   Searchbar,
   Icon,

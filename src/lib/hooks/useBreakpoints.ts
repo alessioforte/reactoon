@@ -6,35 +6,33 @@ const useBreakpoints = () => {
   const { width } = useResize()
   const isMobile = useDevice()
 
-  const setBreakpoints = () => {
-    let breakpoints = {
-      isSmall: false,
+  let breakpoints = {
+    isSmall: false,
+    isMedium: false,
+    isLarge: true,
+    isMobile
+  }
+
+  if (width <= 768) {
+    breakpoints = {
+      isSmall: true,
       isMedium: false,
-      isLarge: true,
+      isLarge: false,
       isMobile
     }
-    if (width <= 768) {
-      breakpoints = {
-        isSmall: true,
-        isMedium: false,
-        isLarge: false,
-        isMobile
-      }
-    } else if (width > 768 && width < 1440) {
-      breakpoints = {
-        isSmall: false,
-        isMedium: true,
-        isLarge: false,
-        isMobile
-      }
+  } else if (width > 768 && width < 1440) {
+    breakpoints = {
+      isSmall: false,
+      isMedium: true,
+      isLarge: false,
+      isMobile
     }
-
-    return breakpoints
   }
-  const [state, setState] = useState(setBreakpoints())
+
+  const [state, setState] = useState(breakpoints)
 
   useEffect(() => {
-    setState(setBreakpoints())
+    setState(breakpoints)
   }, [width])
 
   return state

@@ -17,7 +17,7 @@ interface FC<P> extends FunctionComponent<P> {
 
 const Modal: FC<Props> = ({ size, children, render, shouldCloseOnOverlayClick }): ReactElement => {
   const [visible, setState] = useState(false);
-  const overlay: React.MutableRefObject<undefined> = useRef();
+  const overlay = useRef();
 
   const open = () => {
     setState(true);

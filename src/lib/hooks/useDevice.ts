@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+/* eslint-disable */
 const setDevice = () => {
   let isMobile = false;
   // device detection

@@ -3,11 +3,12 @@ import { render } from 'react-dom';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import Preview from './preview';
 import theme from './theme';
-import { Tooltip, Modal } from './lib';
+import { Tooltip, Modal, toast } from './lib';
 
 const MOUNT_NODE = document.getElementById('root');
 Tooltip.setRoot(MOUNT_NODE, 'root-tooltip');
 Modal.setRoot(MOUNT_NODE, 'root-modal');
+toast.setRoot(MOUNT_NODE, 'root-toast');
 
 const GlobalStyle = createGlobalStyle`
     * {

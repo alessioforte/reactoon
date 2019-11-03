@@ -43,7 +43,7 @@ Message.defaultProps = {
   theme: styles
 }
 
-export default withTheme(Message)
+export default withTheme(Message);
 
 const Box = styled.div<{kind: string}>`
   border-radius: ${props => props.theme.border.radius}px;

@@ -1,11 +1,11 @@
-import React, { FC, useState, useEffect, useRef } from 'react';
+import React, { FC, ReactNode, useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { withTheme, ThemeProvider } from 'styled-components';
 import { useResize } from '../../hooks';
 import { styles } from '../../theme';
 
 type Props = {
-  children?: React.ReactChildren,
+  children?: ReactNode,
   enableTransition?: boolean,
   duration?: number,
   height?: number,
@@ -17,16 +17,15 @@ const Slideshow: FC<Props> = ({ children, enableTransition, height, duration, th
   const size = useResize();
   const [selected, setSelected] = useState(0);
 
-
-    useEffect(() => {
-      if (enableTransition) {
-        const interval = setInterval(() => {
-          let i = (selected + 1) % React.Children.count(children);
-          setSelected(i);
-        }, duration)
-        return () => clearInterval(interval)
-      }
-    }, [selected]);
+  useEffect(() => {
+    if (enableTransition) {
+      const interval = setInterval(() => {
+        let i = (selected + 1) % React.Children.count(children);
+        setSelected(i);
+      }, duration)
+      return () => clearInterval(interval)
+    }
+  }, [selected]);
 
 
   const shiftSlide = (i: number) => {
@@ -60,8 +59,8 @@ const Slideshow: FC<Props> = ({ children, enableTransition, height, duration, th
   );
 }
 
-Slideshow.prototype = {
-  children: PropTypes.array,
+Slideshow.propTypes = {
+  children: PropTypes.node,
   enableTransition: PropTypes.bool,
   height: PropTypes.number,
   duration: PropTypes.number,
