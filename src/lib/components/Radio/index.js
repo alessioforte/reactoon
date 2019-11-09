@@ -21,7 +21,7 @@ const Radio = ({ name, label, options, onChange, inline, theme }) => {
         {label && <Placeholder>{label}</Placeholder>}
         <Options inline={inline}>
           {options.map((option, i) => (
-            <label key={`${option.label}-${i}`}>
+            <label key={`${option.label}`}>
               <input
                 type='radio'
                 name={name}
