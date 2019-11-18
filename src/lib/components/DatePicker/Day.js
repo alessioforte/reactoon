@@ -1,11 +1,38 @@
 import React, { useContext } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { getContrastYIQ } from '../../theme';
 import Context from './Context';
 
 export default ({ day, select }) => {
   const numberday = day[1];
   const value = useContext(Context);
+  const { minDate, maxDate } = value;
+
+  const bound =
+    (day[0] === minDate[0] &&
+      day[1] === minDate[1] &&
+      day[2] === minDate[2] &&
+      day[3] === minDate[3]) ||
+    (day[0] === maxDate[0] &&
+      day[1] === maxDate[1] &&
+      day[2] === maxDate[2] &&
+      day[3] === maxDate[3]);
+
+  const handleOnClick = () => {
+    if (
+      (day[3] <= minDate[3] && day[2] < minDate[2]) ||
+      (day[2] === minDate[2] && day[1] < minDate[1])
+    ) {
+      return;
+    }
+    if (
+      (day[3] >= maxDate[3] && day[2] > maxDate[2]) ||
+      (day[2] === maxDate[2] && day[1] > maxDate[1])
+    ) {
+      return;
+    }
+    select(day);
+  };
 
   let today = false;
   if (value.selected) {
@@ -21,16 +48,45 @@ export default ({ day, select }) => {
     day[2] === value.today[2] &&
     day[3] === value.today[3];
 
+  const kind = selected
+    ? 'selected'
+    : today
+    ? 'today'
+    : bound
+    ? 'boud'
+    : 'default';
+
   return (
-    <Day
-      onClick={() => select(day)}
-      selected={selected || today}
-      today={today}
-      month={day[2] === value.month}
-    >
+    <Day onClick={handleOnClick} month={day[2] === value.month} kind={kind}>
       <NumberDay>{numberday}</NumberDay>
     </Day>
   );
+};
+
+const colors = {
+  today: css`
+    background: ${props => props.theme.colors.primary};
+    color: ${props =>
+      props.theme.colors[getContrastYIQ(props.theme.colors.primary)]};
+  `,
+  bound: css`
+    background: ${props => props.theme.colors.upperground};
+    color: ${props =>
+      props.theme.colors[getContrastYIQ(props.theme.colors.upperground)]};
+  `,
+  selected: css`
+    background: ${props => props.theme.colors.secondary};
+    color: ${props =>
+      props.theme.colors[getContrastYIQ(props.theme.colors.secondary)]};
+  `,
+  default: css`
+    background: ${props =>
+      props.month ? props.theme.colors.ground : props.theme.colors.flatground};
+    color: ${props =>
+      props.month
+        ? props.theme.colors[getContrastYIQ(props.theme.colors.ground)]
+        : props.theme.colors[getContrastYIQ(props.theme.colors.flatground)]};
+  `
 };
 
 /* eslint-disable */
@@ -38,22 +94,7 @@ const Day = styled.div`
   border-radius: 2px;
   box-sizing: border-box;
   height: 30px;
-  background: ${({ theme, selected, today, month }) =>
-    selected
-      ? today
-        ? theme.colors.primary
-        : theme.colors.secondary
-      : month
-      ? theme.colors.ground
-      : theme.colors.flatground};
-  color: ${({ theme, selected, today, month }) =>
-    selected
-      ? today
-        ? theme.colors[getContrastYIQ(theme.colors.primary)]
-        : theme.colors[getContrastYIQ(theme.colors.secondary)]
-      : month
-      ? theme.colors[getContrastYIQ(theme.colors.ground)]
-      : theme.colors[getContrastYIQ(theme.colors.flatground)]};
+  ${props => colors[props.kind]};
   display: flex;
   flex-direction: column;
   align-items: center;

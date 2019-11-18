@@ -186,7 +186,12 @@ export default () => {
           <Button icon='default' href='/' />
         </ButtonGroup>
         <br />
-        <DatePicker label='start date' />
+        <DatePicker
+          label='start date'
+          min={new Date('09/09/2019')}
+          max={new Date('03/09/2020')}
+          placeholder='Selezione la dataaaa'
+        />
         <br />
         <Dropdown>
           <Dropdown.Option

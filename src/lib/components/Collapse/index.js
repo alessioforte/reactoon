@@ -5,22 +5,22 @@ import theme from 'theme';
 import Icon from '../Icon';
 
 const Collapse = ({ isOpen, children, title }) => {
-  const [state, setState] = useState(isOpen)
+  const [state, setState] = useState(isOpen);
 
   const togglePanel = () => {
-    setState(!state)
-  }
+    setState(!state);
+  };
 
   return (
     <Collapsed isOpen={state}>
       <div
         onClick={togglePanel}
-        className="collapse"
-        role="button"
-        aria-hidden="true"
+        className='collapse'
+        role='button'
+        aria-hidden='true'
       >
         {title}
-        <div className="icon">
+        <div className='icon'>
           <Icon
             name={isOpen ? 'angle-top' : 'angle-down'}
             color={theme.colors.primary}
@@ -28,19 +28,19 @@ const Collapse = ({ isOpen, children, title }) => {
           />
         </div>
       </div>
-      {isOpen && <div className="box">{children}</div>}
+      {isOpen && <div className='box'>{children}</div>}
     </Collapsed>
-  )
-}
+  );
+};
 
 Collapse.propTypes = {
   title: PropTypes.string,
   children: PropTypes.any,
-  open: PropTypes.bool,
+  open: PropTypes.bool
 };
 
 Collapse.defaultProps = {
-  title: 'default',
+  title: 'default'
 };
 
 export default Collapse;

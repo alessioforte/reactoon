@@ -9,13 +9,47 @@ import Week from './Week';
 import Context from './Context';
 import Dropbox from '../Dropbox';
 
-const DatePicker = ({ label, placeholder, onChange, name, isError, theme }) => {
+const DatePicker = ({
+  label,
+  placeholder,
+  onChange,
+  name,
+  isError,
+  theme,
+  min,
+  max
+}) => {
+  // dateFormat
+  // renderInput
+  // value
+  // defaultValue
+
   const today = [
     moment().weekday(),
     moment().date(),
     moment().month(),
     moment().year()
   ];
+
+  let minDate = null;
+  let maxDate = null;
+
+  if (min) {
+    minDate = [
+      moment(min).weekday(),
+      moment(min).date(),
+      moment(min).month(),
+      moment(min).year()
+    ];
+  }
+  if (max) {
+    maxDate = [
+      moment(max).weekday(),
+      moment(max).date(),
+      moment(max).month(),
+      moment(max).year()
+    ];
+  }
 
   const [date, setDate] = useState(Time.getCurrentMonthWeeks(today));
   const [selected, setSelected] = useState(null);
@@ -37,12 +71,16 @@ const DatePicker = ({ label, placeholder, onChange, name, isError, theme }) => {
 
   const getLastMonth = e => {
     e.stopPropagation();
+    const { month, year } = date;
+    if (minDate && minDate[2] === month && minDate[3] === year) return;
     const newDate = Time.getLastMonthWeeks(date);
     setDate(newDate);
   };
 
   const getNextMonth = e => {
     e.stopPropagation();
+    const { month, year } = date;
+    if (maxDate && maxDate[2] === month && maxDate[3] === year) return;
     const newDate = Time.getNextMonthWeeks(date);
     setDate(newDate);
   };
@@ -56,11 +94,11 @@ const DatePicker = ({ label, placeholder, onChange, name, isError, theme }) => {
   };
 
   const select = (day, callback) => {
-    let text = `${day[1]} ${moment.months(day[2])} ${day[3]}`;
-    let date = new Date(`${day[2] + 1}/${day[1]}/${day[3]}`);
-    setText(text);
+    const t = `${day[1]} ${moment.months(day[2])} ${day[3]}`;
+    const d = new Date(`${day[2] + 1}/${day[1]}/${day[3]}`);
+    setText(t);
     setSelected(day);
-    onChange(date);
+    onChange(d);
     if (callback) callback();
   };
 
@@ -75,10 +113,10 @@ const DatePicker = ({ label, placeholder, onChange, name, isError, theme }) => {
     <Target
       onClick={() => open(show)}
       isError={isError}
-      isText={text ? false : true}
+      isText={!!text}
       name={name}
     >
-      {text ? text : placeholder}
+      {text || placeholder}
       <div>
         {selected && (
           <IconDelete onClick={clear}>
@@ -104,25 +142,24 @@ const DatePicker = ({ label, placeholder, onChange, name, isError, theme }) => {
             <Icon name='caret' size='5px' color={theme.colors.background} />
           </CaretBox>
           {month} {date.year}
-          <CaretBox right={true} onClick={getNextMonth}>
+          <CaretBox right onClick={getNextMonth}>
             <Icon name='caret' size='5px' color={theme.colors.background} />
           </CaretBox>
         </Header>
-        <Context.Provider value={{ today, month: date.month, selected }}>
+        <Context.Provider
+          value={{ today, month: date.month, selected, minDate, maxDate }}
+        >
           <Weekdays>
-            {weekdays.map(weekday => (
-              <Weekday
-                holiday={0 === weekday[1] || 6 === weekday[1]}
-                key={weekday[0]}
-              >
-                {weekday[0]}
+            {weekdays.map(w => (
+              <Weekday holiday={0 === w[1] || 6 === w[1]} key={w[0]}>
+                {w[0]}
               </Weekday>
             ))}
           </Weekdays>
           <div>
             {weeks.map((week, i) => (
               <Week
-                key={`${month}-${i}`}
+                key={`${month}-${i.toString()}`}
                 selectDay={day => select(day, close)}
                 week={week}
               />
@@ -147,7 +184,9 @@ DatePicker.propTypes = {
   name: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   isError: PropTypes.bool,
-  theme: PropTypes.object
+  theme: PropTypes.object,
+  min: PropTypes.instanceOf(Date),
+  max: PropTypes.instanceOf(Date)
 };
 
 DatePicker.defaultProps = {
