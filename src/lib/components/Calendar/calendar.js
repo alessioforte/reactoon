@@ -23,8 +23,15 @@ class Calendar extends Component {
       moment().year()
     ];
 
+    const today = [
+      moment().weekday(),
+      moment().date(),
+      moment().month(),
+      moment().year()
+    ];
+
     const current = Time.getCurrentMonth(today);
-    const previous = Time.getPreviousMonth(current);
+    const previous = Time.getLastMonth(current);
     const next = Time.getNextMonth(current);
 
     this.dayWidth = 32;
@@ -52,7 +59,7 @@ class Calendar extends Component {
     let { endScroll, months } = this.state;
 
     if (scrollLeft < 1) {
-      let previousMonth = Time.getPreviousMonth(months[0]);
+      let previousMonth = Time.getLastMonth(months[0]);
       let daysCount = 0;
 
       months.splice(0, 0, previousMonth);

@@ -63,7 +63,7 @@ export default ({ day, select }) => {
   );
 };
 
-const colors = {
+const COLORS = {
   today: css`
     background: ${props => props.theme.colors.primary};
     color: ${props =>
@@ -94,7 +94,7 @@ const Day = styled.div`
   border-radius: 2px;
   box-sizing: border-box;
   height: 30px;
-  ${props => colors[props.kind]};
+  ${props => COLORS[props.kind]};
   display: flex;
   flex-direction: column;
   align-items: center;

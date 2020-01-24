@@ -23,15 +23,19 @@ const Modal: FC<Props> = ({ size, children, render, shouldCloseOnOverlayClick })
     setState(true);
   };
 
-  const close = (e: any) => {
+  const closeOnClick = (e: any) => {
     if (e.target === overlay.current) {
       setState(false);
     }
   };
 
+  const close = () => {
+    setState(false)
+  }
+
   const renderModal = () => {
     const ROOT_NODE: any = document.getElementById(ROOT_ID);
-    const handleClickOnOverlay = shouldCloseOnOverlayClick ? close : () => {}
+    const handleClickOnOverlay = shouldCloseOnOverlayClick ? closeOnClick : () => {}
     const Root = (
       <Overlay onClick={handleClickOnOverlay} ref={overlay}>
         <Content size={size}>{render && render({ close })}</Content>

@@ -26,6 +26,7 @@ import {
 } from './lib';
 import 'moment/locale/it';
 import { withNotification } from './lib/hoc';
+import Calendar from './lib/components/Calendar/calendar';
 
 import toast from './lib/components/Toast';
 
@@ -131,6 +132,7 @@ export default () => {
         renderMenu={() => <Item>menu item</Item>}
       ></SideBar>
       <Root>
+        <Calendar />
         <Tag label='badge' icon='delete' />
         <Tooltip render='This is a tooltip 4'>
           <Button
