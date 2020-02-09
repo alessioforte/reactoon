@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { ThemeProvider, withTheme } from 'styled-components';
 import Theme, { getContrastYIQ } from '../../theme';
@@ -12,15 +12,17 @@ const Input = ({
   isError,
   onChange,
   message,
-  theme
+  theme,
+  ref
 }) => {
-  const input = React.createRef();
-  const hasValue = value ? true : false;
+  const [state, setState] = useState(value || '')
+  const [hasValue, setHasValue] = useState(!!value);
 
   const handleChange = e => {
-    let value = e.target.value;
-    input.current.setAttribute('data-value', value !== '' ? true : false);
-    const data = { value: e.target.value, name, type };
+    let v = e.target.value;
+    const data = { value: v, name, type };
+    setHasValue(!!v);
+    setState(v)
     onChange(e, data);
   };
 
@@ -28,11 +30,11 @@ const Input = ({
     <ThemeProvider theme={theme}>
       <Box isError={isError}>
         <input
-          ref={input}
+          ref={ref || null}
           type={type}
           name={name}
           onChange={handleChange}
-          value={value}
+          value={state}
           data-value={hasValue}
         />
         <Label>{isError ? <span>{message}</span> : placeholder}</Label>
@@ -46,7 +48,8 @@ Input.propTypes = {
   type: PropTypes.string,
   placeholder: PropTypes.string,
   isError: PropTypes.bool,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  ref: PropTypes.any
 };
 
 Input.defaultProps = {
