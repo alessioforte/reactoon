@@ -1,66 +1,16 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { ThemeProvider, withTheme } from 'styled-components';
 import Theme, { getContrastYIQ } from '../../theme';
+import useDropdown from './useDropdown'
 
 const Dropbox = ({ renderTarget, renderDropdown, theme }) => {
-  const [visible, setVisible] = useState(false);
-  const [position, setPosition] = useState({});
-  const target = useRef();
-  const dropdown = useRef();
+  const { open, close, position, target, dropdown, visible } = useDropdown()
 
-  useEffect(() => {
-    setDropdownPosition();
-  }, []);
-
-  const setDropdownPosition = () => {
-    const rect = target.current.getBoundingClientRect();
-    const maxWidth = target.current.firstChild.getBoundingClientRect().width;
-    const p = { left: 0, right: null, maxWidth };
-    if (rect.x + 200 > window.innerWidth) {
-      p.left = null;
-      p.right = '0';
-    }
-    if (rect.bottom + 300 > window.innerHeight) {
-      p.bottom = 30;
-    }
-    setPosition(p);
-  };
-
-  const show = () => {
-    setDropdownPosition();
-    if (!visible) {
-      setVisible(true);
-      document.addEventListener('click', hide);
-      window.addEventListener('blur', blur);
-    }
-  };
-
-  const blur = () => {
-    setVisible(false);
-    document.removeEventListener('click', hide);
-    window.removeEventListener('blur', blur);
-  };
-
-  const hide = e => {
-    if (dropdown.current && !dropdown.current.contains(e.target)) {
-      setVisible(false);
-    }
-    if (!dropdown.current) {
-      document.removeEventListener('click', hide);
-      window.removeEventListener('blur', blur);
-    }
-  };
-
-  const close = () => {
-    setVisible(false);
-    document.removeEventListener('click', hide);
-    window.removeEventListener('blur', blur);
-  };
   return (
     <ThemeProvider theme={theme}>
       <Box ref={target}>
-        {renderTarget({ show, close })}
+        {renderTarget({ show: open, close })}
         {visible && (
           <Drop position={position} ref={dropdown}>
             {renderDropdown({ close })}
