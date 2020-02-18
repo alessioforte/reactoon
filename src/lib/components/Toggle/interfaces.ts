@@ -2,7 +2,9 @@ import React from 'react'
 
 export interface Data {
   checked: boolean,
-  label?: string
+  label?: string,
+  name?: string,
+  value: boolean
 }
 
 export interface Props {
@@ -10,7 +12,7 @@ export interface Props {
   name?: string,
   initialValue?: boolean,
   theme: any,
-  onChange: (e: React.ChangeEvent<HTMLDivElement>, data: Data) => void
+  onChange: (data: Data, e: React.ChangeEvent<HTMLDivElement>) => void
 }
 
 export interface KnobProps {

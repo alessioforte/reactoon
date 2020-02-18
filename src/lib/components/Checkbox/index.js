@@ -10,9 +10,10 @@ const Checkbox = ({ label, name, checked, onChange, theme }) => {
 
   const handleOnClick = e => {
     e.preventDefault();
-    setValue(!value);
+    const newValue = !value
+    setValue(newValue);
 
-    const data = { checked: !value, label };
+    const data = { value: newValue, checked: newValue, label, name };
     onChange(data);
   };
 

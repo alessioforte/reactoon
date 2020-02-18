@@ -10,8 +10,8 @@ const Toggle: FC<Props> = ({ label, initialValue, name, onChange, theme }) => {
   const handleOnClick = (e: any): any => {
     const checked: boolean = !value
     setValue(checked)
-    const data: Data = { checked, label }
-    onChange(e, data)
+    const data: Data = { name, value: checked, checked, label }
+    onChange(data, e)
   }
 
   return (
