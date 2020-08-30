@@ -70,8 +70,8 @@ const Wrapper = styled.label`
 `;
 const Check = styled.span`
   flex-shrink: 0;
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   border-radius: 3px;
   background: ${props =>
     props.value ? props.theme.colors.primary : props.theme.colors.background};
@@ -87,6 +87,7 @@ const Check = styled.span`
     ${focus}
   }
   & svg {
+    position: absolute;
     opacity: ${props => (props.value ? 1 : 0)};
   }
 `;

@@ -30,109 +30,52 @@ import Calendar from './lib/components/Calendar/calendar';
 
 import toast from './lib/components/Toast';
 
-const langs = [
-  { label: 'italiano', value: 'it' },
-  { label: 'inglese', value: 'en' },
-  { label: 'spagnolo', value: 'es' },
-  { label: 'francese', value: 'fr' },
-  { label: 'tedesco', value: 'ge' },
-  { label: 'russo', value: 'ru' }
-];
-
-const bands = [
-  { label: 'Kasabian', value: 'Kasabian' },
-  { label: 'Oasis', value: 'Oasis' },
-  { label: 'Franz Ferdinand', value: 'Franz Ferdinand' },
-  { label: 'Strokes', value: 'Strokes' },
-  { label: 'Beatles', value: 'Beatles' },
-  { label: 'Rolling Stones', value: 'Rolling Stones' },
-  { label: 'Queen', value: 'Queen' },
-  { label: 'Deep Purple', value: 'Deep Purple' },
-  { label: 'Led Zeppelin', value: 'Led Zeppelin' },
-  { label: 'Rainbow', value: 'Rainbow' },
-  { label: 'Pink Floyd', value: 'Pink Floyd' },
-  { label: 'Coldplay', value: 'Coldplay' },
-  { label: 'Muse', value: 'Muse' },
-  { label: 'The Doors', value: 'The Doors' },
-  { label: 'Killers', value: 'Killers' },
-  { label: 'The Smiths', value: 'The Smiths' },
-  { label: 'Whitesnakes', value: 'Whitesnakes' }
-];
-
-// const radioOptions = [
-//     { text: 'yes', value: 'yes' },
-//     { text: 'no', value: 'no' },
-//     { text: 'maybe', value: 'myaybe' }
-// ]
-
-const getSuggestions = value => {
-  if (value === '') return;
-  return new Promise((resolve, reject) => {
-    let suggestions = [];
-    suggestions = bands.filter(item => {
-      let label = item.label.toLowerCase();
-      return label.includes(value.toLowerCase());
-    });
-    resolve(suggestions);
-  });
-};
-
-const ButtonTip = withTooltip(Button);
-const ButtonNoty = withNotification(Button);
-
 export default () => {
-  const [state, setState] = useState({
-    inputValue: '',
-    messages: [],
-    inputError: false,
-    showMenu: false
-  });
-
-  function changeMessage() {
-    let random = Math.floor(Math.random() * 100);
-    let msg = 'message ' + random;
-    // let messages = state.messages
-    // messages.push({ content: msg, duration: random * 100 })
-    // setState({ messages })
-    toast.notify(msg);
-  }
-
-  function onInputChange(data) {
-    const { value } = data;
-    setState({ inputValue: value, inputError: false });
-
-    if (value === 'error') {
-      console.log('is error');
-      setState({ inputError: true });
-    }
-  }
-
-  function fillInput() {
-    console.log('fill input');
-    setState({ inputValue: 'input filled' });
-  }
-
-  async function handleSearchbar(value) {
-    let suggestions = [];
-    if (value !== '') {
-      suggestions = await getSuggestions(value);
-    }
-    setState({ suggestions });
-  }
+  const [state, setState] = useState();
 
   return (
-    <Flex>
+    <Preview>
       <SideBar
-        isWide={state.showMenu}
+        isWide
         renderHeader={() => (
           <MenuHeader>
             <span onClick={() => setState({ showMenu: false })}>&times;</span>
           </MenuHeader>
         )}
-        renderMenu={() => <Item>menu item</Item>}
+        renderMenu={() => <div>menu item</div>}
       ></SideBar>
-      <Root>
-        <Calendar />
+      <Body>
+        <Red><Checkbox /><Toggle /></Red>
+      </Body>
+    </Preview>
+  );
+};
+
+const Body = styled.div`
+  padding: 10px;
+  flex-grow: 1;
+  overflow: scroll;
+`;
+const Preview = styled.div`
+  display: flex;
+  max-height: 100vh;
+`;
+const MenuHeader = styled.div`
+  height: 100px;
+  background: darkgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  & > span {
+    cursor: pointer;
+  }
+`;
+const Red = styled.div`
+  background: red;
+`
+
+{/* <Calendar />
         <Tag label='badge' icon='delete' />
         <Tooltip render='This is a tooltip 4'>
           <Button
@@ -324,55 +267,56 @@ export default () => {
           placeholder='select a language'
           onChange={value => console.log('select value:', value)}
         />
-        <br />
-      </Root>
-    </Flex>
-  );
-};
+        <br /> */}
 
-const SearchComponent = () => {
-  const [suggestions, setSuggestions] = useState([]);
+        // &times;
 
-  async function handleSearchbar(value) {
-    let suggestions = [];
-    if (value !== '') {
-      suggestions = await getSuggestions(value);
-    }
-    setSuggestions(suggestions);
-  }
+        // const SearchComponent = () => {
+        //   const [suggestions, setSuggestions] = useState([]);
 
-  return (
-    <Searchbar
-      suggestions={suggestions}
-      onChange={value => handleSearchbar(value)}
-      onSearch={value => console.log('search', value)}
-    />
-  );
-};
+        //   async function handleSearchbar(value) {
+        //     let suggestions = [];
+        //     if (value !== '') {
+        //       suggestions = await getSuggestions(value);
+        //     }
+        //     setSuggestions(suggestions);
+        //   }
 
-const Root = styled.div`
-  padding: 10px;
-  flex-grow: 1;
-  overflow: scroll;
-`;
-const Flex = styled.div`
-  display: flex;
-  max-height: 100vh;
-`;
-const BottomRight = styled.div`
-  position: absolute;
-  bottom: 10px;
-  right: 50px;
-`;
-const MenuHeader = styled.div`
-  height: 300px;
-  background: darkgray;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  & > span {
-    cursor: pointer;
-  }
-`;
-const Item = styled.div``;
+        //   return (
+        //     <Searchbar
+        //       suggestions={suggestions}
+        //       onChange={value => handleSearchbar(value)}
+        //       onSearch={value => console.log('search', value)}
+        //     />
+        //   );
+        // };
+
+
+        // const langs = [
+        //   { label: 'italiano', value: 'it' },
+        //   { label: 'inglese', value: 'en' },
+        //   { label: 'spagnolo', value: 'es' },
+        //   { label: 'francese', value: 'fr' },
+        //   { label: 'tedesco', value: 'ge' },
+        //   { label: 'russo', value: 'ru' }
+        // ];
+
+        // const bands = [
+        //   { label: 'Kasabian', value: 'Kasabian' },
+        //   { label: 'Oasis', value: 'Oasis' },
+        //   { label: 'Franz Ferdinand', value: 'Franz Ferdinand' },
+        //   { label: 'Strokes', value: 'Strokes' },
+        //   { label: 'Beatles', value: 'Beatles' },
+        //   { label: 'Rolling Stones', value: 'Rolling Stones' },
+        //   { label: 'Queen', value: 'Queen' },
+        //   { label: 'Deep Purple', value: 'Deep Purple' },
+        //   { label: 'Led Zeppelin', value: 'Led Zeppelin' },
+        //   { label: 'Rainbow', value: 'Rainbow' },
+        //   { label: 'Pink Floyd', value: 'Pink Floyd' },
+        //   { label: 'Coldplay', value: 'Coldplay' },
+        //   { label: 'Muse', value: 'Muse' },
+        //   { label: 'The Doors', value: 'The Doors' },
+        //   { label: 'Killers', value: 'Killers' },
+        //   { label: 'The Smiths', value: 'The Smiths' },
+        //   { label: 'Whitesnakes', value: 'Whitesnakes' }
+        // ];

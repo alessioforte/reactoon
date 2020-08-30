@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { KnobProps } from './interfaces'
+import { KnobProps } from './types'
 import { focus } from '../Styled/css'
 
 export const Block = styled.div`

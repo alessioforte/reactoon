@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { ThemeProvider, withTheme } from 'styled-components';
 import { styles } from '../../theme';
-import { Props, Data } from './interfaces'
+import { Props, Data } from './types'
 import { Block, Knob, Label } from './styled'
 
 const Toggle: FC<Props> = ({ label, initialValue, name, onChange, theme }) => {
@@ -36,6 +36,7 @@ const Toggle: FC<Props> = ({ label, initialValue, name, onChange, theme }) => {
 
 Toggle.defaultProps = {
   initialValue: false,
+  onChange: (value) => console.log(value),
   theme: styles
 }
 

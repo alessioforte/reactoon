@@ -56,6 +56,9 @@
       "last 1 safari version"
     ]
   },
+  "jshintConfig": {
+    "esversion": "9"
+  },
   "peerDependencies": {
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
@@ -86,10 +89,10 @@
     "prettier": "^1.19.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
-    "react-scripts": "^3.4.0",
+    "react-scripts": "^3.4.3",
     "react-test-renderer": "^16.13.0",
     "styled-components": "^4.4.1",
-    "stylelint": "^10.1.0",
+    "stylelint": "^13.6.1",
     "stylelint-config-recommended": "^2.2.0",
     "stylelint-config-styled-components": "^0.1.1",
     "stylelint-processor-styled-components": "^1.10.0",

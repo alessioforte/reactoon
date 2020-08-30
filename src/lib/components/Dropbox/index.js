@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { ThemeProvider, withTheme } from 'styled-components';
 import Theme, { getContrastYIQ } from '../../theme';
-import useDropdown from './useDropdown'
+import useDropdown from './useDropdown';
 
 const Dropbox = ({ renderTarget, renderDropdown, theme }) => {
-  const { open, close, position, target, dropdown, visible } = useDropdown()
+  const { open, close, position, target, dropdown, visible } = useDropdown();
 
   return (
     <ThemeProvider theme={theme}>

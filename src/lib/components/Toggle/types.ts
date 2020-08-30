@@ -1,13 +1,13 @@
 import React from 'react'
 
-export interface Data {
+export type Data = {
   checked: boolean,
   label?: string,
   name?: string,
   value: boolean
 }
 
-export interface Props {
+export type Props = {
   label?: string,
   name?: string,
   initialValue?: boolean,
@@ -15,7 +15,7 @@ export interface Props {
   onChange: (data: Data, e: React.ChangeEvent<HTMLDivElement>) => void
 }
 
-export interface KnobProps {
+export type KnobProps = {
   active: boolean,
   name?: string,
   value: boolean
