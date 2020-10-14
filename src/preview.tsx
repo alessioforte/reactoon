@@ -24,7 +24,6 @@ import {
   Slider,
   Tag
 } from './lib';
-import 'moment/locale/it';
 // import Calendar from './lib/components/Calendar/calendar';
 // import { withNotification, withTooltip } from './lib/hoc';
 // import toast from './lib/components/Toast';

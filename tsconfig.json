@@ -30,8 +30,8 @@
     "baseUrl": ".",
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
-    "noEmit": true
+    "noEmit": true,
+    "isolatedModules": true
   },
   "exclude": [
     "node_modules"

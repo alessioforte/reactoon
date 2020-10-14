@@ -1,8 +1,7 @@
 import React, { useState, FC } from 'react';
 import styled, { withTheme } from 'styled-components';
-import moment from 'moment';
 import { styles, getContrastYIQ } from '../../theme';
-import Time from '../../utils/Time';
+import Calendar, { months, days } from '../../utils/Calendar';
 import Icon from '../Icon';
 import Week from './Week';
 import Context from './Context';
@@ -11,13 +10,13 @@ import Dropbox from '../Dropbox';
 type Props = {
   label?: string;
   placeholder?: string;
-  onChange?: () => {},
-  name?: string,
-  isError?: boolean,
-  theme?: any,
-  min?: Date,
-  max?: Date
-}
+  onChange?: () => {};
+  name?: string;
+  isError?: boolean;
+  theme?: any;
+  min?: Date;
+  max?: Date;
+};
 
 const DatePicker: FC<Props> = ({
   label,
@@ -27,63 +26,25 @@ const DatePicker: FC<Props> = ({
   isError = false,
   theme = styles,
   min,
-  max,
+  max
 }) => {
   // dateFormat
   // renderInput
   // value
   // defaultValue
-
-  const today = [
-    moment().weekday(),
-    moment().date(),
-    moment().month(),
-    moment().year()
-  ];
-
-  let minDate: number[] | null = null;
-  let maxDate: number[] | null = null;
-
-  if (min) {
-    minDate = [
-      moment(min).weekday(),
-      moment(min).date(),
-      moment(min).month(),
-      moment(min).year()
-    ];
-  }
-  if (max) {
-    maxDate = [
-      moment(max).weekday(),
-      moment(max).date(),
-      moment(max).month(),
-      moment(max).year()
-    ];
-  }
-
-  const [date, setDate] = useState(Time.getCurrentMonthWeeks(today));
+  const [date, setDate] = useState(Calendar.buildCurrentMonth());
   const [selected, setSelected] = useState<number[] | null>(null);
   const [text, setText] = useState<string | null>(null);
-  const weekdays: any[] = [];
-  let weekday: any;
-  /* eslint-disable-next-line */
-  for (let i = 0; i < 7; i++) {
-    weekday = moment().weekday(i);
-    weekdays.push([
-      weekday.format('ddd'),
-      Number(
-        moment()
-          .weekday(i)
-          .format('d')
-      )
-    ]);
-  }
 
+  const today = Calendar.getDayArray();
+  const minDate: number[] | null = min ? Calendar.getDayArray(min) : null;
+  const maxDate: number[] | null = max ? Calendar.getDayArray(max) : null;
+  const weekdays: any[] = Object.keys(days).map(key => [days[key], Number(key)]);
   const getLastMonth = e => {
     e.stopPropagation();
     const { month, year } = date;
     if (minDate && minDate[2] === month && minDate[3] === year) return;
-    const newDate = Time.getLastMonthWeeks(date);
+    const newDate = Calendar.buildLastMonth(month, year);
     setDate(newDate);
   };
 
@@ -91,20 +52,36 @@ const DatePicker: FC<Props> = ({
     e.stopPropagation();
     const { month, year } = date;
     if (maxDate && maxDate[2] === month && maxDate[3] === year) return;
-    const newDate = Time.getNextMonthWeeks(date);
+    const newDate = Calendar.buildNextMonth(month, year);
     setDate(newDate);
   };
 
+  const setLastYear = e => {
+    e.stopPropagation();
+    const newDate = Calendar.buildMonth(date.month, date.year - 1);
+    setDate(newDate);
+  }
+
+  const setNextYear = e => {
+    e.stopPropagation();
+    const newDate = Calendar.buildMonth(date.month, date.year + 1);
+    setDate(newDate);
+  }
+
   const open = callback => {
     let newDate;
-    if (selected) newDate = Time.getCurrentMonthWeeks(selected);
-    else newDate = Time.getCurrentMonthWeeks(today);
+    if (selected) {
+      const month = selected[2]
+      const year = selected[3]
+      newDate = Calendar.buildMonth(month, year);
+    }
+    else newDate = Calendar.buildCurrentMonth();
     setDate(newDate);
     if (callback) callback();
   };
 
   const select = (day, callback) => {
-    const t = `${day[1]} ${moment.months(day[2])} ${day[3]}`;
+    const t = `${day[1]} ${months[day[2]]} ${day[3]}`;
     const d = new Date(`${day[2] + 1}/${day[1]}/${day[3]}`);
     setText(t);
     setSelected(day);
@@ -142,19 +119,44 @@ const DatePicker: FC<Props> = ({
 
   const renderDropdown = ({ close }) => {
     const weeks = date.weeks || [];
-    const month = moment()
-      .month(date.month)
-      .format('MMMM');
+    const month = months[date.month];
+
     return (
       <Month>
         <Header>
-          <CaretBox right={false} onClick={getLastMonth}>
-            <Icon name='caret' size='5px' color={theme.colors.background} />
-          </CaretBox>
+          <Arrows>
+            <CaretBox onClick={setLastYear}>
+              <Icon
+                name='caret-double-left'
+                size='10px'
+                color={theme.colors.upperground}
+              />
+            </CaretBox>
+            <CaretBox onClick={getLastMonth}>
+              <Icon
+                name='caret-left'
+                size='10px'
+                color={theme.colors.upperground}
+              />
+            </CaretBox>
+          </Arrows>
           {month} {date.year}
-          <CaretBox right onClick={getNextMonth}>
-            <Icon name='caret' size='5px' color={theme.colors.background} />
-          </CaretBox>
+          <Arrows>
+            <CaretBox onClick={getNextMonth}>
+              <Icon
+                name='caret-right'
+                size='10px'
+                color={theme.colors.upperground}
+              />
+            </CaretBox>
+            <CaretBox onClick={setNextYear}>
+              <Icon
+                name='caret-double-right'
+                size='10px'
+                color={theme.colors.upperground}
+              />
+            </CaretBox>
+          </Arrows>
         </Header>
         <Context.Provider
           value={{ today, month: date.month, selected, minDate, maxDate }}
@@ -191,7 +193,7 @@ const DatePicker: FC<Props> = ({
 export default withTheme(DatePicker);
 
 /* eslint-disable */
-const Target = styled.div<{ isError: boolean, isText: boolean, name: string }>`
+const Target = styled.div<{ isError: boolean; isText: boolean; name: string }>`
   border-radius: ${props => props.theme.border.radius + 'px'};
   box-sizing: border-box;
   display: flex;
@@ -257,19 +259,18 @@ const IconDelete = styled.div`
     background: ${props => props.theme.colors.ground};
   }
 `;
-const CaretBox = styled.div<{ right: boolean }>`
+const CaretBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  transform: ${props => (props.right ? 'rotate(-90deg)' : 'rotate(90deg)')};
-  background: ${props => props.theme.colors.flatground};
   &:hover {
     cursor: pointer;
-    background: ${props => props.theme.colors.ground};
   }
+`;
+const Arrows = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 30px;
 `;
 const Weekdays = styled.div`
   box-sizing: border-box;

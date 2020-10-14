@@ -16,25 +16,29 @@ export default ({ day, select }) => {
   const { minDate, maxDate } = value;
 
   const bound =
-    (day[0] === minDate[0] &&
+    (minDate &&
+      day[0] === minDate[0] &&
       day[1] === minDate[1] &&
       day[2] === minDate[2] &&
       day[3] === minDate[3]) ||
-    (day[0] === maxDate[0] &&
+    (maxDate &&
+      day[0] === maxDate[0] &&
       day[1] === maxDate[1] &&
       day[2] === maxDate[2] &&
       day[3] === maxDate[3]);
 
   const handleOnClick = () => {
     if (
-      (day[3] <= minDate[3] && day[2] < minDate[2]) ||
-      (day[2] === minDate[2] && day[1] < minDate[1])
+      minDate &&
+      ((day[3] <= minDate[3] && day[2] < minDate[2]) ||
+        (day[2] === minDate[2] && day[1] < minDate[1]))
     ) {
       return;
     }
     if (
-      (day[3] >= maxDate[3] && day[2] > maxDate[2]) ||
-      (day[2] === maxDate[2] && day[1] > maxDate[1])
+      maxDate &&
+      ((day[3] >= maxDate[3] && day[2] > maxDate[2]) ||
+        (day[2] === maxDate[2] && day[1] > maxDate[1]))
     ) {
       return;
     }
@@ -97,7 +101,7 @@ const COLORS = {
 };
 
 /* eslint-disable */
-const Day = styled.div<{ kind: string, month: boolean }>`
+const Day = styled.div<{ kind: string; month: boolean }>`
   border-radius: 2px;
   box-sizing: border-box;
   height: 30px;
