@@ -1,6 +1,7 @@
 import Button, { ButtonGroup } from './components/Button';
 import Input from './components/Input';
 import Checkbox from './components/Checkbox';
+import Collapse from './components/Collapse';
 import Toggle from './components/Toggle';
 import Radio from './components/Radio';
 import Select from './components/Select/Select';
@@ -40,6 +41,7 @@ export {
   ButtonGroup,
   Input,
   Checkbox,
+  Collapse,
   Toggle,
   Radio,
   Select,

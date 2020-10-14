@@ -5,7 +5,14 @@ import Context from './Context';
 
 export default ({ day, select }) => {
   const numberday = day[1];
-  const value = useContext(Context);
+  const value = useContext(Context) as {
+    minDate: [][];
+    maxDate: [][];
+    value: string;
+    month: number;
+    selected: number[];
+    today: number[];
+  };
   const { minDate, maxDate } = value;
 
   const bound =
@@ -79,7 +86,7 @@ const COLORS = {
     color: ${props =>
       props.theme.colors[getContrastYIQ(props.theme.colors.secondary)]};
   `,
-  default: css`
+  default: css<{ month: number }>`
     background: ${props =>
       props.month ? props.theme.colors.ground : props.theme.colors.flatground};
     color: ${props =>
@@ -90,7 +97,7 @@ const COLORS = {
 };
 
 /* eslint-disable */
-const Day = styled.div`
+const Day = styled.div<{ kind: string, month: boolean }>`
   border-radius: 2px;
   box-sizing: border-box;
   height: 30px;

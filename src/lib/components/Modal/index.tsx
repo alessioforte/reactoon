@@ -52,13 +52,15 @@ const Modal: FC<Props> = ({ size, children, render, shouldCloseOnOverlayClick })
   );
 };
 
-Modal.setRoot = (APP_NODE, id) => {
+Modal.setRoot = (APP_NODE: Element | null, id) => {
   ROOT_ID = id;
   let node = document.getElementById(ROOT_ID);
   if (!node) {
     node = document.createElement('div');
     node.setAttribute('id', ROOT_ID);
-    APP_NODE.insertAdjacentElement('afterend', node);
+    if (APP_NODE) {
+      APP_NODE.insertAdjacentElement('afterend', node);
+    }
   }
 };
 

@@ -9,7 +9,7 @@ import { availableIcons } from '../Icon/icons';
 type Props = {
   kind?: string,
   href?: string,
-  children: ReactNode,
+  children?: ReactNode,
   label?: string,
   icon?: string,
   reverse?: boolean,
@@ -65,7 +65,7 @@ const Button: FC<Props> =
   return <ThemeProvider theme={theme}>{button}</ThemeProvider>;
 };
 
-export const ButtonGroup: FC<{children: ReactNode}> = ({ children }) => {
+export const ButtonGroup: FC<{children?: ReactNode}> = ({ children }) => {
   return (
     <Group>
       {Children.toArray(children)}

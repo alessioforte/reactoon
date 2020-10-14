@@ -1,19 +1,32 @@
-import React, { Children, useState, useEffect } from 'react';
+import React, {
+  Children,
+  useState,
+  useRef,
+  useEffect,
+  ReactNode,
+  FunctionComponent,
+  ForwardRefExoticComponent
+} from 'react';
 import { createPortal } from 'react-dom';
-import PropTypes from 'prop-types';
 import styled, { keyframes, withTheme } from 'styled-components';
 import { styles, getContrastYIQ } from '../../theme';
 
 let ROOT_ID = 'root-tooltip';
 
-const Tooltip = ({ render, children }) => {
-  const target = React.createRef();
-  const tip = React.createRef();
+type Props = {
+  children: React.ReactElement;
+  content: (props: any) => ReactNode;
+  theme: any;
+};
 
-  const [visible, setState] = useState(false);
+const Tooltip: FunctionComponent<Props> = ({ content, children, theme }) => {
+  const target: React.MutableRefObject<HTMLDivElement | undefined> = useRef();
+  const tip: React.MutableRefObject<HTMLDivElement | undefined> = useRef();
+
+  const [visible, setState] = useState<boolean>(false);
 
   useEffect(() => {
-    if (tip.current) {
+    if (tip.current && target.current) {
       const rect = target.current.getBoundingClientRect();
       const { innerHeight, innerWidth, scrollY } = window;
       const { width, height } = tip.current.getBoundingClientRect();
@@ -56,8 +69,8 @@ const Tooltip = ({ render, children }) => {
   };
 
   const renderTooltip = () => {
-    const ROOT_NODE = document.getElementById(ROOT_ID);
-    const Root = <Tip ref={tip}>{render}</Tip>;
+    const ROOT_NODE: any = document.getElementById(ROOT_ID);
+    const Root = <Tip ref={tip}>{content}</Tip>;
     return createPortal(Root, ROOT_NODE);
   };
 
@@ -78,7 +91,23 @@ const Tooltip = ({ render, children }) => {
   );
 };
 
-function setRoot(APP_NODE, id) {
+// Tooltip.setRoot = (APP_NODE, id) => {
+//   ROOT_ID = id;
+//   let node = document.getElementById(ROOT_ID);
+//   if (!node) {
+//     node = document.createElement('div');
+//     node.setAttribute('id', ROOT_ID);
+//     APP_NODE.insertAdjacentElement('afterend', node);
+//   }
+// };
+
+interface FC<P> extends ForwardRefExoticComponent<P> {
+  setRoot: (APP_NODE: Element, id: string) => void;
+}
+
+const FREC: FC<Props> = withTheme(Tooltip) as FC<Props>;
+
+FREC.setRoot = (APP_NODE, id) => {
   ROOT_ID = id;
   let node = document.getElementById(ROOT_ID);
   if (!node) {
@@ -86,21 +115,9 @@ function setRoot(APP_NODE, id) {
     node.setAttribute('id', ROOT_ID);
     APP_NODE.insertAdjacentElement('afterend', node);
   }
-}
-
-Tooltip.propTypes = {
-  children: PropTypes.node.isRequired,
-  render: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
-  theme: PropTypes.object
 };
 
-Tooltip.defaultProps = {
-  theme: styles
-};
-
-Tooltip.setRoot = setRoot;
-
-export default withTheme(Tooltip);
+export default FREC;
 
 export const delay = keyframes`
     0% {
@@ -113,11 +130,11 @@ export const delay = keyframes`
         opacity: 1;
     }
 `;
-export const Target = styled.div`
+export const Target = styled.div<{ ref: any }>`
   display: inline-block;
   width: fit-content;
 `;
-export const Tip = styled.div`
+export const Tip = styled.div<{ ref: any }>`
   position: absolute;
   left: -800px;
   z-index: 99;

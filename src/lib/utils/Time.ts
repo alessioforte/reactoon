@@ -2,8 +2,8 @@
 import moment from 'moment';
 
 export default class Time {
-  static buildDays(month, firstweekday, year) {
-    let days = [];
+  static buildDays(month: number, firstweekday: number, year: number) {
+    let days: number[][] = [];
     let daysInMonth = this.getDaysInMonth(month, year);
 
     for (let i = 0; i < daysInMonth; i++) {
@@ -18,10 +18,10 @@ export default class Time {
   }
 
   static buildWeeks(month, firstweekday, year) {
-    let weeks = [];
+    let weeks: number[][][] = [];
     let days = this.buildDays(month, firstweekday, year);
-    let previousDays = [];
-    let nextDays = [];
+    let previousDays: number[][] = [];
+    let nextDays: number[][] = [];
 
     if (firstweekday > 0) {
       let previousMonth = moment()
@@ -60,7 +60,7 @@ export default class Time {
     let totalDays = [...previousDays, ...days, ...nextDays];
     let j = totalDays.length;
     let chunk = 7;
-    let chunkArr = [];
+    let chunkArr: number[][] = [];
     for (let i = 0; i < j; i += chunk) {
       chunkArr = totalDays.slice(i, i + chunk);
       weeks.push(chunkArr);
@@ -73,7 +73,7 @@ export default class Time {
     return moment(`${year}-${month + 1}`, 'YYYY-MM').daysInMonth();
   }
 
-  static getCurrentMonthWeeks([weekday, numberday, month, year]) {
+  static getCurrentMonthWeeks([weekday, numberday, month, year]: number[]) {
     let firstweekday = Time.getFistWeekdayOfMonth(weekday, numberday);
     let weeks = Time.buildWeeks(month, firstweekday, year);
     let days = Time.buildDays(month, firstweekday, year);

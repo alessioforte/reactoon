@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, FC } from 'react';
 import styled, { withTheme } from 'styled-components';
 import moment from 'moment';
 import { styles, getContrastYIQ } from '../../theme';
@@ -9,15 +8,26 @@ import Week from './Week';
 import Context from './Context';
 import Dropbox from '../Dropbox';
 
-const DatePicker = ({
+type Props = {
+  label?: string;
+  placeholder?: string;
+  onChange?: () => {},
+  name?: string,
+  isError?: boolean,
+  theme?: any,
+  min?: Date,
+  max?: Date
+}
+
+const DatePicker: FC<Props> = ({
   label,
-  placeholder,
-  onChange,
-  name,
-  isError,
-  theme,
+  placeholder = 'select date...',
+  onChange = date => console.log(date),
+  name = '',
+  isError = false,
+  theme = styles,
   min,
-  max
+  max,
 }) => {
   // dateFormat
   // renderInput
@@ -31,8 +41,8 @@ const DatePicker = ({
     moment().year()
   ];
 
-  let minDate = null;
-  let maxDate = null;
+  let minDate: number[] | null = null;
+  let maxDate: number[] | null = null;
 
   if (min) {
     minDate = [
@@ -52,10 +62,10 @@ const DatePicker = ({
   }
 
   const [date, setDate] = useState(Time.getCurrentMonthWeeks(today));
-  const [selected, setSelected] = useState(null);
-  const [text, setText] = useState(null);
-  const weekdays = [];
-  let weekday;
+  const [selected, setSelected] = useState<number[] | null>(null);
+  const [text, setText] = useState<string | null>(null);
+  const weekdays: any[] = [];
+  let weekday: any;
   /* eslint-disable-next-line */
   for (let i = 0; i < 7; i++) {
     weekday = moment().weekday(i);
@@ -178,27 +188,10 @@ const DatePicker = ({
   );
 };
 
-DatePicker.propTypes = {
-  label: PropTypes.string,
-  placeholder: PropTypes.string,
-  name: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
-  isError: PropTypes.bool,
-  theme: PropTypes.object,
-  min: PropTypes.instanceOf(Date),
-  max: PropTypes.instanceOf(Date)
-};
-
-DatePicker.defaultProps = {
-  placeholder: 'select date...',
-  onChange: date => console.log(date),
-  theme: styles
-};
-
 export default withTheme(DatePicker);
 
 /* eslint-disable */
-const Target = styled.div`
+const Target = styled.div<{ isError: boolean, isText: boolean, name: string }>`
   border-radius: ${props => props.theme.border.radius + 'px'};
   box-sizing: border-box;
   display: flex;
@@ -247,15 +240,13 @@ const Header = styled.div`
   padding: 0 5px;
   color: ${props => props.theme.colors.ground};
 `;
-const IconContainer = styled.div`
+const IconDelete = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 16px;
   height: 16px;
   border-radius: 50%;
-`;
-const IconDelete = styled(IconContainer)`
   width: 16px;
   height: 16px;
   background: ${props => props.theme.colors.flatground};
@@ -266,7 +257,13 @@ const IconDelete = styled(IconContainer)`
     background: ${props => props.theme.colors.ground};
   }
 `;
-const CaretBox = styled(IconContainer)`
+const CaretBox = styled.div<{ right: boolean }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
   transform: ${props => (props.right ? 'rotate(-90deg)' : 'rotate(90deg)')};
   background: ${props => props.theme.colors.flatground};
   &:hover {
@@ -280,7 +277,7 @@ const Weekdays = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 2px;
 `;
-const Weekday = styled.div`
+const Weekday = styled.div<{ holiday: boolean }>`
   box-sizing: border-box;
   height: 30px;
   display: flex;

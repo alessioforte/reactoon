@@ -5,11 +5,6 @@ import Preview from './preview';
 import theme from './theme';
 import { Tooltip, Modal, toast } from './lib';
 
-const MOUNT_NODE = document.getElementById('root');
-Tooltip.setRoot(MOUNT_NODE, 'root-tooltip');
-Modal.setRoot(MOUNT_NODE, 'root-modal');
-toast.setRoot(MOUNT_NODE, 'root-toast');
-
 const GlobalStyle = createGlobalStyle`
     * {
         padding: 0;
@@ -45,12 +40,20 @@ const GlobalStyle = createGlobalStyle`
     }
 `;
 
-render(
+const ROOT: React.ReactElement = (
   <>
     <GlobalStyle />
     <ThemeProvider theme={theme}>
       <Preview />
     </ThemeProvider>
-  </>,
-  MOUNT_NODE
+  </>
 );
+
+const MOUNT_NODE: Element | null = document.getElementById('root');
+if (MOUNT_NODE) {
+  Tooltip.setRoot(MOUNT_NODE, 'root-tooltip');
+  Modal.setRoot(MOUNT_NODE, 'root-modal');
+  toast.setRoot(MOUNT_NODE, 'root-toast');
+}
+
+render(ROOT, MOUNT_NODE);

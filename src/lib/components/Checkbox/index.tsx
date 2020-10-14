@@ -1,16 +1,29 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, FC } from 'react';
 import styled, { withTheme, ThemeProvider } from 'styled-components';
 import { getContrastYIQ, styles } from '../../theme';
 import Icon from '../Icon';
 import { focus } from '../Styled/css';
 
-const Checkbox = ({ label, name, checked, onChange, theme }) => {
+interface Props {
+  label?: string;
+  name?: string;
+  checked?: boolean;
+  onChange?: () => {};
+  theme?: any;
+}
+
+const Checkbox: FC<Props> = ({
+  label,
+  name = '',
+  checked = false,
+  onChange = value => console.log(value),
+  theme = styles
+}) => {
   const [value, setValue] = useState(checked || false);
 
   const handleOnClick = e => {
     e.preventDefault();
-    const newValue = !value
+    const newValue = !value;
     setValue(newValue);
 
     const data = { value: newValue, checked: newValue, label, name };
@@ -20,14 +33,14 @@ const Checkbox = ({ label, name, checked, onChange, theme }) => {
   return (
     <ThemeProvider theme={theme}>
       <Wrapper onClick={handleOnClick}>
-        <input type='checkbox' name={name} value={value} />
+        <input type='checkbox' name={name} value={value.toString()} />
         <Check
           role='checkbox'
           name={name}
           value={value}
           aria-label={label}
           aria-checked={value}
-          tabIndex='0'
+          tabIndex={0}
         >
           <Icon
             name='checkmark'
@@ -39,20 +52,6 @@ const Checkbox = ({ label, name, checked, onChange, theme }) => {
       </Wrapper>
     </ThemeProvider>
   );
-};
-
-Checkbox.propTypes = {
-  label: PropTypes.string,
-  name: PropTypes.string,
-  checked: PropTypes.bool,
-  onChange: PropTypes.func,
-  theme: PropTypes.object
-};
-
-Checkbox.defaultProps = {
-  checked: false,
-  onChange: value => console.log(value),
-  theme: styles
 };
 
 export default withTheme(Checkbox);
@@ -68,7 +67,7 @@ const Wrapper = styled.label`
     z-index: -1;
   }
 `;
-const Check = styled.span`
+const Check = styled.span<{ name: string; value: boolean }>`
   flex-shrink: 0;
   width: 20px;
   height: 20px;
