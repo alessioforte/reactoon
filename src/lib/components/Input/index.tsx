@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react';
+import React, { FC, useState } from 'react';
 import styled, { ThemeProvider, withTheme } from 'styled-components';
 import Theme, { getContrastYIQ } from '../../theme';
 import { focus } from '../Styled/css';
@@ -9,10 +9,10 @@ interface Props {
   name?: string;
   value?: string;
   isError?: boolean;
-  onChange?: (data: any) => {},
+  onChange?: (data: any) => {};
   message?: string;
+  ref?: React.MutableRefObject<HTMLInputElement | null>;
   theme: any;
-  ref: React.MutableRefObject<HTMLDivElement | undefined>;
 }
 
 const Input: FC<Props> = ({
@@ -26,22 +26,22 @@ const Input: FC<Props> = ({
   theme = Theme.styles,
   ref
 }) => {
-  const [state, setState] = useState(value || '')
+  const [state, setState] = useState(value || '');
   const [hasValue, setHasValue] = useState(!!value);
 
   const handleChange = e => {
     let v = e.target.value;
     const data = { value: v, name, type };
     setHasValue(!!v);
-    setState(v)
-    onChange(e, data);
+    setState(v);
+    onChange(data);
   };
 
   return (
     <ThemeProvider theme={theme}>
       <Box isError={isError}>
         <input
-          ref={ref || null}
+          ref={ref}
           type={type}
           name={name}
           onChange={handleChange}
@@ -104,12 +104,3 @@ const Label = styled.label`
     color: ${props => props.theme.colors.error};
   }
 `;
-// const Line = styled.div`
-//   position: absolute;
-//   bottom: -1px;
-//   left: -1px;
-//   right: -1px;
-//   height: 2px;
-//   pointer-events: none;
-//   background: ${props => (props.isError ? props.theme.colors.error : 'none')};
-// `;

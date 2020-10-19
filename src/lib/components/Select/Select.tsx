@@ -6,7 +6,7 @@ import Icon from '../Icon';
 import { Target, Options, Option } from '../Styled';
 
 interface Props {
-  placeholder: string?
+  placeholder?: string;
   options?: Option[]
   isError?: boolean;
   onChange?: (data: any) => {};

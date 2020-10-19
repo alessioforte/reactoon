@@ -8,11 +8,11 @@ import Tag from '../Tag';
 import { Target } from '../Styled';
 
 interface Props {
-  placeholder: string;
-  options: any;
-  onChange: (values: any) => {};
-  isError: boolean;
-  theme: any;
+  placeholder?: string;
+  options?: any;
+  onChange?: (values: any) => {};
+  isError?: boolean;
+  theme?: any;
 }
 
 interface State {
@@ -22,9 +22,9 @@ interface State {
 
 const FilterSelect: FC<Props> = ({
   placeholder = 'select...',
-  options,
+  options = [],
   onChange = value => console.log(value),
-  isError,
+  isError = false,
   theme = styles
 }) => {
   const [state, setState] = useState<State>({ selected: [], values: [] });

@@ -11,9 +11,9 @@ import Button from '../Button';
 import Dropbox from '../Dropbox';
 
 interface Props {
-  placeholder: string;
+  placeholder?: string;
   children?: ReactElement;
-  renderButton: (props: any) => ReactNode;
+  renderButton?: (props: any) => ReactNode;
 }
 
 interface OptionProps {

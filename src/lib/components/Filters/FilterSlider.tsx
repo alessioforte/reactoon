@@ -8,12 +8,12 @@ import { Target } from '../Styled';
 import { styles } from '../../theme';
 
 interface Props {
-  placeholder: string;
-  min: number;
-  max: number;
-  onChange: (data: any) => {};
-  isError: boolean;
-  theme: any;
+  placeholder?: string;
+  min?: number;
+  max?: number;
+  onChange?: (data: any) => {};
+  isError?: boolean;
+  theme?: any;
 }
 
 const FilterSlider: FC<Props> = ({
@@ -21,7 +21,7 @@ const FilterSlider: FC<Props> = ({
   min,
   max,
   onChange = data => console.log(data),
-  isError,
+  isError = false,
   theme = styles
 }) => {
   const [state, setState] = useState({ value: [min, max] });

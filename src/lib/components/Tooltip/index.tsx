@@ -14,9 +14,9 @@ import { styles, getContrastYIQ } from '../../theme';
 let ROOT_ID = 'root-tooltip';
 
 type Props = {
-  children: React.ReactElement;
-  content: (props: any) => ReactNode;
-  theme: any;
+  children?: React.ReactElement;
+  content?: (props: any) => ReactNode;
+  theme?: any;
 };
 
 const Tooltip: FunctionComponent<Props> = ({ content, children, theme = styles }) => {

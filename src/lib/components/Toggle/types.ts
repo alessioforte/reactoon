@@ -11,8 +11,8 @@ export type Props = {
   label?: string,
   name?: string,
   initialValue?: boolean,
+  onChange?: (data: Data, e: React.ChangeEvent<HTMLDivElement>) => void
   theme: any,
-  onChange: (data: Data, e: React.ChangeEvent<HTMLDivElement>) => void
 }
 
 export type KnobProps = {

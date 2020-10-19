@@ -8,7 +8,7 @@ type Props = {
   kind?: string,
   title?: string,
   content?: string,
-  children: React.ReactChildren,
+  children?: React.ReactChildren,
   theme: any
 }
 

@@ -6,21 +6,26 @@ import { focus } from '../Styled/css';
 interface Props {
   name?: string;
   label?: string;
-  options: any;
+  options?: Option[];
   onChange?: (data: any) => {};
   inline?: boolean;
   theme: any;
 }
 
-const Radio = ({
+interface Option {
+  label: string;
+  value: any;
+}
+
+const Radio: FC<Props> = ({
   name,
-  label,
-  options,
+  label = 'select...',
+  options = [],
   onChange = data => console.log(data),
   inline = false,
   theme = Theme.styles
 }) => {
-  const initialValue = options.length > 0 ? options[0].value : null;
+  const initialValue: Option = options.length > 0 ? options[0].value : null;
   const [value, setValue] = useState(initialValue);
 
   const handleOnClick = (e, newValue) => {
