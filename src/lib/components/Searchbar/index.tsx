@@ -1,5 +1,4 @@
 import React, { useState, useRef, FC } from 'react';
-import PropTypes from 'prop-types';
 import styled, { ThemeProvider, withTheme } from 'styled-components';
 import Icon from '../Icon';
 import Theme, { getContrastYIQ } from '../../theme/';

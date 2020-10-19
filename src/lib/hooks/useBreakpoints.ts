@@ -33,7 +33,7 @@ const useBreakpoints = () => {
 
   useEffect(() => {
     setState(breakpoints)
-  }, [width])
+  }, [breakpoints])
 
   return state
 }

@@ -32,7 +32,13 @@ const components = {
   button: () => <Button label='LABEL' />,
   'button group': () => <ButtonGroup />,
   datepicker: () => <DatePicker />,
-  dropdown: () => <Dropdown />,
+  dropdown: () => (
+    <Dropdown label="label">
+      <Dropdown.Option label='item 1' onClick={() => console.log('action 1')} />
+      <Dropdown.Option label='item 2' onClick={() => console.log('action 2')} />
+      <Dropdown.Option label='item 3' onClick={() => console.log('action 3')} />
+    </Dropdown>
+  ),
   checkbox: () => <Checkbox label='label' />,
   collapse: () => <Collapse />,
   select: Select,
@@ -47,12 +53,12 @@ const components = {
   toogle: () => <Toggle />,
   tooltip: () => <Tooltip />,
   slider: () => <Slider />,
-  tag: () => <Tag />,
+  tag: () => <Tag label="label tag" />,
 
 };
 
 export default () => {
-  const [state, setState] = useState('datepicker');
+  const [state, setState] = useState('dropdown');
 
   return (
     <Preview>

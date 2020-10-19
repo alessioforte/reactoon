@@ -25,7 +25,7 @@ const Slideshow: FC<Props> = ({ children, enableTransition, height, duration, th
       }, duration)
       return () => clearInterval(interval)
     }
-  }, [selected]);
+  }, [selected, enableTransition, duration, children]);
 
 
   const shiftSlide = (i: number) => {

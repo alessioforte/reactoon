@@ -11,30 +11,25 @@ import Button from '../Button';
 import Dropbox from '../Dropbox';
 
 interface Props {
-  placeholder?: string;
-  children?: ReactElement;
+  label?: string;
+  children?: ReactElement[];
   renderButton?: (props: any) => ReactNode;
 }
 
-interface OptionProps {
-  label: string,
-  action: any,
-}
-
 interface FC<P> extends FunctionComponent<P> {
-  Option: FunctionComponent<OptionProps>
+  Option: FunctionComponent<OptionProps>;
 }
 
-const Dropdown: FC<Props> = ({ placeholder, children, renderButton }) => {
+const Dropdown: FC<Props> = ({ label, children, renderButton }) => {
   const renderTarget = ({ show }) =>
     renderButton ? (
       renderButton(show)
     ) : (
       <Button onClick={show}>
-        {placeholder ? placeholder : <Icon name='caret' size='5px' />}
+        {label ? label : <Icon name='caret' size='5px' />}
       </Button>
     );
-
+  
   const renderDropdown = ({ close }) => (
     <div onClick={close}>{children && Children.toArray(children)}</div>
   );
@@ -43,9 +38,14 @@ const Dropdown: FC<Props> = ({ placeholder, children, renderButton }) => {
   );
 };
 
-Dropdown.Option = ({ label, action }) => {
+interface OptionProps {
+  label?: string;
+  onClick?: () => void;
+}
+
+Dropdown.Option = ({ label, onClick = () => {} }: OptionProps) => {
   return (
-    <Item onClick={action} key={label}>
+    <Item onClick={onClick} key={label}>
       {label}
     </Item>
   );

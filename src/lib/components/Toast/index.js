@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import styled, { keyframes } from 'styled-components';
 
@@ -111,7 +111,7 @@ const ToastManager = ({ actions }) => {
   );
 };
 
-const Message = props => {
+const Message = ({ dismiss, content }) => {
   const [time, setTime] = useState(0);
 
   useEffect(() => {
@@ -120,17 +120,17 @@ const Message = props => {
     }, 1000);
     if (time > 5) {
       clearTimeout(timeout);
-      props.dismiss(props.content);
+      dismiss(content);
     }
     return () => {
       clearTimeout(timeout);
     };
-  }, [time]);
+  }, [content, dismiss, time]);
 
   return (
     time < 5 && (
       <Box>
-        {props.content} {time}
+        {content} {time}
       </Box>
     )
   );

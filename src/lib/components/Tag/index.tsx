@@ -7,16 +7,16 @@ import { styles, getContrastYIQ } from '../../theme';
 type Props = {
   label?: string,
   icon?: string,
-  action?: (e: any) => void,
+  onClick?: (e: any) => void,
   theme: any
 }
 
-const Tag: FC<Props> = ({ label, icon, action, theme }) => {
+const Tag: FC<Props> = ({ label = 'tag', icon, onClick = (e) => {}, theme }) => {
 
   let tagIcon: any = null;
-  if (icon && action) {
+  if (icon && onClick) {
     tagIcon = (
-      <IconTag onClick={action} pointer>
+      <IconTag onClick={onClick} pointer>
         <Icon
           name={icon}
           size='8px'
@@ -25,7 +25,7 @@ const Tag: FC<Props> = ({ label, icon, action, theme }) => {
       </IconTag>
     )
   }
-  if (icon && !action) {
+  if (icon && !onClick) {
     tagIcon = (
       <IconTag>
         <Icon
@@ -49,7 +49,7 @@ const Tag: FC<Props> = ({ label, icon, action, theme }) => {
 Tag.propTypes = {
   label: PropTypes.string,
   icon: PropTypes.string,
-  action: PropTypes.func,
+  onClick: PropTypes.func,
   theme: PropTypes.any
 }
 

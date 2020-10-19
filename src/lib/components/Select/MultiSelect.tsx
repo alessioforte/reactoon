@@ -67,7 +67,7 @@ const Multiselect: FC<Props> = ({
         key={`${item}-${i}`}
         label={item.label}
         icon='delete'
-        action={e => unselect(e, item)}
+        onClick={e => unselect(e, item)}
       />
     ));
   };

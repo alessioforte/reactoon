@@ -1,5 +1,4 @@
 import React, { FC, Children, ReactNode, ReactElement } from 'react';
-import PropTypes from 'prop-types';
 import { withTheme, ThemeProvider } from 'styled-components';
 import { styles } from '../../theme';
 import { StyledButton, A, availableKinds, Group } from './styled';
@@ -15,19 +14,19 @@ type Props = {
   reverse?: boolean;
   round?: boolean;
   theme: any;
-  onClick?: () => {};
+  onClick?: () => void;
 };
 
 const Button: FC<Props> = ({
-  kind,
+  kind = 'primary',
   href,
   children,
-  theme,
-  label,
+  label = '',
   icon,
-  reverse,
-  round,
-  onClick,
+  reverse = false,
+  round = false,
+  onClick = () => {},
+  theme = styles,
   ...props
 }) => {
   let buttonKinds: string = kind || 'primary';
@@ -53,6 +52,7 @@ const Button: FC<Props> = ({
       reverse={reverse}
       round={round}
       hasLabel={label !== '' || children !== undefined}
+      onClick={onClick}
     >
       {inner}
     </StyledButton>
@@ -78,25 +78,6 @@ const Button: FC<Props> = ({
 
 export const ButtonGroup: FC<{ children?: ReactNode }> = ({ children }) => {
   return <Group>{Children.toArray(children)}</Group>;
-};
-
-Button.propTypes = {
-  kind: PropTypes.oneOf(availableKinds),
-  href: PropTypes.string,
-  children: PropTypes.node,
-  label: PropTypes.string,
-  icon: PropTypes.oneOf(availableIcons),
-  reverse: PropTypes.bool,
-  round: PropTypes.bool,
-  theme: PropTypes.object
-};
-
-Button.defaultProps = {
-  kind: 'primary',
-  label: '',
-  reverse: false,
-  round: false,
-  theme: styles
 };
 
 export default withTheme(Button);

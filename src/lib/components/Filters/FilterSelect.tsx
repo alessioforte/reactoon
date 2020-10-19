@@ -82,7 +82,7 @@ const FilterSelect: FC<Props> = ({
         key={`${item.value}`}
         label={item.label}
         icon='delete'
-        action={e => unselect(e, item)}
+        onClick={e => unselect(e, item)}
       />
     ));
 
