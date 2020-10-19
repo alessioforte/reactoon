@@ -1,15 +1,37 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, FC } from 'react';
 import { withTheme } from 'styled-components';
 import { styles } from '../../theme';
 import Dropbox from '../Dropbox';
 import Tag from '../Tag';
 import { Target, Options, Option } from '../Styled';
 
-const Multiselect = ({ placeholder, options, isError, onChange, theme }) => {
-  const label = placeholder || 'select...';
+interface Props {
+  placeholder?: string;
+  options?: Option[];
+  isError?: boolean;
+  onChange?: (data: any) => {};
+  theme?: any;
+}
+interface Option {
+  label: string;
+  value: any;
+  selected?: boolean;
+}
 
-  const [state, setState] = useState({
+type State = {
+  values: any[];
+  selected: Option[];
+  options: Option[];
+};
+
+const Multiselect: FC<Props> = ({
+  placeholder = 'select...',
+  options = [],
+  isError = false,
+  onChange = data => console.log(data),
+  theme = styles
+}) => {
+  const [state, setState] = useState<State>({
     values: [],
     selected: [],
     options
@@ -51,11 +73,11 @@ const Multiselect = ({ placeholder, options, isError, onChange, theme }) => {
   };
 
   const renderTarget = ({ show }) => (
-    <Target onClick={show} isError={isError} tabIndex='0'>
+    <Target onClick={show} isError={isError} tabIndex={0}>
       {state.selected.length > 0 ? (
         <div>{renderSelected()}</div>
       ) : (
-        <div>{label}</div>
+        <div>{placeholder}</div>
       )}
     </Target>
   );
@@ -77,17 +99,6 @@ const Multiselect = ({ placeholder, options, isError, onChange, theme }) => {
   return (
     <Dropbox renderTarget={renderTarget} renderDropdown={renderDropdown} />
   );
-};
-
-Multiselect.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onChange: PropTypes.func.isRequired
-};
-
-Multiselect.defaultProps = {
-  placeholder: 'select...',
-  onChange: () => {},
-  theme: styles
 };
 
 export default withTheme(Multiselect);

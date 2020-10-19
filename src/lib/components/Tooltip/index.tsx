@@ -19,7 +19,7 @@ type Props = {
   theme: any;
 };
 
-const Tooltip: FunctionComponent<Props> = ({ content, children, theme }) => {
+const Tooltip: FunctionComponent<Props> = ({ content, children, theme = styles }) => {
   const target: React.MutableRefObject<HTMLDivElement | undefined> = useRef();
   const tip: React.MutableRefObject<HTMLDivElement | undefined> = useRef();
 
@@ -90,16 +90,6 @@ const Tooltip: FunctionComponent<Props> = ({ content, children, theme }) => {
     </>
   );
 };
-
-// Tooltip.setRoot = (APP_NODE, id) => {
-//   ROOT_ID = id;
-//   let node = document.getElementById(ROOT_ID);
-//   if (!node) {
-//     node = document.createElement('div');
-//     node.setAttribute('id', ROOT_ID);
-//     APP_NODE.insertAdjacentElement('afterend', node);
-//   }
-// };
 
 interface FC<P> extends ForwardRefExoticComponent<P> {
   setRoot: (APP_NODE: Element, id: string) => void;

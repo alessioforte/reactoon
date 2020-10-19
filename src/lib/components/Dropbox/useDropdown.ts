@@ -1,27 +1,38 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, MutableRefObject } from 'react'
+
+interface Position {
+  left?: number | null;
+  right?: number | null;
+  top?: number | null;
+  bottom?: number | null;
+  maxWidth?: number | null;
+}
 
 const useDropdown = () => {
   const [visible, setVisible] = useState(false);
-  const [position, setPosition] = useState({});
-  const target = useRef();
-  const dropdown = useRef();
+  const [position, setPosition] = useState<Position>({});
+  const target: MutableRefObject<HTMLDivElement | undefined> = useRef();
+  const dropdown: MutableRefObject<HTMLDivElement | undefined> = useRef();
 
   useEffect(() => {
     setDropdownPosition();
   }, []);
 
   const setDropdownPosition = () => {
-    const rect = target.current.getBoundingClientRect();
-    const maxWidth = target.current.firstChild.getBoundingClientRect().width;
-    const p = { left: 0, right: null, maxWidth };
-    if (rect.x + 200 > window.innerWidth) {
-      p.left = null;
-      p.right = '0';
+    if (target.current) {
+      const rect = target.current.getBoundingClientRect();
+      const firstChild = target.current.firstChild as HTMLDivElement;
+      const maxWidth = firstChild.getBoundingClientRect().width;
+      const p: Position = { left: 0, right: null, maxWidth };
+      if (rect.x + 200 > window.innerWidth) {
+        p.left = null;
+        p.right = 0;
+      }
+      if (rect.bottom + 300 > window.innerHeight) {
+        p.bottom = 30;
+      }
+      setPosition(p);
     }
-    if (rect.bottom + 300 > window.innerHeight) {
-      p.bottom = 30;
-    }
-    setPosition(p);
   };
 
   const open = () => {

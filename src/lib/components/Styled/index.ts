@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { getContrastYIQ } from '../../theme';
 import { focus } from './css';
 
-export const Target = styled.div`
+export const Target = styled.div<{ isError: boolean; value?: any }>`
   border-radius: ${props => props.theme.border.radius + 'px'};
   box-sizing: border-box;
   display: flex;
@@ -35,14 +35,14 @@ export const Target = styled.div`
   }
 `;
 
-export const Options = styled.div`
+export const Options = styled.div<{ reverse?: boolean }>`
   display: flex;
   flex-direction: ${props => (props.reverse ? 'column' : 'column-reverse')};
   order: ${props => (props.reverse ? '0' : '-1')};
   /* overflow: scroll; */
 `;
 
-export const Option = styled.li`
+export const Option = styled.li<{ selected?: boolean }>`
   background: ${props =>
     props.selected ? props.theme.colors.ground : 'transparent'};
   color: ${props =>

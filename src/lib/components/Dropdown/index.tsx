@@ -1,11 +1,31 @@
-import React from 'react';
+import React, {
+  FunctionComponent,
+  ReactNode,
+  ReactElement,
+  Children
+} from 'react';
 import styled from 'styled-components';
 import { getContrastYIQ } from '../../theme';
 import Icon from '../Icon';
 import Button from '../Button';
 import Dropbox from '../Dropbox';
 
-const Dropdown = ({ placeholder, children, renderButton }) => {
+interface Props {
+  placeholder: string;
+  children?: ReactElement;
+  renderButton: (props: any) => ReactNode;
+}
+
+interface OptionProps {
+  label: string,
+  action: any,
+}
+
+interface FC<P> extends FunctionComponent<P> {
+  Option: FunctionComponent<OptionProps>
+}
+
+const Dropdown: FC<Props> = ({ placeholder, children, renderButton }) => {
   const renderTarget = ({ show }) =>
     renderButton ? (
       renderButton(show)
@@ -16,22 +36,20 @@ const Dropdown = ({ placeholder, children, renderButton }) => {
     );
 
   const renderDropdown = ({ close }) => (
-    <div onClick={close}>{children && children.map(child => child)}</div>
+    <div onClick={close}>{children && Children.toArray(children)}</div>
   );
   return (
     <Dropbox renderTarget={renderTarget} renderDropdown={renderDropdown} />
   );
 };
 
-const Option = ({ label, action }) => {
+Dropdown.Option = ({ label, action }) => {
   return (
     <Item onClick={action} key={label}>
       {label}
     </Item>
   );
 };
-
-Dropdown.Option = Option;
 
 export default Dropdown;
 

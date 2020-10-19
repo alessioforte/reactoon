@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, FC } from 'react';
 import styled from 'styled-components';
 import Icon from '../Icon';
 
-const Collapse = ({ isOpen, children, title }) => {
+interface Props {
+  isOpen?: boolean;
+  children?: React.ReactElement,
+  title?: string
+}
+
+const Collapse: FC<Props> = ({ isOpen = false, children, title }) => {
   const [state, setState] = useState(isOpen);
 
   const togglePanel = () => {
@@ -30,19 +35,9 @@ const Collapse = ({ isOpen, children, title }) => {
   );
 };
 
-Collapse.propTypes = {
-  title: PropTypes.string,
-  children: PropTypes.any,
-  open: PropTypes.bool
-};
-
-Collapse.defaultProps = {
-  title: 'default'
-};
-
 export default Collapse;
 
-const Collapsed = styled.div`
+const Collapsed = styled.div<{ isOpen: boolean }>`
   user-select: none;
   max-width: 100%;
   .collapse {

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { getContrastYIQ } from '../../theme';
 
 /* eslint-disable */
-export const Options = styled.div`
+export const Options = styled.div<{ reverse?: boolean }>`
   display: flex;
   flex-direction: ${props => (props.reverse ? 'column' : 'column-reverse')};
   order: ${props => (props.reverse ? '0' : '-2')};
@@ -17,7 +17,7 @@ export const Content = styled(Options)`
   min-height: 100px;
   padding: 1rem;
 `;
-export const Control = styled.div`
+export const Control = styled.div<{ reverse?: boolean; reset?: boolean }>`
   display: flex;
   justify-content: space-between;
   margin: 7px;
@@ -44,7 +44,7 @@ export const Control = styled.div`
     display: ${props => (props.reset ? 'flex' : 'none')};
   }
 `;
-export const Option = styled.div`
+export const Option = styled.div<{ isSelected: boolean }>`
   display: flex;
   align-items: center;
   min-height: 28px;

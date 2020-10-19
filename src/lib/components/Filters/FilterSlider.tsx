@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, FC } from 'react';
 import { withTheme } from 'styled-components';
 import Dropbox from '../Dropbox';
 import Slider from '../Slider';
@@ -8,7 +7,23 @@ import { Content, Control } from './styled';
 import { Target } from '../Styled';
 import { styles } from '../../theme';
 
-const FilterSlider = ({ placeholder, min, max, onChange, isError, theme }) => {
+interface Props {
+  placeholder: string;
+  min: number;
+  max: number;
+  onChange: (data: any) => {};
+  isError: boolean;
+  theme: any;
+}
+
+const FilterSlider: FC<Props> = ({
+  placeholder = 'select...',
+  min,
+  max,
+  onChange = data => console.log(data),
+  isError,
+  theme = styles
+}) => {
   const [state, setState] = useState({ value: [min, max] });
   const [reset, setReset] = useState(false);
   const label = placeholder || 'select...';
@@ -27,7 +42,7 @@ const FilterSlider = ({ placeholder, min, max, onChange, isError, theme }) => {
   };
 
   const renderTarget = ({ show }) => (
-    <Target onClick={show} isError={isError} tabIndex='0'>
+    <Target onClick={show} isError={isError} tabIndex={0}>
       {label}
       <div className='icon'>
         <Icon name='caret' size='5px' color={theme.colors.ground} />
@@ -62,16 +77,6 @@ const FilterSlider = ({ placeholder, min, max, onChange, isError, theme }) => {
   return (
     <Dropbox renderTarget={renderTarget} renderDropdown={renderDropdown} />
   );
-};
-
-FilterSlider.propTypes = {
-  onChange: PropTypes.func.isRequired
-};
-
-FilterSlider.defaultProps = {
-  placeholder: 'select...',
-  onChange: value => console.log(value),
-  theme: styles
 };
 
 export default withTheme(FilterSlider);

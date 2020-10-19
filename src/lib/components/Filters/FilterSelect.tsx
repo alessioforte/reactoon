@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, FC } from 'react';
 import { withTheme } from 'styled-components';
 import Dropbox from '../Dropbox';
 import { styles } from '../../theme';
@@ -8,8 +7,27 @@ import Icon from '../Icon';
 import Tag from '../Tag';
 import { Target } from '../Styled';
 
-const FilterSelect = ({ placeholder, options, onChange, isError, theme }) => {
-  const [state, setState] = useState({ selected: [], values: [] });
+interface Props {
+  placeholder: string;
+  options: any;
+  onChange: (values: any) => {};
+  isError: boolean;
+  theme: any;
+}
+
+interface State {
+  selected: any[];
+  values: any[];
+}
+
+const FilterSelect: FC<Props> = ({
+  placeholder = 'select...',
+  options,
+  onChange = value => console.log(value),
+  isError,
+  theme = styles
+}) => {
+  const [state, setState] = useState<State>({ selected: [], values: [] });
   const label = placeholder || 'select...';
 
   const select = (e, item) => {
@@ -50,7 +68,7 @@ const FilterSelect = ({ placeholder, options, onChange, isError, theme }) => {
   };
 
   const renderTarget = ({ show }) => (
-    <Target onClick={show} isError={isError} tabIndex='0'>
+    <Target onClick={show} isError={isError} tabIndex={0}>
       {label}
       <div className='icon'>
         <Icon name='caret' size='5px' color={theme.colors.ground} />
@@ -105,17 +123,6 @@ const FilterSelect = ({ placeholder, options, onChange, isError, theme }) => {
   return (
     <Dropbox renderTarget={renderTarget} renderDropdown={renderDropdown} />
   );
-};
-
-FilterSelect.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onChange: PropTypes.func.isRequired
-};
-
-FilterSelect.defaultProps = {
-  placeholder: 'select...',
-  onChange: value => console.log(value),
-  theme: styles
 };
 
 export default withTheme(FilterSelect);

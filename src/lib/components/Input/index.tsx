@@ -1,18 +1,29 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, FC } from 'react';
 import styled, { ThemeProvider, withTheme } from 'styled-components';
 import Theme, { getContrastYIQ } from '../../theme';
 import { focus } from '../Styled/css';
 
-const Input = ({
-  type,
+interface Props {
+  type?: string;
+  placeholder?: string;
+  name?: string;
+  value?: string;
+  isError?: boolean;
+  onChange?: (data: any) => {},
+  message?: string;
+  theme: any;
+  ref: React.MutableRefObject<HTMLDivElement | undefined>;
+}
+
+const Input: FC<Props> = ({
+  type = 'input',
   placeholder,
   name,
   value,
-  isError,
-  onChange,
+  isError = false,
+  onChange = data => console.log(data),
   message,
-  theme,
+  theme = Theme.styles,
   ref
 }) => {
   const [state, setState] = useState(value || '')
@@ -38,34 +49,15 @@ const Input = ({
           data-value={hasValue}
         />
         <Label>{isError ? <span>{message}</span> : placeholder}</Label>
-        {/* <Line isError={isError} /> */}
       </Box>
     </ThemeProvider>
   );
 };
 
-Input.propTypes = {
-  type: PropTypes.string,
-  placeholder: PropTypes.string,
-  isError: PropTypes.bool,
-  onChange: PropTypes.func,
-  ref: PropTypes.any
-};
-
-Input.defaultProps = {
-  type: 'input',
-  placeholder: '',
-  onChange: () => {},
-  isError: false,
-  min: null,
-  max: null,
-  theme: Theme.styles
-};
-
 export default withTheme(Input);
 
 /* eslint-disable */
-const Box = styled.div`
+const Box = styled.div<{ isError?: boolean }>`
   box-sizing: border-box;
   position: relative;
   min-height: 30px;

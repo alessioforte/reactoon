@@ -7,22 +7,33 @@ import Icon from '../Icon';
 import { availableIcons } from '../Icon/icons';
 
 type Props = {
-  kind?: string,
-  href?: string,
-  children?: ReactNode,
-  label?: string,
-  icon?: string,
-  reverse?: boolean,
-  round?: boolean,
-  theme: any,
-}
+  kind?: string;
+  href?: string;
+  children?: ReactNode;
+  label?: string;
+  icon?: string;
+  reverse?: boolean;
+  round?: boolean;
+  theme: any;
+  onClick?: () => {};
+};
 
-const Button: FC<Props> =
-({ kind, href, children, theme, label, icon, reverse, round, ...props }) => {
+const Button: FC<Props> = ({
+  kind,
+  href,
+  children,
+  theme,
+  label,
+  icon,
+  reverse,
+  round,
+  onClick,
+  ...props
+}) => {
   let buttonKinds: string = kind || 'primary';
   if (kind && !availableKinds.includes(kind)) buttonKinds = 'primary';
 
-  let inner: ReactNode = children ? Children.toArray(children) : label
+  let inner: ReactNode = children ? Children.toArray(children) : label;
 
   if (icon && availableIcons.includes(icon)) {
     inner = (
@@ -32,7 +43,7 @@ const Button: FC<Props> =
         </span>
         {label}
       </>
-    )
+    );
   }
 
   let button: ReactElement = (
@@ -65,13 +76,9 @@ const Button: FC<Props> =
   return <ThemeProvider theme={theme}>{button}</ThemeProvider>;
 };
 
-export const ButtonGroup: FC<{children?: ReactNode}> = ({ children }) => {
-  return (
-    <Group>
-      {Children.toArray(children)}
-    </Group>
-  )
-}
+export const ButtonGroup: FC<{ children?: ReactNode }> = ({ children }) => {
+  return <Group>{Children.toArray(children)}</Group>;
+};
 
 Button.propTypes = {
   kind: PropTypes.oneOf(availableKinds),

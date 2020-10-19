@@ -1,26 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, FC } from 'react';
 import PropTypes from 'prop-types';
 import styled, { ThemeProvider, withTheme } from 'styled-components';
 import Icon from '../Icon';
 import Theme, { getContrastYIQ } from '../../theme/';
 
-const Searchbar = ({
-  suggestions,
-  onChange,
-  onSearch,
-  onClear,
-  delay,
-  theme
+interface Props {
+  suggestions?: any[];
+  onChange?: (data: any) => {};
+  onSearch?: (data: any) => {};
+  onClear?: () => {};
+  delay?: number;
+  theme?: any;
+}
+
+const Searchbar: FC<Props> = ({
+  suggestions = [],
+  onChange = data => console.log(data),
+  onSearch = () => {},
+  onClear = () => {},
+  delay = 300,
+  theme = Theme.styles
 }) => {
   const [showClear, setShowClear] = useState(false);
   const [showTips, setShowTips] = useState(true);
   const [tipIndex, setTipIndex] = useState(-1);
-  const input = React.createRef();
-  const searchbar = React.createRef();
-  let timeout = null;
+  const input: React.MutableRefObject<HTMLInputElement | undefined> = useRef();
+  const searchbar: React.MutableRefObject<
+    HTMLDivElement | undefined
+  > = useRef();
+  let timeout: number | null = null;
 
   const clearInput = () => {
-    input.current.value = '';
+    if (input.current) {
+      input.current.value = '';
+    }
     setShowClear(false);
     setShowTips(false);
     setTipIndex(-1);
@@ -29,32 +42,34 @@ const Searchbar = ({
   };
 
   const handleInputKeyDown = e => {
-    let i = -1;
-    let length = suggestions.length;
-
-    switch (e.key) {
-      case 'ArrowDown':
-        if (showTips) {
-          i = (tipIndex + 1) % length;
-          input.current.value = suggestions[i].label;
-        }
-        break;
-      case 'ArrowUp':
-        if (showTips) {
-          i = (tipIndex + length - 1) % length;
-          input.current.value = suggestions[i].label;
-        }
-        break;
-      case 'Escape':
-        setShowTips(false);
-        onChange(input.current.value);
-        break;
-      default:
-        break;
+    if (input.current) {
+      let i = -1;
+      let length = suggestions.length;
+      switch (e.key) {
+        case 'ArrowDown':
+          if (showTips) {
+            i = (tipIndex + 1) % length;
+            input.current.value = suggestions[i].label;
+          }
+          break;
+        case 'ArrowUp':
+          if (showTips) {
+            i = (tipIndex + length - 1) % length;
+            input.current.value = suggestions[i].label;
+          }
+          break;
+        case 'Escape':
+          setShowTips(false);
+          onChange(input.current.value);
+          break;
+        default:
+          break;
+      }
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+      setTipIndex(i);
     }
-
-    clearTimeout(timeout);
-    setTipIndex(i);
   };
 
   const handleInputChange = e => {
@@ -78,8 +93,10 @@ const Searchbar = ({
   };
 
   const handleSelection = value => {
-    input.current.value = value;
-    input.current.focus();
+    if (input.current) {
+      input.current.value = value;
+      input.current.focus();
+    }
     onChange(value);
     setShowTips(false);
     window.removeEventListener('click', hide);
@@ -87,10 +104,12 @@ const Searchbar = ({
 
   const handleSubmit = e => {
     e.preventDefault();
-    let value = input.current.value;
-    if (value) {
-      onChange(value);
-      onSearch(value);
+    if (input.current) {
+      let value = input.current.value;
+      if (value) {
+        onChange(value);
+        onSearch(value);
+      }
     }
   };
 
@@ -160,30 +179,13 @@ const Searchbar = ({
   );
 };
 
-Searchbar.propTypes = {
-  suggestions: PropTypes.array,
-  onChange: PropTypes.func,
-  onSearch: PropTypes.func,
-  onClear: PropTypes.func,
-  delay: PropTypes.number
-};
-
-Searchbar.defaultProps = {
-  suggestions: [],
-  onChange: () => {},
-  onSearch: () => {},
-  onClear: () => {},
-  delay: 300,
-  theme: Theme.styles
-};
-
 export default withTheme(Searchbar);
 
 /**
  * STYLES
  */
 
-const Bar = styled.form`
+const Bar = styled.form<{ ref: any }>`
   position: relative;
   display: flex;
   align-items: center;
@@ -191,7 +193,7 @@ const Bar = styled.form`
   min-height: 28px;
   background: ${props => props.theme.colors.background};
 `;
-const Input = styled.input`
+const Input = styled.input<{ ref: any }>`
   flex-grow: 1;
   border: 0;
   min-height: 30px;
@@ -221,7 +223,7 @@ const List = styled.ul`
   font-size: 14px;
   border-top: 1px solid ${props => props.theme.colors.ground};
 `;
-const Tip = styled.li`
+const Tip = styled.li<{ hover: boolean }>`
   display: flex;
   align-items: center;
   min-height: 28px;

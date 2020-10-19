@@ -1,10 +1,25 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, FC } from 'react';
 import styled, { ThemeProvider, withTheme } from 'styled-components';
 import Theme, { getContrastYIQ } from '../../theme';
 import { focus } from '../Styled/css';
 
-const Radio = ({ name, label, options, onChange, inline, theme }) => {
+interface Props {
+  name?: string;
+  label?: string;
+  options: any;
+  onChange?: (data: any) => {};
+  inline?: boolean;
+  theme: any;
+}
+
+const Radio = ({
+  name,
+  label,
+  options,
+  onChange = data => console.log(data),
+  inline = false,
+  theme = Theme.styles
+}) => {
   const initialValue = options.length > 0 ? options[0].value : null;
   const [value, setValue] = useState(initialValue);
 
@@ -20,19 +35,19 @@ const Radio = ({ name, label, options, onChange, inline, theme }) => {
       <div>
         {label && <Placeholder>{label}</Placeholder>}
         <Options inline={inline}>
-          {options.map((option, i) => (
+          {options.map(option => (
             <label key={`${option.label}`}>
               <input
                 type='radio'
                 name={name}
                 value={option.value}
-                tabIndex='-1'
+                tabIndex={-1}
               />
               <Option
                 onClick={e => handleOnClick(e, option.value)}
                 active={value === option.value}
               >
-                <div className='selector' tabIndex='0' />
+                <div className='selector' tabIndex={0} />
                 <span>{option.label}</span>
               </Option>
             </label>
@@ -43,28 +58,13 @@ const Radio = ({ name, label, options, onChange, inline, theme }) => {
   );
 };
 
-Radio.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onChange: PropTypes.func.isRequired,
-  inline: PropTypes.bool,
-  name: PropTypes.string,
-  label: PropTypes.string,
-  theme: PropTypes.any
-};
-
-Radio.defaultProps = {
-  inline: false,
-  onChange: () => {},
-  theme: Theme.styles
-};
-
 export default withTheme(Radio);
 
 /* eslint-disable */
 const Placeholder = styled.span`
   font-weight: bold;
 `;
-const Options = styled.div`
+const Options = styled.div<{ inline?: boolean }>`
   display: flex;
   flex-direction: ${props => (props.inline ? 'row' : 'column')};
   input {
@@ -73,7 +73,7 @@ const Options = styled.div`
     z-index: -1;
   }
 `;
-const Option = styled.div`
+const Option = styled.div<{ active?: boolean }>`
   display: inline-flex;
   align-items: center;
   margin: 0 5px 0 0;

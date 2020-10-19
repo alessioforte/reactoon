@@ -1,10 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FC, ReactNode } from 'react';
 import styled, { ThemeProvider, withTheme } from 'styled-components';
 import Theme, { getContrastYIQ } from '../../theme';
 import useDropdown from './useDropdown';
 
-const Dropbox = ({ renderTarget, renderDropdown, theme }) => {
+interface Props {
+  renderTarget: (props: any) => ReactNode;
+  renderDropdown: (props: any) => ReactNode;
+  theme: any;
+}
+
+const Dropbox: FC<Props> = ({
+  renderTarget,
+  renderDropdown,
+  theme = Theme.styles
+}) => {
   const { open, close, position, target, dropdown, visible } = useDropdown();
 
   return (
@@ -21,23 +30,15 @@ const Dropbox = ({ renderTarget, renderDropdown, theme }) => {
   );
 };
 
-Dropbox.propTypes = {
-  renderTarget: PropTypes.func,
-  renderDropdown: PropTypes.func,
-  theme: PropTypes.object
-};
-
-Dropbox.defaultProps = {
-  theme: Theme.styles
-};
-
 export default withTheme(Dropbox);
 
-// prettier-ignore
-const Box = styled.div`
+const Box = styled.div<{ ref: any }>`
   position: relative;
-`
-const Drop = styled.div.attrs(({ position }) => ({ style: position }))`
+`;
+const Drop = styled.div.attrs(({ position }: any) => ({ style: position }))<{
+  ref: any;
+  position: any;
+}>`
   border-radius: ${props => props.theme.border.radius + 'px'};
   position: absolute;
   background: ${props => props.theme.colors.background};
