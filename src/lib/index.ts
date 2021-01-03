@@ -19,6 +19,7 @@ import Filterslider from './components/Filters/FilterSlider';
 import Modal from './components/Modal';
 import Tag from './components/Tag';
 import Message from './components/Message';
+import Scrollable from './components/Scrollable';
 import toast from './components/Toast';
 // Confirm Component
 // DataRangePicker Component
@@ -58,6 +59,7 @@ export {
   Filterslider,
   withTooltip,
   Theme,
+  Scrollable,
   SideBar,
   Slider,
   Slideshow,

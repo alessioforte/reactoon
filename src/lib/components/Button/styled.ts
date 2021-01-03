@@ -117,7 +117,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   }
 `;
 
-export const A = styled(StyledButton.withComponent('a'))``;
+export const A = StyledButton.withComponent('a');
 
 export const availableKinds = Object.keys(KINDS);
 

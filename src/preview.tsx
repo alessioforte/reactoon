@@ -20,6 +20,7 @@ import {
   Select,
   Toggle,
   Tooltip,
+  Scrollable,
   SideBar,
   Slider,
   Tag
@@ -52,13 +53,20 @@ const components = {
   searchbar: () => <Searchbar />,
   toogle: () => <Toggle />,
   tooltip: () => <Tooltip />,
+  scrollable: () => {
+    return (
+      <Scrollable>
+        <div style={{ height: '2400px', background: 'green' }}>{longContent}</div>
+      </Scrollable>
+    )
+  },
   slider: () => <Slider />,
   tag: () => <Tag label="label tag" />,
 
 };
 
 export default () => {
-  const [state, setState] = useState('dropdown');
+  const [state, setState] = useState('scrollable');
 
   return (
     <Preview>
@@ -137,3 +145,5 @@ const Container = styled.div`
   box-sizing: border-box;
   padding: 10px;
 `
+
+const longContent = `Beethoven, Mozart, Chopin, Liszt, Brahms, Panties...I'm sorry...Schumann, Schubert, Mendelssohn and Bach. Names that will live for ever. But there is one composer whose name is never included with the greats. Why is it that the world never remembered the name of Johann Gambolputty de von Ausfern- schplenden- schlitter- crasscrenbon- fried- digger- dingle- dangle- dongle- dungle- burstein- von- knacker- thrasher- apple- banger- horowitz- ticolensic- grander- knotty- spelltinkle- grandlich- grumblemeyer- spelterwasser- kurstlich- himbleeisen- bahnwagen- gutenabend- bitte- ein- nürnburger- bratwustle- gerspurten- mitz- weimache- luber- hundsfut- gumberaber- shönedanker- kalbsfleisch- mittler- aucher von Hautkopft of Ulm? To do justice to this man, thought by many to be the greatest name in German Baroque music, we present a profile of Johann Gambolputty de von Ausfern- schplenden- schlitter- crasscrenbon- fried- digger- dingle- dangle- dongle- dungle- burstein- von- knacker- thrasher- apple- banger- horowitz- ticolensic- grander- knotty- spelltinkle- grandlich- grumblemeyer- spelterwasser- kurstlich- himbleeisen- bahnwagen- gutenabend- bitte- ein- nürnburger- bratwustle- gerspurten- mitz- weimache- luber- hundsfut- gumberaber- shönedanker- kalbsfleisch- mittler- aucher von Hautkopft of Ulm. We start with an interview with his only surviving relative Karl Gambolputty de von Ausfern...`
