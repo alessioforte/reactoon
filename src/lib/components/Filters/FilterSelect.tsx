@@ -10,7 +10,7 @@ import { Target } from '../Styled';
 interface Props {
   placeholder?: string;
   options?: any;
-  onChange?: (values: any) => {};
+  onChange?: (values: any) => void;
   isError?: boolean;
   theme?: any;
 }
@@ -31,8 +31,8 @@ const FilterSelect: FC<Props> = ({
   const label = placeholder || 'select...';
 
   const select = (e, item) => {
-    let selected = state.selected;
-    let values = state.values;
+    const selected = state.selected;
+    const values = state.values;
     selected.push(item);
     values.push(item.value);
 
@@ -41,8 +41,8 @@ const FilterSelect: FC<Props> = ({
   };
 
   const selectAll = () => {
-    let all = [...options];
-    let values = all.map(item => item.value);
+    const all = [...options];
+    const values = all.map(item => item.value);
 
     setState({ selected: all, values });
     onChange(values);
@@ -55,12 +55,12 @@ const FilterSelect: FC<Props> = ({
 
   const unselect = (e, item) => {
     e.stopPropagation();
-    let sIndex = state.selected.indexOf(item);
-    let selected = state.selected;
+    const sIndex = state.selected.indexOf(item);
+    const selected = state.selected;
     selected.splice(sIndex, 1);
 
-    let vIndex = state.values.indexOf(item.value);
-    let values = state.values;
+    const vIndex = state.values.indexOf(item.value);
+    const values = state.values;
     values.splice(vIndex, 1);
 
     setState({ selected, values });
@@ -103,7 +103,7 @@ const FilterSelect: FC<Props> = ({
       <Options>
         {options &&
           options.map((item, i) => {
-            let isSelected = state.selected.includes(item);
+            const isSelected = state.selected.includes(item);
             return (
               <Option
                 key={`${item.value}`}

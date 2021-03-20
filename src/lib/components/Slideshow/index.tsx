@@ -20,7 +20,7 @@ const Slideshow: FC<Props> = ({ children, enableTransition, height, duration, th
   useEffect(() => {
     if (enableTransition) {
       const interval = setInterval(() => {
-        let i = (selected + 1) % React.Children.count(children);
+        const i = (selected + 1) % React.Children.count(children);
         setSelected(i);
       }, duration)
       return () => clearInterval(interval)

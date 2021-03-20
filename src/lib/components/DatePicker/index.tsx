@@ -10,7 +10,7 @@ import Dropbox from '../Dropbox';
 type Props = {
   label?: string;
   placeholder?: string;
-  onChange?: () => {};
+  onChange?: () => void;
   name?: string;
   isError?: boolean;
   theme?: any;

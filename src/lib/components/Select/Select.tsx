@@ -9,7 +9,7 @@ interface Props {
   placeholder?: string;
   options?: Option[]
   isError?: boolean;
-  onChange?: (data: any) => {};
+  onChange?: (data: any) => void;
   theme?: any
 }
 

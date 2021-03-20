@@ -25,14 +25,14 @@ export const months = {
 
 class Calendar {
   static buildDays(month: number, firstweekday: number, year: number) {
-    let days: number[][] = [];
-    let daysInMonth = this.getDaysInMonth(month, year);
+    const days: number[][] = [];
+    const daysInMonth = this.getDaysInMonth(month, year);
 
     for (let i = 0; i < daysInMonth; i++) {
       if (firstweekday === 7) firstweekday = 0;
-      let weekday = firstweekday;
+      const weekday = firstweekday;
       firstweekday++;
-      let numberday = i + 1;
+      const numberday = i + 1;
       days.push([weekday, numberday, month, year]);
     }
 
@@ -40,15 +40,15 @@ class Calendar {
   }
 
   static buildWeeks(month, firstweekday, year) {
-    let weeks: number[][][] = [];
-    let days = this.buildDays(month, firstweekday, year);
-    let previousDays: number[][] = [];
-    let nextDays: number[][] = [];
+    const weeks: number[][][] = [];
+    const days = this.buildDays(month, firstweekday, year);
+    const previousDays: number[][] = [];
+    const nextDays: number[][] = [];
 
     if (firstweekday > 0) {
       const previousMonth = this.getPreviousMonth(month, year);
-      let previousYear = month === 0 ? year - 1 : year;
-      let daysInPreviousMonth = this.getDaysInMonth(
+      const previousYear = month === 0 ? year - 1 : year;
+      const daysInPreviousMonth = this.getDaysInMonth(
         previousMonth,
         previousYear
       );
@@ -61,7 +61,7 @@ class Calendar {
     }
 
     const nextMonth = this.getNextMonth(month, year);
-    let nextYear = month < 11 ? year : year + 1;
+    const nextYear = month < 11 ? year : year + 1;
     let nextMonthFirstWeekday = days[days.length - 1][0] + 1;
     let nextNumberday = 1;
     for (let i = nextMonthFirstWeekday; i < 7; i++) {
@@ -73,9 +73,9 @@ class Calendar {
       ]);
     }
 
-    let totalDays = [...previousDays, ...days, ...nextDays];
-    let j = totalDays.length;
-    let chunk = 7;
+    const totalDays = [...previousDays, ...days, ...nextDays];
+    const j = totalDays.length;
+    const chunk = 7;
     let chunkArr: number[][] = [];
     for (let i = 0; i < j; i += chunk) {
       chunkArr = totalDays.slice(i, i + chunk);

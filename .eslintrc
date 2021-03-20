@@ -1,6 +1,6 @@
 {
-  "extends": ["prettier", "prettier/react"],
-  "plugins": ["react", "import", "prettier", "react-hooks", "jsx-a11y"],
+  "extends": ["plugin:@typescript-eslint/recommended", "prettier"],
+  "plugins": ["@typescript-eslint", "react", "import", "prettier", "react-hooks", "jsx-a11y"],
   "env": {
     "browser": true,
     "node": true,
@@ -57,7 +57,7 @@
       "moduleDirectory": ["node_modules", "src", "api"]
     }
   },
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "sourceType": "module",
     "ecmaFeatures": {

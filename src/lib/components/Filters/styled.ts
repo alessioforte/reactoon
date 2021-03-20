@@ -11,7 +11,7 @@ export const Options = styled.div<{ reverse?: boolean }>`
   margin: 5px 0;
   padding-top: 10px;
 `;
-export const Content = styled(Options)`
+export const Content = styled.div`
   align-items: center;
   justify-content: center;
   min-height: 100px;

@@ -91,7 +91,7 @@ const ToastManager = ({ actions }) => {
     setClosed([]);
   };
 
-  const closeAll = () => {};
+  const closeAll = () => null;
 
   const close = msg => {
     // const messages = top.filter((m, i) => i !== index)

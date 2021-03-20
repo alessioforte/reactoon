@@ -8,7 +8,7 @@ interface Props {
   label?: string;
   name?: string;
   checked?: boolean;
-  onChange?: () => {};
+  onChange?: (value: any) => void;
   theme?: any;
 }
 

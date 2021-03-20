@@ -11,7 +11,7 @@ type Props = {
   theme: any
 }
 
-const Tag: FC<Props> = ({ label = 'tag', icon, onClick = (e) => {}, theme }) => {
+const Tag: FC<Props> = ({ label = 'tag', icon, onClick = () => null, theme }) => {
 
   let tagIcon: any = null;
   if (icon && onClick) {

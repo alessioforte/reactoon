@@ -7,7 +7,7 @@ interface Props {
   name?: string;
   label?: string;
   options?: Option[];
-  onChange?: (data: any) => {};
+  onChange?: (data: any) => void;
   inline?: boolean;
   theme: any;
 }

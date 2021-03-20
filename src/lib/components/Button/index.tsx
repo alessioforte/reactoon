@@ -25,7 +25,7 @@ const Button: FC<Props> = ({
   icon,
   reverse = false,
   round = false,
-  onClick = () => {},
+  onClick = () => null,
   theme = styles,
   ...props
 }) => {

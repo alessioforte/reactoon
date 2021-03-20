@@ -5,9 +5,9 @@ import Theme, { getContrastYIQ } from '../../theme/';
 
 interface Props {
   suggestions?: any[];
-  onChange?: (data: any) => {};
-  onSearch?: (data: any) => {};
-  onClear?: () => {};
+  onChange?: (data: any) => void;
+  onSearch?: (data: any) => void;
+  onClear?: () => void;
   delay?: number;
   theme?: any;
 }
@@ -15,8 +15,8 @@ interface Props {
 const Searchbar: FC<Props> = ({
   suggestions = [],
   onChange = data => console.log(data),
-  onSearch = () => {},
-  onClear = () => {},
+  onSearch = () => null,
+  onClear = () => null,
   delay = 300,
   theme = Theme.styles
 }) => {
@@ -27,7 +27,7 @@ const Searchbar: FC<Props> = ({
   const searchbar: React.MutableRefObject<
     HTMLDivElement | undefined
   > = useRef();
-  let timeout: number | null = null;
+  let timeout: NodeJS.Timeout | null = null;
 
   const clearInput = () => {
     if (input.current) {
@@ -43,7 +43,7 @@ const Searchbar: FC<Props> = ({
   const handleInputKeyDown = e => {
     if (input.current) {
       let i = -1;
-      let length = suggestions.length;
+      const length = suggestions.length;
       switch (e.key) {
         case 'ArrowDown':
           if (showTips) {
@@ -104,7 +104,7 @@ const Searchbar: FC<Props> = ({
   const handleSubmit = e => {
     e.preventDefault();
     if (input.current) {
-      let value = input.current.value;
+      const value = input.current.value;
       if (value) {
         onChange(value);
         onSearch(value);
@@ -114,9 +114,9 @@ const Searchbar: FC<Props> = ({
 
   const hide = e => {
     if (searchbar.current) {
-      var rect = searchbar.current.getBoundingClientRect();
-      var x = e.clientX;
-      var y = e.clientY;
+      const rect = searchbar.current.getBoundingClientRect();
+      const x = e.clientX;
+      const y = e.clientY;
       if (y < rect.top || y > rect.bottom || x < rect.left || x > rect.right) {
         setShowTips(false);
         window.removeEventListener('click', hide);

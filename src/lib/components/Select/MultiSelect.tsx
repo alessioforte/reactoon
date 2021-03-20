@@ -9,7 +9,7 @@ interface Props {
   placeholder?: string;
   options?: Option[];
   isError?: boolean;
-  onChange?: (data: any) => {};
+  onChange?: (data: any) => void;
   theme?: any;
 }
 interface Option {
@@ -38,8 +38,8 @@ const Multiselect: FC<Props> = ({
   });
 
   const select = (item, i) => {
-    let selected = state.selected;
-    let values = state.values;
+    const selected = state.selected;
+    const values = state.values;
     selected.push(item);
     values.push(item.value);
     options[i].selected = true;
@@ -49,9 +49,9 @@ const Multiselect: FC<Props> = ({
 
   const unselect = (e, item) => {
     e.stopPropagation();
-    let selected = state.selected.filter(s => s.value !== item.value);
-    let values = state.values.filter(v => v !== item.value);
-    let options = state.options.map(o => {
+    const selected = state.selected.filter(s => s.value !== item.value);
+    const values = state.values.filter(v => v !== item.value);
+    const options = state.options.map(o => {
       if (o.value === item.value) {
         o.selected = false;
       }

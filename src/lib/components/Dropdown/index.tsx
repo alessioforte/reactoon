@@ -29,7 +29,7 @@ const Dropdown: FC<Props> = ({ label, children, renderButton }) => {
         {label ? label : <Icon name='caret' size='5px' />}
       </Button>
     );
-  
+
   const renderDropdown = ({ close }) => (
     <div onClick={close}>{children && Children.toArray(children)}</div>
   );
@@ -43,7 +43,7 @@ interface OptionProps {
   onClick?: () => void;
 }
 
-Dropdown.Option = ({ label, onClick = () => {} }: OptionProps) => {
+Dropdown.Option = ({ label, onClick = () => null }: OptionProps) => {
   return (
     <Item onClick={onClick} key={label}>
       {label}

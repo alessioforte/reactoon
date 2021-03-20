@@ -11,7 +11,7 @@ interface Props {
   placeholder?: string;
   min?: number;
   max?: number;
-  onChange?: (data: any) => {};
+  onChange?: (data: any) => void;
   isError?: boolean;
   theme?: any;
 }

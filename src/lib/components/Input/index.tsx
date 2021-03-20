@@ -9,7 +9,7 @@ interface Props {
   name?: string;
   value?: string;
   isError?: boolean;
-  onChange?: (data: any) => {};
+  onChange?: (data: any) => void;
   message?: string;
   ref?: React.MutableRefObject<HTMLInputElement | null>;
   theme: any;
@@ -30,7 +30,7 @@ const Input: FC<Props> = ({
   const [hasValue, setHasValue] = useState(!!value);
 
   const handleChange = e => {
-    let v = e.target.value;
+    const v = e.target.value;
     const data = { value: v, name, type };
     setHasValue(!!v);
     setState(v);

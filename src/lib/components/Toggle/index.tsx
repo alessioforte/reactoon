@@ -14,7 +14,7 @@ const Toggle: FC<Props> = ({
   const [value, setValue] = useState<boolean>(initialValue || false);
 
   const handleOnClick = (e: any): any => {
-    const checked: boolean = !value;
+    const checked = !value;
     setValue(checked);
     const data: Data = { name, value: checked, checked, label };
     onChange(data, e);

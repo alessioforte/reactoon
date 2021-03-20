@@ -49,7 +49,7 @@ const Modal: FC<Props> = ({
     const ROOT_NODE: any = document.getElementById(ROOT_ID);
     const handleClickOnOverlay = shouldCloseOnOverlayClick
       ? closeOnClick
-      : () => {};
+      : () => null;
     const Root = (
       <Overlay onClick={handleClickOnOverlay} ref={overlay}>
         <Content size={size}>{render && render({ close })}</Content>
