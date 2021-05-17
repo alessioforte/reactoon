@@ -139,5 +139,5 @@ export const Tip = styled.div<{ ref: any }>`
   color: ${props =>
     props.theme.colors[getContrastYIQ(props.theme.colors.background)]};
   box-shadow: ${props => props.theme.colors.shadow};
-  border-radius: ${props => props.theme.border.radius + 'px'};
+  border-radius: ${props => `${props.theme.border.radius}px`};
 `;

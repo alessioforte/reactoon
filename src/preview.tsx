@@ -55,7 +55,7 @@ const components = {
   tooltip: () => <Tooltip />,
   scrollable: () => {
     return (
-      <Scrollable>
+      <Scrollable size={{ width: 600, height: 600 }}>
         <div style={{ height: '2400px', background: 'green' }}>{longContent}</div>
       </Scrollable>
     )

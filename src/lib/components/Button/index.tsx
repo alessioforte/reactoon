@@ -14,7 +14,7 @@ type Props = {
   reverse?: boolean;
   round?: boolean;
   theme: any;
-  onClick?: () => void;
+  onClick?: (e: any) => void;
 };
 
 const Button: FC<Props> = ({

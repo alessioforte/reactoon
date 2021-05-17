@@ -10,30 +10,33 @@ import styled from 'styled-components';
 
 interface Props {
   children?: ReactElement | ReactElement[] | string;
-  height?: string;
+  size?: { width: number; height: number };
   maxHeight?: string;
   className?: string;
 }
 
-const width = '600px';
-const height = '600px';
-
 const Scrollable: FC<Props> = ({
   children,
-  height = '100%',
-  maxHeight = '100%',
+  size,
   className = ''
 }) => {
   const container: React.MutableRefObject<
     HTMLDivElement | undefined
   > = useRef();
+  const initialY = useRef();
+  const scrollPosition = useRef(0);
   const [barHeight, setBarHeight] = useState<number>(0);
   const [barPosition, setBarPostion] = useState<number>(0);
   const [showBar, setShowBar] = useState<boolean>(false);
 
   useEffect(() => {
     if (container.current) {
-      const h = 600 / (container?.current.scrollHeight / 600);
+      const { clientHeight, scrollHeight } = container.current;
+      console.log({ clientHeight, scrollHeight })
+      let h = 0;
+      if (clientHeight !== scrollHeight) {
+        h = clientHeight * clientHeight / scrollHeight;
+      }
       setBarHeight(h);
     }
   }, []);
@@ -44,16 +47,65 @@ const Scrollable: FC<Props> = ({
     setBarPostion(p);
   };
 
+  const onMouseDown = e => {
+    e.preventDefault();
+    initialY.current = e.clientY;
+    scrollPosition.current = container.current?.scrollTop || 0;
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+  }
+
+  const onMouseMove = e => {
+    const delta = e.clientY - (initialY.current || 0);
+    const perc = (100 / 600) * delta;
+    if (container.current) {
+      container.current.scrollTop = scrollPosition.current + container.current?.scrollHeight / 100 * perc
+    }
+  }
+
+  const onMouseUp = e => {
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+  }
+
   return (
-    <div style={{ position: 'relative', height, width }}>
-      <Scrollbar>
-        <Bar style={{ height: barHeight, top: `${barPosition}%` }}></Bar>
-      </Scrollbar>
+    <div
+      style={{
+        position: 'relative',
+        height: size?.height || '100%',
+        width: size?.width || '100%',
+      }}
+      onMouseLeave={() => setShowBar(false)}
+      onMouseEnter={() => setShowBar(true)}
+    >
+      <VerticalScrollbar>
+        <Bar
+          style={{
+            height: barHeight,
+            top: `${barPosition}%`,
+            // display: showBar ? 'block' : 'none',
+            width: '14px',
+            right: 0,
+          }}
+          onMouseDown={onMouseDown}
+        />
+      </VerticalScrollbar>
+      <HorizontalScrollbar>
+      <Bar
+          style={{
+            width: barHeight,
+            // top: `${barPosition}%`,
+            // display: showBar ? 'block' : 'none',
+            height: '14px',
+            left: 0,
+          }}
+          // onMouseDown={onMouseDown}
+        />
+      </HorizontalScrollbar>
       <Container
         ref={container}
         onScroll={handleScroll}
-        onMouseLeave={() => setShowBar(false)}
-        onMouseEnter={() => setShowBar(true)}
+        size={size}
       >
         <Content className={className}>
           {children && Children.toArray(children)}
@@ -65,9 +117,9 @@ const Scrollable: FC<Props> = ({
 
 export default Scrollable;
 
-const Container = styled.div<{ ref: any }>`
-  width: ${width};
-  height: ${height};
+const Container = styled.div<{ ref: any, size?: { width: number; height: number } }>`
+  width: ${props => `${props.size?.width}px` || '100%'};
+  height: ${props => `${props.size?.height}px` || '100%'};
   background: blue;
   position: relative;
   overflow: scroll;
@@ -78,7 +130,7 @@ const Container = styled.div<{ ref: any }>`
 const Content = styled.div`
   background: green;
 `;
-const Scrollbar = styled.div`
+const VerticalScrollbar = styled.div`
   z-index: 999;
   position: absolute;
   top: 0;
@@ -86,11 +138,20 @@ const Scrollbar = styled.div`
   height: 100%;
   width: 14px;
   float: right;
-  pointer-events: none;
+`;
+const HorizontalScrollbar = styled.div`
+  z-index: 999;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: calc(100% - 14px);
+  background: red;
+  height: 14px;
 `;
 const Bar = styled.div`
-  width: 14px;
-  right: 0;
   background: rgba(0, 0, 0, 0.3);
   position: absolute;
+  &:hover {
+    background: rgba(0, 0, 0, 0.5);
+  }
 `;

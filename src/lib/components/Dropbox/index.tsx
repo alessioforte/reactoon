@@ -34,12 +34,13 @@ export default withTheme(Dropbox);
 
 const Box = styled.div<{ ref: any }>`
   position: relative;
+  display: inline-block;
 `;
 const Drop = styled.div.attrs(({ position }: any) => ({ style: position }))<{
   ref: any;
   position: any;
 }>`
-  border-radius: ${props => props.theme.border.radius + 'px'};
+  border-radius: ${props => `${props.theme.border.radius}px`};
   position: absolute;
   background: ${props => props.theme.colors.background};
   color: ${props =>

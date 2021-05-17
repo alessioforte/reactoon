@@ -27,7 +27,7 @@
     "react/jsx-first-prop-new-line": [2, "multiline"],
     "react/jsx-filename-extension": "off",
     "react/jsx-no-target-blank": "warn",
-    "react/jsx-max-props-per-line": [1, {"maximum": 1}],
+    "react/jsx-max-props-per-line": 0,
     "react/jsx-one-expression-per-line": "off",
     "react/jsx-props-no-spreading": "off",
     "react/prop-types": "off",
@@ -50,7 +50,8 @@
     "import/no-extraneous-dependencies": "off",
     "import/no-named-as-default": "error",
     "import/no-unresolved": "off",
-    "import/no-dynamic-require": "off"
+    "import/no-dynamic-require": "off",
+    "@typescript-eslint/no-explicit-any": 0
   },
   "settings": {
     "import/resolve": {
