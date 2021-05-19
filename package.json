@@ -1,6 +1,6 @@
 {
   "name": "@alessioforte/reactoon",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "license": "MIT",
   "author": {
     "name": "Alessio Forte",
@@ -23,8 +23,8 @@
   "scripts": {
     "start": "PORT=3009 react-scripts start",
     "build": "rm -rf lib && NODE_ENV=production npm run build:esm && npm run build:cjs",
-    "build:esm": "tsc src/lib/index.ts --jsx preserve --module ESNext --target ES6 --moduleResolution Node --allowSyntheticDefaultImports --declaration --outDir ./lib/esm",
-    "build:cjs": "tsc src/lib/index.ts --jsx preserve --module CommonJS --target ES6 --moduleResolution Node --allowSyntheticDefaultImports --outDir ./lib/cjs",
+    "build:esm": "tsc src/lib/index.ts --jsx react-jsx --module ESNext --target ES6 --moduleResolution Node --allowSyntheticDefaultImports --declaration --outDir ./lib/esm",
+    "build:cjs": "tsc src/lib/index.ts --jsx react-jsx --module CommonJS --target ES6 --moduleResolution Node --allowSyntheticDefaultImports --outDir ./lib/cjs",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "npm run lint:js && npm run lint:css",
