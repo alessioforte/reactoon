@@ -1,5 +1,6 @@
 import Button, { ButtonGroup } from './components/Button';
 import Input from './components/Input';
+import Carousel from './components/Carousel';
 import Checkbox from './components/Checkbox';
 import Collapse from './components/Collapse';
 import Toggle from './components/Toggle';
@@ -41,6 +42,7 @@ export {
   Button,
   ButtonGroup,
   Input,
+  Carousel,
   Checkbox,
   Collapse,
   Toggle,
