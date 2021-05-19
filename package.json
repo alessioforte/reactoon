@@ -1,15 +1,16 @@
 {
   "name": "@alessioforte/reactoon",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "license": "MIT",
   "author": {
     "name": "Alessio Forte",
     "email": "alessioforte@mail.com"
   },
-  "main": "lib/index.js",
-  "module": "lib/index.js",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
+  "types": "./lib/esm/index.d.ts",
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com/@alessioforte"
+    "registry": "https://npm.pkg.github.com/@alessioforte"
   },
   "files": [
     "lib",
@@ -21,7 +22,9 @@
   },
   "scripts": {
     "start": "PORT=3009 react-scripts start",
-    "build": "rm -rf lib && NODE_ENV=production babel src/lib --out-dir lib --extensions \".ts,.tsx,.js,.jsx\" --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
+    "build": "rm -rf lib && NODE_ENV=production npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "npm run lint:js && npm run lint:css",
@@ -95,15 +98,14 @@
     "prettier": "^2.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-scripts": "^4.0.3",
+    "react-scripts": "^2.1.8",
     "react-test-renderer": "^17.0.1",
     "styled-components": "^5.2.1",
-    "stylelint": "^13.12.0",
-    "stylelint-config-recommended": "^4.0.0",
+    "stylelint": "^9.3.0",
+    "stylelint-config-recommended": "^2.2.0",
     "stylelint-config-styled-components": "^0.1.1",
-    "stylelint-processor-styled-components": "^1.10.0",
+    "stylelint-processor-styled-components": "^1.5.1",
     "typescript": "^4.2.3",
     "typescript-plugin-styled-components": "^1.4.4"
-  },
-  "dependencies": {}
+  }
 }

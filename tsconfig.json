@@ -5,12 +5,13 @@
     "lib": [
       "dom",
       "es6",
-      "es2017"
+      "es2017",
+      "esnext"
     ],
     "allowJs": true,
     "jsx": "react-jsx",
     "sourceMap": true,
-    "outDir": "./dist",
+    "outDir": "lib/esm",
     "strict": true,
     "moduleResolution": "node",
     "removeComments": true,
@@ -34,7 +35,17 @@
     "isolatedModules": true
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "__tests__",
+    "__snapshots__",
+    "./**/*.test.js",
+    "./**/*.spec.js",
+    "./**/*.test.jsx",
+    "./**/*.spec.jsx",
+    "./**/*.test.ts",
+    "./**/*.spec.ts",
+    "./**/*.test.tsx",
+    "./**/*.spec.tsx",
   ],
   "include": [
     "./src/**/*.tsx",
