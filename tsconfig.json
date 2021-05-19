@@ -11,7 +11,7 @@
     "allowJs": true,
     "jsx": "react-jsx",
     "sourceMap": true,
-    "outDir": "lib/esm",
+    "outDir": "./lib/esm",
     "strict": true,
     "moduleResolution": "node",
     "removeComments": true,
@@ -35,17 +35,11 @@
     "isolatedModules": true
   },
   "exclude": [
+    "lib",
     "node_modules",
-    "__tests__",
-    "__snapshots__",
-    "./**/*.test.js",
-    "./**/*.spec.js",
-    "./**/*.test.jsx",
-    "./**/*.spec.jsx",
-    "./**/*.test.ts",
-    "./**/*.spec.ts",
-    "./**/*.test.tsx",
-    "./**/*.spec.tsx",
+    "./src/**/__tests__",
+    "./src/**/__snapshots__",
+    "./src/**/tests"
   ],
   "include": [
     "./src/**/*.tsx",

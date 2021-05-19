@@ -1,6 +1,6 @@
 {
   "name": "@alessioforte/reactoon",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "license": "MIT",
   "author": {
     "name": "Alessio Forte",
@@ -23,8 +23,8 @@
   "scripts": {
     "start": "PORT=3009 react-scripts start",
     "build": "rm -rf lib && NODE_ENV=production npm run build:esm && npm run build:cjs",
-    "build:esm": "tsc",
-    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
+    "build:esm": "tsc src/lib/index.ts --jsx preserve --module ESNext --declaration --outDir ./lib/esm",
+    "build:cjs": "tsc src/lib/index.ts --jsx preserve --module CommonJS --outDir ./lib/cjs",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "npm run lint:js && npm run lint:css",
