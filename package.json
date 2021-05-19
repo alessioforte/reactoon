@@ -20,7 +20,7 @@
     "url": "https://github.com/alessioforte/reactoon.git"
   },
   "scripts": {
-    "start": "PORT=3003 react-scripts start",
+    "start": "PORT=3009 react-scripts start",
     "build": "rm -rf lib && NODE_ENV=production babel src/lib --out-dir lib --extensions \".ts,.tsx,.js,.jsx\" --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

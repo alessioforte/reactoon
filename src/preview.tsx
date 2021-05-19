@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import {
   Button,
   ButtonGroup,
+  Carousel,
   Checkbox,
   Collapse,
   DatePicker,
@@ -40,6 +41,7 @@ const components = {
       <Dropdown.Option label='item 3' onClick={() => console.log('action 3')} />
     </Dropdown>
   ),
+  carousel: () => <Carousel><div>slide 1</div></Carousel>,
   checkbox: () => <Checkbox label='label' />,
   collapse: () => <Collapse />,
   select: Select,

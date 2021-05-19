@@ -81,7 +81,7 @@ const Swipeable = styled.div.attrs(({ offset, index, isSwiping }: any) => ({
   height: number | string;
   offset: number;
   index: number;
-  isSwiping: boolean;
+  isSwiping?: boolean;
 }>`
   height: ${props => props.height};
   display: flex;
