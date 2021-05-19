@@ -5,6 +5,7 @@ import { useSwipeable } from '../../hooks';
 interface Props {
   children?: any;
   enableTransition?: boolean;
+  enableSwipe?: boolean;
   height?: number | string;
   duration?: number;
 }
@@ -12,6 +13,7 @@ interface Props {
 const Carousel: React.FC<Props> = ({
   children,
   enableTransition = false,
+  enableSwipe = false,
   height = 320,
   duration = 7000
 }) => {
@@ -29,6 +31,7 @@ const Carousel: React.FC<Props> = ({
   });
 
   const H = typeof height === 'string' ? height : `${height}px`;
+  const swipeProps = enableSwipe ? { onMouseDown, onTouchStart, isSwiping } : {};
   return (
     <Slides height={H}>
       {Array.isArray(children) ? (
@@ -36,9 +39,7 @@ const Carousel: React.FC<Props> = ({
           height={H}
           offset={offset}
           index={index}
-          onMouseDown={onMouseDown}
-          onTouchStart={onTouchStart}
-          isSwiping={isSwiping}
+          {...swipeProps}
         >
           {children.map((child, i) => (
             <Slide key={`slide-${i}`}>{child}</Slide>

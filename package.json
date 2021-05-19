@@ -8,6 +8,9 @@
   },
   "main": "lib/index.js",
   "module": "lib/index.js",
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com/@alessioforte"
+  },
   "files": [
     "lib",
     "README.md"
