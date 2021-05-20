@@ -1,7 +1,6 @@
 import React, { FC, ReactNode } from 'react';
-import PropTypes from 'prop-types';
 import { Svg } from './styled';
-import icons, { availableIcons } from './icons';
+import icons from './icons';
 
 type Props = {
   name?: string;
@@ -26,18 +25,6 @@ const Icon: FC<Props> = ({ name = 'default', color, size, className = '' }) => {
       {inner}
     </Svg>
   );
-};
-
-Icon.propTypes = {
-  name: PropTypes.oneOf(availableIcons).isRequired,
-  color: PropTypes.string,
-  size: PropTypes.string
-};
-
-Icon.defaultProps = {
-  name: 'default',
-  color: '#DADEE1',
-  size: '1rem'
 };
 
 export default Icon;
