@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
-import PropTypes from 'prop-types';
 import styled, { withTheme, ThemeProvider } from 'styled-components';
 import Icon from '../Icon';
-import { styles, getContrastYIQ } from '../../theme';
+import { getContrastYIQ } from '../../theme';
 
 type Props = {
   label?: string,
@@ -44,18 +43,6 @@ const Tag: FC<Props> = ({ label = 'tag', icon, onClick = () => null, theme }) =>
       </Badge>
     </ThemeProvider>
   )
-}
-
-Tag.propTypes = {
-  label: PropTypes.string,
-  icon: PropTypes.string,
-  onClick: PropTypes.func,
-  theme: PropTypes.any
-}
-
-Tag.defaultProps = {
-  label: '',
-  theme: styles
 }
 
 export default withTheme(Tag);

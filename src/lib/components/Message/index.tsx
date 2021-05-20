@@ -1,7 +1,6 @@
 import React, { FC, useState } from 'react'
-import PropTypes from 'prop-types';
 import styled, { ThemeProvider, withTheme } from 'styled-components'
-import { styles, getColorLuminance, getContrastYIQ } from '../../theme';
+import { getColorLuminance, getContrastYIQ } from '../../theme';
 import Icon from '../Icon';
 
 type Props = {
@@ -32,15 +31,6 @@ const Message: FC<Props> = ({ kind, title, content, children, theme }): any => {
       </Box>
     </ThemeProvider>
   )
-}
-
-Message.propTypes = {
-  kind: PropTypes.string.isRequired,
-}
-
-Message.defaultProps = {
-  kind: 'info',
-  theme: styles
 }
 
 export default withTheme(Message);

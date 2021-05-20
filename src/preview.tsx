@@ -9,8 +9,7 @@ import {
   Collapse,
   DatePicker,
   Dropdown,
-  Filterselect,
-  Filterslider,
+  // Filterselect,
   // Toast,
   Message,
   Multiselect,
@@ -23,7 +22,6 @@ import {
   Tooltip,
   Scrollable,
   SideBar,
-  Slider,
   Tag
 } from './lib';
 // import Calendar from './lib/components/Calendar/calendar';
@@ -45,8 +43,8 @@ const components = {
   checkbox: () => <Checkbox label='label' />,
   collapse: () => <Collapse />,
   select: Select,
-  'filter select': () => <Filterselect />,
-  'filter slider': () => <Filterslider />,
+  // 'filter select': () => <Filterselect />,
+  // 'filter slider': () => <Filterslider />,
   'multi select': () => <Multiselect />,
   message: () => <Message />,
   modal: () => <Modal />,
@@ -62,7 +60,7 @@ const components = {
       </Scrollable>
     )
   },
-  slider: () => <Slider />,
+  // slider: () => <Slider />,
   tag: () => <Tag label="label tag" />,
 
 };

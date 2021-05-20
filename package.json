@@ -1,6 +1,6 @@
 {
   "name": "@alessioforte/reactoon",
-  "version": "0.2.10",
+  "version": "0.2.12",
   "license": "MIT",
   "author": {
     "name": "Alessio Forte",
@@ -66,9 +66,9 @@
     "esversion": "9"
   },
   "peerDependencies": {
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "styled-components": "^5.2.1"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "styled-components": "^5.3.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.13.10",
@@ -96,11 +96,11 @@
     "jest-styled-components": "^7.0.3",
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-scripts": "^2.1.8",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "^4.0.3",
     "react-test-renderer": "^17.0.1",
-    "styled-components": "^5.2.1",
+    "styled-components": "^5.3.0",
     "stylelint": "^9.3.0",
     "stylelint-config-recommended": "^2.2.0",
     "stylelint-config-styled-components": "^0.1.1",

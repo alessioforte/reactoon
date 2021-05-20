@@ -1,8 +1,6 @@
 import React, { FC, ReactNode, useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import styled, { withTheme, ThemeProvider } from 'styled-components';
 import { useResize } from '../../hooks';
-import { styles } from '../../theme';
 
 type Props = {
   children?: ReactNode,
@@ -57,21 +55,6 @@ const Slideshow: FC<Props> = ({ children, enableTransition, height, duration, th
       </Box>
     </ThemeProvider>
   );
-}
-
-Slideshow.propTypes = {
-  children: PropTypes.node,
-  enableTransition: PropTypes.bool,
-  height: PropTypes.number,
-  duration: PropTypes.number,
-  theme: PropTypes.object
-}
-
-Slideshow.defaultProps = {
-  height: 300,
-  duration: 7000,
-  enableTransition: false,
-  theme: styles
 }
 
 export default withTheme(Slideshow)

@@ -1,6 +1,5 @@
 import React, { useState, FC } from 'react';
 import { withTheme } from 'styled-components';
-import { styles } from '../../theme';
 import Dropbox from '../Dropbox';
 import Tag from '../Tag';
 import { Target, Options, Option } from '../Styled';
@@ -28,8 +27,7 @@ const Multiselect: FC<Props> = ({
   placeholder = 'select...',
   options = [],
   isError = false,
-  onChange = data => console.log(data),
-  theme = styles
+  onChange = () => null
 }) => {
   const [state, setState] = useState<State>({
     values: [],
