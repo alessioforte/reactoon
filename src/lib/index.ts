@@ -22,9 +22,9 @@ import Tag from './components/Tag';
 import Message from './components/Message';
 import Scrollable from './components/Scrollable';
 import toast from './components/Toast';
+
 // Confirm Component
 // DataRangePicker Component
-
 // Step
 // Progress Bar
 // Accordion
@@ -35,6 +35,7 @@ import toast from './components/Toast';
 // Linked buttons
 
 import withTooltip from './hoc/withTooltip';
+import withNotification from './hoc/withNotification';
 
 import Theme from './theme';
 
@@ -60,6 +61,7 @@ export {
   Filterselect,
   Filterslider,
   withTooltip,
+  withNotification,
   Theme,
   Scrollable,
   SideBar,
