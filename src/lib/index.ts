@@ -24,6 +24,14 @@ import withNotification from './hoc/withNotification';
 
 import Theme from './theme';
 
+import {
+  useBreakpoints,
+  useDevice,
+  useResize,
+  useDropdown,
+  useSwipeable
+} from './hooks';
+
 export {
   Button,
   ButtonGroup,
@@ -48,5 +56,10 @@ export {
   Theme,
   Scrollable,
   SideBar,
-  Tag
+  Tag,
+  useBreakpoints,
+  useDevice,
+  useResize,
+  useDropdown,
+  useSwipeable
 };
