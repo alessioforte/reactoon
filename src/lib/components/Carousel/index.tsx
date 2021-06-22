@@ -127,7 +127,6 @@ const Swipeable = styled.div.attrs(({ offset, index, isSwiping }: any) => ({
   height: ${props => props.height};
   display: flex;
   width: 100%;
-  background: red;
 `;
 const Dots = styled.div`
   display: flex;
