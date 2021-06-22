@@ -48,7 +48,11 @@ const Carousel: React.FC<Props> = ({
         {...swipeProps}
       >
         {slides.map((child, i) => (
-          <Slide key={`${i}-slide`} isVisible={index === i} effect={transitionEffect}>
+          <Slide
+            key={`${i}-slide`}
+            isVisible={index === i}
+            effect={transitionEffect}
+          >
             {child}
           </Slide>
         ))}
@@ -58,21 +62,25 @@ const Carousel: React.FC<Props> = ({
           <Dots>
             {Array.isArray(children) &&
               React.Children.map(children, (child, i) => (
-                <Dot key={`${i}-dot`} onClick={() => shift(i)} active={i === index} />
+                <Dot
+                  key={`${i}-dot`}
+                  onClick={() => shift(i)}
+                  active={i === index}
+                />
               ))}
           </Dots>
         </Container>
       )}
       {enableArrows && (
         <>
-          <Arrow>
+          <Arrow className='arrow'>
             <IconBox
               onClick={() => shift((index + slides.length - 1) % slides.length)}
             >
               <Icon name='caret-left' size='20px' color='#fff' />
             </IconBox>
           </Arrow>
-          <Arrow rightSide>
+          <Arrow className='arrow' rightSide>
             <IconBox onClick={() => shift((index + 1) % slides.length)}>
               <Icon name='caret-right' size='20px' color='#fff' />
             </IconBox>
@@ -157,6 +165,10 @@ const IconBox = styled.div`
   width: 42px;
   height: 42px;
   cursor: pointer;
+  opacity: 0.3;
+  &:hover {
+    opacity: 0.9;
+  }
 `;
 const createEffect = (props: { effect?: string; isVisible?: boolean }) => {
   const effects = {

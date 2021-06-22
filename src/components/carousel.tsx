@@ -9,7 +9,7 @@ export default (): React.ReactElement => (
       enableSwipe
       duration={7000}
       enableTransition
-      // enableArrows
+      enableArrows
       transitionEffect='fade'
     >
       <Slide color='#5cc9f5'>1</Slide>
