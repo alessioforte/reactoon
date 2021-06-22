@@ -43,12 +43,12 @@ const Carousel: React.FC<Props> = ({
     <Slides height={H}>
       <Swipeable
         height={H}
-        offset={transitionEffect === 'slide' && offset}
+        offset={transitionEffect === 'slide' ? offset : undefined}
         index={index}
         {...swipeProps}
       >
         {slides.map((child, i) => (
-          <Slide isVisible={index === i} effect={transitionEffect}>
+          <Slide key={`${i}-slide`} isVisible={index === i} effect={transitionEffect}>
             {child}
           </Slide>
         ))}
@@ -58,7 +58,7 @@ const Carousel: React.FC<Props> = ({
           <Dots>
             {Array.isArray(children) &&
               React.Children.map(children, (child, i) => (
-                <Dot key={i} onClick={() => shift(i)} active={i === index} />
+                <Dot key={`${i}-dot`} onClick={() => shift(i)} active={i === index} />
               ))}
           </Dots>
         </Container>
@@ -87,7 +87,7 @@ export default Carousel;
 
 interface SwipeableProps {
   height?: number | string;
-  offset?: number | undefined | boolean;
+  offset?: number | undefined;
   index?: number;
   isSwiping?: boolean;
 }
@@ -118,7 +118,7 @@ const Container = styled.div`
 `;
 const Swipeable = styled.div.attrs(({ offset, index, isSwiping }: any) => ({
   style: {
-    transform: `translate(calc(-${100 * index}% + ${offset}px), 0px)`,
+    transform: offset && `translate(calc(-${100 * index}% + ${offset}px), 0px)`,
     transition: isSwiping
       ? 'none'
       : 'all 0.7s cubic-bezier(0.15, 0.3, 0.25, 1) 0s'
