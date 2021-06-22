@@ -6,47 +6,42 @@ interface Props {
   children?: any;
   enableTransition?: boolean;
   enableSwipe?: boolean;
+  enableArrows?: boolean;
   height?: number | string;
   duration?: number;
+  transitionEffect?: 'slide' | 'fade'
 }
 
 const Carousel: React.FC<Props> = ({
   children,
   enableTransition = false,
   enableSwipe = false,
+  // enableArrows = false,
   height = 320,
-  duration = 7000
+  duration = 7000,
+  transitionEffect = 'slide'
 }) => {
-  const {
-    isSwiping,
-    offset,
-    onMouseDown,
-    onTouchStart,
-    index,
-    shift
-  } = useSwipeable({
-    length: children.length,
-    duration,
-    enableTransition
-  });
+  const { isSwiping, offset, onMouseDown, onTouchStart, index, shift } =
+    useSwipeable({
+      length: children.length,
+      duration,
+      enableTransition
+    });
 
   const H = typeof height === 'string' ? height : `${height}px`;
-  const swipeProps = enableSwipe ? { onMouseDown, onTouchStart, isSwiping } : {};
+  const swipeProps = enableSwipe
+    ? { onMouseDown, onTouchStart, isSwiping }
+    : {};
   return (
     <Slides height={H}>
       {Array.isArray(children) ? (
-        <Swipeable
-          height={H}
-          offset={offset}
-          index={index}
-          {...swipeProps}
-        >
+        <Swipeable height={H} offset={offset} index={index} {...swipeProps}>
           {children.map((child, i) => (
             <Slide key={`slide-${i}`}>{child}</Slide>
           ))}
         </Swipeable>
       ) : (
-        <div>{children}</div>
+        <Slide>{children}</Slide>
       )}
 
       <Container>
@@ -63,29 +58,13 @@ const Carousel: React.FC<Props> = ({
 
 export default Carousel;
 
+/* width: 100vw; */
 const Slides = styled.div<{ height: string | number }>`
-  width: 100vw;
+  width: 100%;
   position: relative;
   display: flex;
   overflow: hidden;
   height: ${props => props.height};
-`;
-const Swipeable = styled.div.attrs(({ offset, index, isSwiping }: any) => ({
-  style: {
-    transform: `translate(calc(-${100 * index}% + ${offset}px), 0px)`,
-    transition: isSwiping
-      ? 'none'
-      : 'all 0.7s cubic-bezier(0.15, 0.3, 0.25, 1) 0s'
-  }
-}))<{
-  height: number | string;
-  offset: number;
-  index: number;
-  isSwiping?: boolean;
-}>`
-  height: ${props => props.height};
-  display: flex;
-  width: 100vw;
 `;
 const Slide = styled.div`
   width: 100%;
@@ -102,6 +81,17 @@ const Container = styled.div`
     max-width: 1380px;
     padding: 10px 30px;
   }
+`;
+const Swipeable = styled.div.attrs(({ offset, index, isSwiping }: any) => ({
+  style: {
+    transform: `translate(calc(-${100 * index}% + ${offset}px), 0px)`,
+    transition: isSwiping ? 'none' : 'all 0.7s cubic-bezier(0.15, 0.3, 0.25, 1) 0s',
+  }
+}))<{ height: number | string; offset: number; index: number; isSwiping?: boolean; }>`
+  height: ${props => props.height};
+  display: flex;
+  width: 100%;
+  background: red;
 `;
 const Dots = styled.div`
   display: flex;

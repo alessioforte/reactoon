@@ -1,72 +1,11 @@
 /* eslint-disable */
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import {
-  Button,
-  ButtonGroup,
-  Carousel,
-  Checkbox,
-  Collapse,
-  DatePicker,
-  Dropdown,
-  // Filterselect,
-  // Toast,
-  Message,
-  Multiselect,
-  Modal,
-  Input,
-  Radio,
-  Searchbar,
-  Select,
-  Toggle,
-  Tooltip,
-  Scrollable,
-  SideBar,
-  Tag
-} from './lib';
-// import Calendar from './lib/components/Calendar/calendar';
-// import { withNotification, withTooltip } from './lib/hoc';
-// import toast from './lib/components/Toast';
-
-const components = {
-  button: () => <Button label='LABEL' />,
-  'button group': () => <ButtonGroup />,
-  datepicker: () => <DatePicker />,
-  dropdown: () => (
-    <Dropdown label="label">
-      <Dropdown.Option label='item 1' onClick={() => console.log('action 1')} />
-      <Dropdown.Option label='item 2' onClick={() => console.log('action 2')} />
-      <Dropdown.Option label='item 3' onClick={() => console.log('action 3')} />
-    </Dropdown>
-  ),
-  carousel: () => <Carousel><div>slide 1</div></Carousel>,
-  checkbox: () => <Checkbox label='label' />,
-  collapse: () => <Collapse />,
-  select: Select,
-  // 'filter select': () => <Filterselect />,
-  // 'filter slider': () => <Filterslider />,
-  'multi select': () => <Multiselect />,
-  message: () => <Message />,
-  modal: () => <Modal />,
-  input: () => <Input />,
-  radio: () => <Radio />,
-  searchbar: () => <Searchbar />,
-  toogle: () => <Toggle />,
-  tooltip: () => <Tooltip />,
-  scrollable: () => {
-    return (
-      <Scrollable size={{ width: 600, height: 600 }}>
-        <div style={{ height: '2400px', background: 'green' }}>{longContent}</div>
-      </Scrollable>
-    )
-  },
-  // slider: () => <Slider />,
-  tag: () => <Tag label="label tag" />,
-
-};
+import { SideBar } from './lib';
+import * as components from './components';
 
 export default () => {
-  const [state, setState] = useState('scrollable');
+  const [state, setState] = useState('carousel');
 
   return (
     <Preview>
@@ -94,7 +33,7 @@ export default () => {
               <h3>{state.toUpperCase()}</h3>
             </Header>
             <Container>
-              {components[state]()}
+              {components[state] ? components[state]() : <div>Reactoon</div>}
             </Container>
           </div>
         )}
@@ -125,7 +64,7 @@ const MenuHeader = styled.div`
 const MenuItems = styled.div`
   box-sizing: border-box;
   padding: 10px 0;
-`
+`;
 const MenuItem = styled.div`
   color: white;
   padding: 10px;
@@ -143,7 +82,6 @@ const Header = styled.div`
 `;
 const Container = styled.div`
   box-sizing: border-box;
-  padding: 10px;
-`
+`;
 
-const longContent = `Beethoven, Mozart, Chopin, Liszt, Brahms, Panties...I'm sorry...Schumann, Schubert, Mendelssohn and Bach. Names that will live for ever. But there is one composer whose name is never included with the greats. Why is it that the world never remembered the name of Johann Gambolputty de von Ausfern- schplenden- schlitter- crasscrenbon- fried- digger- dingle- dangle- dongle- dungle- burstein- von- knacker- thrasher- apple- banger- horowitz- ticolensic- grander- knotty- spelltinkle- grandlich- grumblemeyer- spelterwasser- kurstlich- himbleeisen- bahnwagen- gutenabend- bitte- ein- nürnburger- bratwustle- gerspurten- mitz- weimache- luber- hundsfut- gumberaber- shönedanker- kalbsfleisch- mittler- aucher von Hautkopft of Ulm? To do justice to this man, thought by many to be the greatest name in German Baroque music, we present a profile of Johann Gambolputty de von Ausfern- schplenden- schlitter- crasscrenbon- fried- digger- dingle- dangle- dongle- dungle- burstein- von- knacker- thrasher- apple- banger- horowitz- ticolensic- grander- knotty- spelltinkle- grandlich- grumblemeyer- spelterwasser- kurstlich- himbleeisen- bahnwagen- gutenabend- bitte- ein- nürnburger- bratwustle- gerspurten- mitz- weimache- luber- hundsfut- gumberaber- shönedanker- kalbsfleisch- mittler- aucher von Hautkopft of Ulm. We start with an interview with his only surviving relative Karl Gambolputty de von Ausfern...`
+// const longContent = `Beethoven, Mozart, Chopin, Liszt, Brahms, Panties...I'm sorry...Schumann, Schubert, Mendelssohn and Bach. Names that will live for ever. But there is one composer whose name is never included with the greats. Why is it that the world never remembered the name of Johann Gambolputty de von Ausfern- schplenden- schlitter- crasscrenbon- fried- digger- dingle- dangle- dongle- dungle- burstein- von- knacker- thrasher- apple- banger- horowitz- ticolensic- grander- knotty- spelltinkle- grandlich- grumblemeyer- spelterwasser- kurstlich- himbleeisen- bahnwagen- gutenabend- bitte- ein- nürnburger- bratwustle- gerspurten- mitz- weimache- luber- hundsfut- gumberaber- shönedanker- kalbsfleisch- mittler- aucher von Hautkopft of Ulm? To do justice to this man, thought by many to be the greatest name in German Baroque music, we present a profile of Johann Gambolputty de von Ausfern- schplenden- schlitter- crasscrenbon- fried- digger- dingle- dangle- dongle- dungle- burstein- von- knacker- thrasher- apple- banger- horowitz- ticolensic- grander- knotty- spelltinkle- grandlich- grumblemeyer- spelterwasser- kurstlich- himbleeisen- bahnwagen- gutenabend- bitte- ein- nürnburger- bratwustle- gerspurten- mitz- weimache- luber- hundsfut- gumberaber- shönedanker- kalbsfleisch- mittler- aucher von Hautkopft of Ulm. We start with an interview with his only surviving relative Karl Gambolputty de von Ausfern...`
