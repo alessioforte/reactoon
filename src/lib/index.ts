@@ -29,7 +29,8 @@ import {
   useDevice,
   useResize,
   useDropdown,
-  useSwipeable
+  useSwipeable,
+  useVisibility
 } from './hooks';
 
 export {
@@ -61,5 +62,6 @@ export {
   useDevice,
   useResize,
   useDropdown,
-  useSwipeable
+  useSwipeable,
+  useVisibility
 };

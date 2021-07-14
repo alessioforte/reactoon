@@ -3,6 +3,7 @@ import useDevice from './useDevice'
 import useResize from './useResize';
 import useDropdown from './useDropdown';
 import useSwipeable from './useSwipeable';
+import useVisibility from './useVisibility';
 
 export {
   useBreakpoints,
@@ -10,4 +11,5 @@ export {
   useResize,
   useDropdown,
   useSwipeable,
+  useVisibility,
 }
