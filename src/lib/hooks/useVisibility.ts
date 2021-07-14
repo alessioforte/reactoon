@@ -63,7 +63,6 @@ const useVisibility = (
 
   const handleIntersect = entries => {
     const [entry] = entries;
-    console.log(entry.target, entry.isIntersecting);
     if (entry.isIntersecting) {
       setIsVisible(true);
       observer.disconnect();
