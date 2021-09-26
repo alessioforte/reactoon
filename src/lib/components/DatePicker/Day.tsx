@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled, { css } from 'styled-components';
-import { getContrastYIQ } from '../../theme';
+import { getContrastYIQ } from '../../utils';
 import Context from './Context';
 
 export default ({ day, select }) => {

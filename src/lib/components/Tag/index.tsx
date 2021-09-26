@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled, { withTheme, ThemeProvider } from 'styled-components';
 import Icon from '../Icon';
-import { getContrastYIQ } from '../../theme';
+import { getContrastYIQ }from '../../utils';
 
 type Props = {
   label?: string,

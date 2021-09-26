@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { getContrastYIQ, getColorLuminance } from '../../theme';
+import { getContrastYIQ, getColorLuminance } from '../../utils';
 import { focus } from '../Styled/css'
 
 const buttonStyles = css`
@@ -63,7 +63,7 @@ export const KINDS: any = {
   `,
   ghost: css`
     background: transparent;
-    border: 2px solid ${props => props.theme.colors.idle};
+    border: 1px solid ${props => props.theme.colors.idle};
     color: ${props => props.theme.colors[getContrastYIQ(props.theme.colors.groundzero)]};
     svg {
       fill: ${props => props.theme.colors[getContrastYIQ(props.theme.colors.groundzero)]};

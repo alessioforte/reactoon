@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getContrastYIQ } from '../../theme';
+import { getContrastYIQ } from '../../utils';
 import { focus } from './css';
 
 export const Target = styled.div<{ isError: boolean; value?: any }>`

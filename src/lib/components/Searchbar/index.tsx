@@ -1,7 +1,8 @@
 import React, { useState, useRef, FC } from 'react';
 import styled, { ThemeProvider, withTheme } from 'styled-components';
 import Icon from '../Icon';
-import Theme, { getContrastYIQ } from '../../theme/';
+import Theme from '../../theme/';
+import { getContrastYIQ }from '../../utils';
 
 interface Props {
   suggestions?: any[];

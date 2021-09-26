@@ -8,7 +8,8 @@ import styled, { ThemeProvider, withTheme } from 'styled-components';
 import Icon from '../Icon';
 import Button from '../Button';
 import { useDropdown } from '../../hooks';
-import Theme, { getContrastYIQ } from '../../theme';
+import Theme from '../../theme';
+import { getContrastYIQ } from '../../utils';
 interface Props {
   label?: string;
   children?: ReactElement[];

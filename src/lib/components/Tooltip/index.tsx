@@ -9,7 +9,8 @@ import React, {
 } from 'react';
 import { createPortal } from 'react-dom';
 import styled, { keyframes, withTheme } from 'styled-components';
-import { styles, getContrastYIQ } from '../../theme';
+import { styles } from '../../theme';
+import { getContrastYIQ } from '../../utils';
 
 let ROOT_ID = 'root-tooltip';
 

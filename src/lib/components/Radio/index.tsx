@@ -1,6 +1,7 @@
 import React, { useState, FC } from 'react';
 import styled, { ThemeProvider, withTheme } from 'styled-components';
-import Theme, { getContrastYIQ } from '../../theme';
+import Theme from '../../theme';
+import { getContrastYIQ } from '../../utils';
 import { focus } from '../Styled/css';
 
 interface Props {

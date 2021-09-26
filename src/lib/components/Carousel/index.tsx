@@ -126,7 +126,7 @@ const Container = styled.div`
 `;
 const Swipeable = styled.div.attrs(({ offset, index, isSwiping }: any) => ({
   style: {
-    transform: offset && `translate(calc(-${100 * index}% + ${offset}px), 0px)`,
+    transform: `translate(calc(-${100 * index}% + ${offset}px), 0px)`,
     transition: isSwiping
       ? 'none'
       : 'all 0.7s cubic-bezier(0.15, 0.3, 0.25, 1) 0s'

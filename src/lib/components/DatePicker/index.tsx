@@ -1,6 +1,7 @@
 import React, { useState, FC } from 'react';
 import styled, { withTheme } from 'styled-components';
-import { styles, getContrastYIQ } from '../../theme';
+import { styles } from '../../theme';
+import { getContrastYIQ }from '../../utils';
 import Calendar, { months, days } from '../../utils/Calendar';
 import Icon from '../Icon';
 import Week from './Week';

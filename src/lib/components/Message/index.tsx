@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import styled, { ThemeProvider, withTheme } from 'styled-components'
-import { getColorLuminance, getContrastYIQ } from '../../theme';
+import { getColorLuminance, getContrastYIQ } from '../../utils';
 import Icon from '../Icon';
 
 type Props = {

@@ -10,7 +10,8 @@ export default (): React.ReactElement => (
       duration={7000}
       enableTransition
       enableArrows
-      transitionEffect='fade'
+      enableDots
+      transitionEffect='slide'
     >
       <Slide color='#5cc9f5'>1</Slide>
       <Slide color='#ff3370'>2</Slide>

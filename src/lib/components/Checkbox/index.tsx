@@ -1,6 +1,7 @@
 import React, { useState, FC } from 'react';
 import styled, { withTheme, ThemeProvider } from 'styled-components';
-import { getContrastYIQ, styles } from '../../theme';
+import { styles } from '../../theme';
+import { getContrastYIQ } from '../../utils';
 import Icon from '../Icon';
 import { focus } from '../Styled/css';
 
